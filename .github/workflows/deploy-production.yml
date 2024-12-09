@@ -17,10 +17,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run Prisma Migrate
+      - name: Run Drizzle Migrate
         run: |
-          npx prisma generate
-          npx prisma migrate deploy
+          pnpm drizzle-kit generate
+          pnpm drizzle-kit migrate deploy
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
