@@ -19,8 +19,8 @@ jobs:
 
       - name: Run Drizzle Migrate
         run: |
-          pnpm drizzle-kit generate
-          pnpm drizzle-kit migrate deploy
+          npx drizzle-kit generate
+          npx drizzle-kit migrate deploy
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
