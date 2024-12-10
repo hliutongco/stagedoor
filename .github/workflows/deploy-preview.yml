@@ -34,6 +34,7 @@ jobs:
   
             echo DATABASE_URL=${{ steps.create-branch.outputs.db_url_with_pooler }}?sslmode=require >> .env
             echo DIRECT_URL=${{ steps.create-branch.outputs.db_url }}?sslmode=require >> .env
+            pnpm i drizzle-kit
             pnpm npx drizzle-kit generate
             pnpm npx drizzle-kit migrate
       - name: Install Vercel CLI
