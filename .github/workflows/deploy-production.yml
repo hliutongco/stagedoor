@@ -16,14 +16,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - name: Run Drizzle Migrate
         run: |
-          npx drizzle-kit generate
-          npx drizzle-kit migrate deploy
+          pnpm drizzle-kit generate
+          pnpm drizzle-kit migrate deploy
 
       - name: Install Vercel CLI
-        run: npm install --global vercel@latest
+        run: pnpm install --global vercel@latest
 
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ env.VERCEL_TOKEN }}
