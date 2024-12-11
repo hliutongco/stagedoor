@@ -24,7 +24,7 @@ jobs:
         run: |
           pnpm i drizzle-kit
           pnpm drizzle-kit generate
-          pnpm drizzle-kit migrate deploy
+          pnpm drizzle-kit migrate
 
       - name: Install Vercel CLI
         run: pnpm install --global vercel@latest
