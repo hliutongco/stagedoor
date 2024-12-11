@@ -7,4 +7,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-v0.0.2 - Added CHANGELOG and Github action for automatically creating tags when main is updated
+v0.0.2 - Added ShadCN, CHANGELOG, and Github action for automatically creating tags when main is updated
