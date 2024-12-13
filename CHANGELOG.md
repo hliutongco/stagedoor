@@ -7,5 +7,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-v0.03 - Added Reviews table
+v0.03 - Added Reviews table and relations
 v0.0.2 - Added ShadCN, CHANGELOG, and Github action for automatically creating tags when main is updated
