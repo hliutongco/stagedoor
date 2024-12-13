@@ -11,4 +11,5 @@ jobs:
     - uses: christophebedard/tag-version-commit@v1
       with:
         token: ${{ secrets.GH_TOKEN }}
+        version_assertion_command: 'grep -q "\"version\": \"$version\"" package.json'
         version_tag_prefix: 'v'
