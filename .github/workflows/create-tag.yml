@@ -10,5 +10,5 @@ jobs:
     - uses: actions/checkout@v2
     - uses: christophebedard/tag-version-commit@v1
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GH_TOKEN }}
         version_tag_prefix: 'v'
