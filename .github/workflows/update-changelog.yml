@@ -1,0 +1,20 @@
+name: Update changelog
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-changelog:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - uses: BobAnkh/auto-generate-changelog@v1.2.5
+      with:
+        REPO_NAME: 'hliutongco/stagedoor'
+        ACCESS_TOKEN: ${{secrets.GH_TOKEN}}
+        PATH: 'CHANGELOG.md'
+        COMMIT_MESSAGE: 'chore(CHANGELOG): update release notes'
+        TYPE: 'feature:Features,fix:Bug Fixes,chore:Minor Changes'
