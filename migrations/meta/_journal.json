@@ -8,6 +8,27 @@
       "when": 1732558967996,
       "tag": "0000_lucky_havok",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1734065221633,
+      "tag": "0001_gorgeous_shaman",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1734066692321,
+      "tag": "0002_stormy_scarlet_witch",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1734066758309,
+      "tag": "0003_superb_energizer",
+      "breakpoints": true
     }
   ]
 }

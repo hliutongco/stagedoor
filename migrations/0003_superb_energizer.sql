@@ -1,0 +1,1 @@
+ALTER TABLE "reviews" RENAME COLUMN "show_i" TO "show_id";
