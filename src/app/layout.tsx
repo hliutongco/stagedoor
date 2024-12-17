@@ -3,14 +3,14 @@ import TopNav from './components/TopNav';
 import { ClerkProvider } from '@clerk/nextjs';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-	return (
-		<ClerkProvider>
-			<html lang="en">
-				<body>
-					<TopNav />
-					{children}
-				</body>
-			</html>
-		</ClerkProvider>
-	);
+  return (
+    <ClerkProvider>
+      <html lang="en">
+        <body>
+          <TopNav />
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
+  );
 }
