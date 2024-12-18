@@ -14,6 +14,7 @@ export const reviews = pgTable('reviews', {
   body: text().notNull(),
   id: integer().primaryKey(),
   showId: integer('show_id'),
+  userId: integer('user_id'),
   title: text().notNull(),
 });
 
