@@ -1,15 +1,13 @@
-import {
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
-} from '@clerk/nextjs'
-import { Button } from '@/components/button'
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { Button } from '@/components/button';
 
 export default function TopNav() {
   return (
-    <div className='bg-slate-100 flex items-center justify-between p-2 w-full'>
-      <h1>StageDoor</h1>
+    <div
+      className="bg-slate-100 
+    flex items-center h-[52px] justify-between px-3 py-2 w-full"
+    >
+      <h1 className="text-2xl">StageDoor</h1>
       <div>
         <SignedOut>
           <SignInButton>
@@ -23,5 +21,5 @@ export default function TopNav() {
         </SignedIn>
       </div>
     </div>
-  )
+  );
 }

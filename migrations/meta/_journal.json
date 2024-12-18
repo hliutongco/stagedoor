@@ -29,6 +29,13 @@
       "when": 1734066758309,
       "tag": "0003_superb_energizer",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1734481508465,
+      "tag": "0004_illegal_lizard",
+      "breakpoints": true
     }
   ]
 }

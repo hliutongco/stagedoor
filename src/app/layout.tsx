@@ -1,14 +1,8 @@
-import './globals.css'
-import TopNav from './components/TopNav'
-import {
-  ClerkProvider,
-} from '@clerk/nextjs'
+import './globals.css';
+import TopNav from './components/TopNav';
+import { ClerkProvider } from '@clerk/nextjs';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
       <html lang="en">
@@ -18,5 +12,5 @@ export default function RootLayout({
         </body>
       </html>
     </ClerkProvider>
-  )
+  );
 }

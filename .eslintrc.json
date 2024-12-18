@@ -1,3 +1,19 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "error",
+    "indent": ["error", 2], // Enforce 2 spaces for indentation
+    "prettier/prettier": [
+      "error",
+      {
+        "useTabs": false // Tell Prettier to use tabs
+      }
+    ]
+  }
 }
