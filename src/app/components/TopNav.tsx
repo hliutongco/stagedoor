@@ -5,9 +5,9 @@ export default function TopNav() {
   return (
     <div
       className="bg-slate-100 
-    flex items-center justify-between p-2 w-full"
+    flex items-center h-[52px] justify-between px-3 py-2 w-full"
     >
-      <h1>StageDoor</h1>
+      <h1 className="text-2xl">StageDoor</h1>
       <div>
         <SignedOut>
           <SignInButton>

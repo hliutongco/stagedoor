@@ -1,4 +1,10 @@
 import Image from 'next/image';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'StageDoor',
+  description: 'The social network for theater lovers',
+};
 
 export default function Home() {
   return (
