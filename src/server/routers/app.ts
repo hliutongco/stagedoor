@@ -1,6 +1,6 @@
-import * as trpcNext from '@trpc/server/adapters/next';
 import { router } from '../trpc';
 import { reviewsRouter } from './review';
+import { createTRPCReact } from '@trpc/react-query';
 
 export const appRouter = router({
   reviews: reviewsRouter,
@@ -8,7 +8,4 @@ export const appRouter = router({
 
 export type AppRouter = typeof appRouter;
 
-export default trpcNext.createNextApiHandler({
-  router: appRouter,
-  createContext: () => ({}),
-});
+export const trpc = createTRPCReact<AppRouter>();
