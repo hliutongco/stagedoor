@@ -1,9 +1,9 @@
 import { router } from '../trpc';
-import { reviewsRouter } from './review';
+import { showsRouter } from './show';
 import { createTRPCReact } from '@trpc/react-query';
 
 export const appRouter = router({
-  reviews: reviewsRouter,
+  shows: showsRouter,
 });
 
 export type AppRouter = typeof appRouter;
