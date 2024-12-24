@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { procedure, router } from '../trpc';
+import { protectedProcedure, router } from '../trpc';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { eq } from 'drizzle-orm';
 import { neon } from '@neondatabase/serverless';
@@ -9,10 +9,10 @@ const sql = neon(process.env.DATABASE_URL ?? '');
 const db = drizzle(sql);
 
 export const showsRouter = router({
-  getShows: procedure.query(() => {
+  getShows: protectedProcedure.query(() => {
     return db.select().from(shows);
   }),
-  getShow: procedure
+  getShow: protectedProcedure
     .input(
       z.object({
         id: z.number(),
