@@ -1,3 +1,4 @@
+'use server';
 import { z } from 'zod';
 import { protectedProcedure, router } from '../trpc';
 import { drizzle } from 'drizzle-orm/neon-http';
