@@ -1,4 +1,3 @@
-'use server';
 import { z } from 'zod';
 import { protectedProcedure, router } from '../trpc';
 import { drizzle } from 'drizzle-orm/neon-http';
@@ -6,7 +5,7 @@ import { eq } from 'drizzle-orm';
 import { neon } from '@neondatabase/serverless';
 import { shows } from '../../db/schema';
 
-const sql = neon(process.env.DATABASE_URL ?? '');
+const sql = neon(process.env.NEXT_PUBLIC_DATABASE_URL ?? '');
 const db = drizzle(sql);
 
 export const showsRouter = router({
