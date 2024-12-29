@@ -1,4 +1,4 @@
-import { router } from '../trpc';
+import { router } from '../init-trpc';
 import { showsRouter } from './show';
 import { createTRPCReact } from '@trpc/react-query';
 

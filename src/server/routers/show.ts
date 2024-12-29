@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { publicProcedure, router } from '../trpc';
+import { publicProcedure, router } from '../init-trpc';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { eq } from 'drizzle-orm';
 import { neon } from '@neondatabase/serverless';
