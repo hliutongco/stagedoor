@@ -1,6 +1,6 @@
 {
-  "id": "f276bc05-f700-4087-bab6-43c81ca79f22",
-  "prevId": "435ee327-67a8-4f3b-a972-0048097e0f84",
+  "id": "8fe1d998-0e3f-4ef4-b208-9b53e187bb86",
+  "prevId": "c0bbc1f2-7fbf-4eef-847f-9f036d70c951",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -23,13 +23,13 @@
         },
         "show_id": {
           "name": "show_id",
-          "type": "integer",
+          "type": "uuid",
           "primaryKey": false,
           "notNull": false
         },
         "user_id": {
           "name": "user_id",
-          "type": "integer",
+          "type": "uuid",
           "primaryKey": false,
           "notNull": false
         },
