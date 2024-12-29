@@ -1,5 +1,45 @@
 # CHANGELOG
 
+## [v0.1.0](https://github.com/hliutongco/stagedoor/releases/tag/v0.1.0) - 2024-12-29 18:04:45
+
+Add public and private procedures for tRPC as well as the setup for a basic tRPC API
+
+### Bug Fixes
+
+- CHANGELOG:
+  - add ShadCN card ([3bd4b9c](https://github.com/hliutongco/stagedoor/commit/3bd4b9c64c6db9f14ff53a0a9489d1280e64420f)) ([#7](https://github.com/hliutongco/stagedoor/pull/7))
+
+- card:
+  - add ShadCN card ([fd45967](https://github.com/hliutongco/stagedoor/commit/fd459678666d12ef9dfbaa10fbb029d376918f5a)) ([#7](https://github.com/hliutongco/stagedoor/pull/7))
+
+- schema:
+  - fix typos with columns ([8ad7442](https://github.com/hliutongco/stagedoor/commit/8ad7442b80292df3f6844898195d32e6e99e391f)) ([#5](https://github.com/hliutongco/stagedoor/pull/5))
+  - add base for review table ([10c5292](https://github.com/hliutongco/stagedoor/commit/10c5292f19f9ddfbbfc6571020cfd89155d8e859)) ([#5](https://github.com/hliutongco/stagedoor/pull/5))
+
+- github/workflows:
+  - fix wrong branch name in github action ([8617055](https://github.com/hliutongco/stagedoor/commit/861705514560b4110cc3d930dd9e96e882742c5d)) ([#4](https://github.com/hliutongco/stagedoor/pull/4))
+
+- src/components:
+  - add ShadCN and custom paths config ([1c7e366](https://github.com/hliutongco/stagedoor/commit/1c7e366dea0aa48449662cff6061ebeb5b3e057a)) ([#3](https://github.com/hliutongco/stagedoor/pull/3))
+
+### Minor Changes
+
+- CHANGELOG:
+  - update release notes ([cb34cd6](https://github.com/hliutongco/stagedoor/commit/cb34cd60e24cc9212b399ba9b24365581cf3de46))
+  - update release notes ([649d1f8](https://github.com/hliutongco/stagedoor/commit/649d1f8a54ff63095c67302a8e3a2dd1f42d54ff))
+  - ^0.0.3 ([da52afa](https://github.com/hliutongco/stagedoor/commit/da52afa1e70a3cb08a3f543c669abe18fc5b1c94))
+  - add changelog file ([c82a54f](https://github.com/hliutongco/stagedoor/commit/c82a54f110504ace0ce7188316f019a26506656c)) ([#3](https://github.com/hliutongco/stagedoor/pull/3))
+
+- github/workflows:
+  - test tag creation based on package.json (#9) ([7a4763b](https://github.com/hliutongco/stagedoor/commit/7a4763b0c1d96028bf69291e35b9b73564efc572)) ([#9](https://github.com/hliutongco/stagedoor/pull/9))
+
+- package.json:
+  - v0.0.3 ([13b4d9b](https://github.com/hliutongco/stagedoor/commit/13b4d9bf8fb17c8c929761a8ad0f4317b75feb37))
+  - change version to 0.0.2 ([5232919](https://github.com/hliutongco/stagedoor/commit/5232919d4ac90bdeba3a1fc15f7ded28e0ef970d)) ([#3](https://github.com/hliutongco/stagedoor/pull/3))
+
+- tsconfig:
+  - fix custom paths ([0c1a0fe](https://github.com/hliutongco/stagedoor/commit/0c1a0fefe6683730351543f61cee85901203a804)) ([#3](https://github.com/hliutongco/stagedoor/pull/3))
+
 ## [v0.0.1](https://github.com/hliutongco/stagedoor/releases/tag/v0.0.1) - 2024-12-11 00:02:30
 
 This release includes basic setup for aligning the Neon branches with Github changes + Vercel deployments
