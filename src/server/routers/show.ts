@@ -15,7 +15,7 @@ export const showsRouter = router({
   getShow: publicProcedure
     .input(
       z.object({
-        id: z.number(),
+        id: z.string().uuid(),
       }),
     )
     .query(({ input: { id } }) => {
