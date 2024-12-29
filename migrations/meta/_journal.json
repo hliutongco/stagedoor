@@ -36,6 +36,20 @@
       "when": 1734481508465,
       "tag": "0004_illegal_lizard",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1735498832600,
+      "tag": "0005_fast_peter_parker",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1735498859886,
+      "tag": "0006_sturdy_white_tiger",
+      "breakpoints": true
     }
   ]
 }
