@@ -1,4 +1,4 @@
-import { integer, text, pgTable, uuid } from 'drizzle-orm/pg-core';
+import { text, pgTable, uuid } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 export const shows = pgTable('shows', {
@@ -13,8 +13,8 @@ export const showRelations = relations(shows, ({ many }) => ({
 export const reviews = pgTable('reviews', {
   body: text().notNull(),
   id: uuid().primaryKey().defaultRandom(),
-  showId: integer('show_id'),
-  userId: integer('user_id'),
+  showId: uuid('show_id'),
+  userId: uuid('user_id'),
   title: text().notNull(),
 });
 
