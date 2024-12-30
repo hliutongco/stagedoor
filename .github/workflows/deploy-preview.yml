@@ -34,7 +34,7 @@ jobs:
       - name: Run Migrations
         run: |
             touch .env
-            echo DATABASE_URL=postgresql://development_owner:${{ env.DATABASE_SECRET }}@${{ steps.create-branch.outputs.branch_id }}.us-east-2.aws.neon.tech/development?sslmode=require
+            echo DATABASE_URL=postgresql://development_owner:${{ env.DATABASE_SECRET }}@${{ steps.create-branch.outputs.host }}.us-east-2.aws.neon.tech/development?sslmode=require
             pnpm i drizzle-kit
             pnpm npx drizzle-kit generate
             pnpm npx drizzle-kit migrate
