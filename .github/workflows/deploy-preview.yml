@@ -1,7 +1,6 @@
 name: Deploy Preview
 on: [pull_request]
 env:
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
   NEON_DATABASE_USERNAME: ${{ secrets.NEON_DATABASE_USERNAME }} # change this to your database username
   GH_TOKEN: ${{ secrets.GH_TOKEN }} # Required for commenting on pull requests for private repos
   NEON_API_KEY: ${{ secrets.NEON_API_KEY }} # You can generate a an API key in your account settings
@@ -35,7 +34,7 @@ jobs:
         run: |
             touch .env
   
-            echo DATABASE_URL=${{ env.DATABASE_URL }}
+            echo DATABASE_URL=${{ steps.create-branch.outputs.db_url }}
             pnpm i drizzle-kit
             pnpm npx drizzle-kit generate
             pnpm npx drizzle-kit migrate
