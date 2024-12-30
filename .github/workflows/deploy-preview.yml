@@ -1,6 +1,7 @@
 name: Deploy Preview
 on: [pull_request]
 env:
+  DATABASE_SECRET: ${{ secrets.DATABASE_SECRET }}
   NEON_DATABASE_USERNAME: ${{ secrets.NEON_DATABASE_USERNAME }} # change this to your database username
   GH_TOKEN: ${{ secrets.GH_TOKEN }} # Required for commenting on pull requests for private repos
   NEON_API_KEY: ${{ secrets.NEON_API_KEY }} # You can generate a an API key in your account settings
@@ -33,8 +34,7 @@ jobs:
       - name: Run Migrations
         run: |
             touch .env
-  
-            echo DATABASE_URL=${{ steps.create-branch.outputs.db_url }}
+            echo DATABASE_URL=postgresql://development_owner:${{ env.DATABASE_SECRET }}@${{ steps.create-branch.outputs.branch_id }}.us-east-2.aws.neon.tech/development?sslmode=require
             pnpm i drizzle-kit
             pnpm npx drizzle-kit generate
             pnpm npx drizzle-kit migrate
