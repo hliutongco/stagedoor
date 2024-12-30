@@ -11,5 +11,5 @@ jobs:
     - uses: christophebedard/tag-version-commit@v1
       with:
         token: ${{ secrets.GH_TOKEN }}
-        check_entire_commit_message: true
         version_tag_prefix: 'v'
+        
