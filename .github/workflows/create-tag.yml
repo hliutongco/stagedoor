@@ -14,8 +14,10 @@ jobs:
         with:
           github_token: ${{ secrets.GH_TOKEN }}
       - name: Create a GitHub release
-        uses: ncipollo/release-action@v1
+        uses: BobAnkh/auto-generate-changelog@v1.2.5
         with:
-          tag: ${{ steps.tag_version.outputs.new_tag }}
-          name: Release ${{ steps.tag_version.outputs.new_tag }}
-          body: ${{ steps.tag_version.outputs.changelog }}
+          REPO_NAME: 'hliutongco/stagedoor'
+          ACCESS_TOKEN: ${{secrets.GH_TOKEN}}
+          PATH: 'CHANGELOG.md'
+          COMMIT_MESSAGE: 'fix(CHANGELOG): update release notes'
+          TYPE: 'perf:Major Release,feat:Minor Release,fix:Patch Release'
