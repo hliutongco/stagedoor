@@ -3,6 +3,7 @@ import { relations } from 'drizzle-orm';
 
 export const shows = pgTable('shows', {
   id: uuid().primaryKey().defaultRandom(),
+  playbillImage: text().notNull().default(''),
   title: text().notNull(),
 });
 

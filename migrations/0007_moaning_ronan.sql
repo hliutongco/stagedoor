@@ -1,0 +1,1 @@
+ALTER TABLE "shows" ADD COLUMN "playbillImage" text DEFAULT '' NOT NULL;
