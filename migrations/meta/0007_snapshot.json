@@ -1,5 +1,5 @@
 {
-  "id": "90941f28-21ee-4771-b918-c4d340993b80",
+  "id": "2f6fc47f-2144-47d2-8a78-c214ef60ba0b",
   "prevId": "8fe1d998-0e3f-4ef4-b208-9b53e187bb86",
   "version": "7",
   "dialect": "postgresql",
@@ -63,7 +63,8 @@
           "name": "playbillImage",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "''"
         },
         "title": {
           "name": "title",
