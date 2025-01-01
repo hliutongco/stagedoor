@@ -25,3 +25,16 @@ export const reviewRelations = relations(reviews, ({ one }) => ({
     references: [shows.id],
   }),
 }));
+
+export const watchedShow = pgTable('watched_show', {
+  id: uuid().primaryKey().defaultRandom(),
+  showId: uuid('show_id'),
+  userId: uuid('user_id'),
+});
+
+export const watchedShowRelations = relations(watchedShow, ({ one }) => ({
+  show: one(shows, {
+    fields: [watchedShow.showId],
+    references: [shows.id],
+  }),
+}));
