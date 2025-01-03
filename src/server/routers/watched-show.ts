@@ -1,4 +1,4 @@
-import { protectedProcedure, router } from '../init-trpc';
+import { publicProcedure, protectedProcedure, router } from '../init-trpc';
 import { watchedShow } from '@/db/schema';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
@@ -9,7 +9,7 @@ const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql);
 
 export const watchedShowRouter = router({
-  getWatchedShow: protectedProcedure
+  getWatchedShow: publicProcedure
     .input(
       z.object({
         showId: z.string().uuid(),

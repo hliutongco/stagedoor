@@ -5,6 +5,7 @@ import { useClerk } from '@clerk/nextjs';
 import { Badge } from '@/components/badge';
 import { Check } from 'lucide-react';
 import { useState } from 'react';
+import { Spinner } from '@/components/spinner';
 
 export default function WatchedButton({
   id,
@@ -23,6 +24,9 @@ export default function WatchedButton({
         redirectToSignIn();
       }
     },
+    onSuccess: () => {
+      setIsWatched(true);
+    },
   });
   const removeMutation = trpc.watchedShows.removeWatchedShow.useMutation({
     onError: (error) => {
@@ -34,6 +38,7 @@ export default function WatchedButton({
 
   return (
     <>
+      {createMutation.isPending && <Spinner size="small" />}
       {isWatched && (
         <>
           <Badge variant="secondary">
@@ -51,11 +56,10 @@ export default function WatchedButton({
           </span>
         </>
       )}
-      {!isWatched && (
+      {!isWatched && !createMutation.isPending && (
         <Button
           onClick={() => {
             createMutation.mutate({ showId: id, userId });
-            setIsWatched(true);
           }}
         >
           I&apos;ve Seen This!
