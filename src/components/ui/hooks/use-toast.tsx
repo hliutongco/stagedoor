@@ -1,3 +1,4 @@
+/* eslint indent: 0 */
 'use client';
 
 // Inspired by react-hot-toast library
@@ -110,7 +111,7 @@ export const reducer = (state: State, action: Action): State => {
         ),
       };
     }
-    case actionTypes.REMOVE_TOAST:
+    case actionTypes.REMOVE_TOAST: {
       if (action.toastId === undefined) {
         return {
           ...state,
@@ -121,6 +122,7 @@ export const reducer = (state: State, action: Action): State => {
         ...state,
         toasts: state.toasts.filter((t) => t.id !== action.toastId),
       };
+    }
   }
 };
 
