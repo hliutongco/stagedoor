@@ -9,10 +9,19 @@ const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql);
 
 export const watchedShowRouter = router({
-  // TODO: Implement the following procedures
-  // getAUsersWatchedShows: publicProcedure.query(() => {
-  //   return db.select().from(watchedShow);
-  // }),
+  getWatchedShow: protectedProcedure
+    .input(
+      z.object({
+        showId: z.string().uuid(),
+        userId: z.string(),
+      }),
+    )
+    .query(({ input: { showId, userId } }) => {
+      return db
+        .select()
+        .from(watchedShow)
+        .where(and(eq(watchedShow.showId, showId), eq(watchedShow.userId, userId)));
+    }),
   addWatchedShow: protectedProcedure
     .input(
       z.object({
