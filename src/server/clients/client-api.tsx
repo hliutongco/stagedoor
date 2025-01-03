@@ -1,7 +1,4 @@
 'use client';
-
-// this file might not be necessary?
-
 // ^-- to make sure we can mount the Provider from a server component
 import type { QueryClient } from '@tanstack/react-query';
 import { QueryClientProvider } from '@tanstack/react-query';

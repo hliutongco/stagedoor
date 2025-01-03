@@ -1,6 +1,7 @@
 import { currentUser } from '@clerk/nextjs/server';
 import { initTRPC, TRPCError } from '@trpc/server';
 import { cache } from 'react';
+
 // Avoid exporting the entire trpc-object since it's not very descriptive.
 export const createTRPCContext = cache(async () => {
   /**
