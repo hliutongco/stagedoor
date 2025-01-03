@@ -5,12 +5,12 @@ import { useClerk } from '@clerk/nextjs';
 import { Badge } from '@/components/badge';
 import { Check } from 'lucide-react';
 import { useState } from 'react';
-import { Spinner } from '@/components/spinner';
+import { useToast } from '@/components/hooks/use-toast';
 
 export default function WatchedButton({
   id,
   isWatched: _isWatched,
-  userId = '',
+  userId,
 }: {
   id: string;
   isWatched: boolean;
@@ -18,27 +18,28 @@ export default function WatchedButton({
 }) {
   const { redirectToSignIn } = useClerk();
   const [isWatched, setIsWatched] = useState(_isWatched);
+  const { toast } = useToast();
   const createMutation = trpc.watchedShows.addWatchedShow.useMutation({
     onError: (error) => {
-      if (error.message.includes('UNAUTHORIZED')) {
-        redirectToSignIn();
-      }
-    },
-    onSuccess: () => {
-      setIsWatched(true);
+      toast({
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
+        description: error.message,
+      });
     },
   });
   const removeMutation = trpc.watchedShows.removeWatchedShow.useMutation({
     onError: (error) => {
-      if (error.message.includes('UNAUTHORIZED')) {
-        redirectToSignIn();
-      }
+      toast({
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
+        description: error.message,
+      });
     },
   });
 
   return (
     <>
-      {createMutation.isPending && <Spinner size="small" />}
       {isWatched && (
         <>
           <Badge variant="secondary">
@@ -47,6 +48,10 @@ export default function WatchedButton({
           <span
             className="hover:underline text-sm"
             onClick={() => {
+              if (!userId) {
+                redirectToSignIn();
+                return;
+              }
               removeMutation.mutate({ showId: id, userId });
               setIsWatched(false);
             }}
@@ -56,10 +61,15 @@ export default function WatchedButton({
           </span>
         </>
       )}
-      {!isWatched && !createMutation.isPending && (
+      {!isWatched && (
         <Button
           onClick={() => {
+            if (!userId) {
+              redirectToSignIn();
+              return;
+            }
             createMutation.mutate({ showId: id, userId });
+            setIsWatched(true);
           }}
         >
           I&apos;ve Seen This!
