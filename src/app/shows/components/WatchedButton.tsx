@@ -4,7 +4,7 @@ import { trpc } from '@/server/clients/client-api';
 import { useClerk } from '@clerk/nextjs';
 import { Badge } from '@/components/badge';
 import { Check } from 'lucide-react';
-import  { useState } from 'react';
+import { useState } from 'react';
 
 export default function WatchedButton({
   id,
@@ -18,9 +18,6 @@ export default function WatchedButton({
   const { redirectToSignIn } = useClerk();
   const [isWatched, setIsWatched] = useState(_isWatched);
   const createMutation = trpc.watchedShows.addWatchedShow.useMutation({
-    onSuccess: (response) => {
-      console.log('Success', response);
-    },
     onError: (error) => {
       if (error.message.includes('UNAUTHORIZED')) {
         redirectToSignIn();
@@ -28,9 +25,6 @@ export default function WatchedButton({
     },
   });
   const removeMutation = trpc.watchedShows.removeWatchedShow.useMutation({
-    onSuccess: (response) => {
-      console.log('Success', response);
-    },
     onError: (error) => {
       if (error.message.includes('UNAUTHORIZED')) {
         redirectToSignIn();
