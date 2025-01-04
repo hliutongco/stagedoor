@@ -1,12 +1,13 @@
 import { publicProcedure, protectedProcedure, router } from '../init-trpc';
-import { watchedShow } from '@/db/schema';
+import { watchedShows } from '@/db/schema';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
 import { z } from 'zod';
 import { and, eq } from 'drizzle-orm';
+import * as schema from '../../db/schema';
 
 const sql = neon(process.env.DATABASE_URL!);
-const db = drizzle(sql);
+const db = drizzle(sql, { schema });
 
 export const watchedShowRouter = router({
   getWatchedShow: publicProcedure
@@ -17,10 +18,18 @@ export const watchedShowRouter = router({
       }),
     )
     .query(({ input: { showId, userId } }) => {
-      return db
-        .select()
-        .from(watchedShow)
-        .where(and(eq(watchedShow.showId, showId), eq(watchedShow.userId, userId)));
+      return db.query.watchedShows.findFirst({
+        where: and(eq(watchedShows.showId, showId), eq(watchedShows.userId, userId)),
+      });
+    }),
+  getWatchedShowsByUser: publicProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+      }),
+    )
+    .query(({ input: { userId } }) => {
+      return db.select().from(watchedShows).where(eq(watchedShows.userId, userId));
     }),
   addWatchedShow: protectedProcedure
     .input(
@@ -30,7 +39,7 @@ export const watchedShowRouter = router({
       }),
     )
     .mutation(({ input: { showId, userId } }) => {
-      return db.insert(watchedShow).values({
+      return db.insert(watchedShows).values({
         showId,
         userId,
       });
@@ -44,7 +53,7 @@ export const watchedShowRouter = router({
     )
     .mutation(({ input: { showId, userId } }) => {
       return db
-        .delete(watchedShow)
-        .where(and(eq(watchedShow.showId, showId), eq(watchedShow.userId, userId)));
+        .delete(watchedShows)
+        .where(and(eq(watchedShows.showId, showId), eq(watchedShows.userId, userId)));
     }),
 });

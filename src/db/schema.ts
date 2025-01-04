@@ -9,6 +9,7 @@ export const shows = pgTable('shows', {
 
 export const showRelations = relations(shows, ({ many }) => ({
   reviews: many(reviews),
+  watchedShows: many(watchedShows),
 }));
 
 export const reviews = pgTable('reviews', {
@@ -26,15 +27,15 @@ export const reviewRelations = relations(reviews, ({ one }) => ({
   }),
 }));
 
-export const watchedShow = pgTable('watched_show', {
+export const watchedShows = pgTable('watched_shows', {
   id: uuid().primaryKey().defaultRandom(),
   showId: uuid('show_id'),
   userId: text('user_id'),
 });
 
-export const watchedShowRelations = relations(watchedShow, ({ one }) => ({
+export const watchedShowsRelations = relations(watchedShows, ({ one }) => ({
   show: one(shows, {
-    fields: [watchedShow.showId],
+    fields: [watchedShows.showId],
     references: [shows.id],
   }),
 }));
