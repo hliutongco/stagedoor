@@ -4,9 +4,10 @@ import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
 import { z } from 'zod';
 import { and, eq } from 'drizzle-orm';
+import * as schema from '../../db/schema';
 
 const sql = neon(process.env.DATABASE_URL!);
-const db = drizzle(sql);
+const db = drizzle(sql, { schema });
 
 export const watchedShowRouter = router({
   getWatchedShow: publicProcedure
@@ -17,10 +18,18 @@ export const watchedShowRouter = router({
       }),
     )
     .query(({ input: { showId, userId } }) => {
-      return db
-        .select()
-        .from(watchedShows)
-        .where(and(eq(watchedShows.showId, showId), eq(watchedShows.userId, userId)));
+      return db.query.watchedShows.findFirst({
+        where: and(eq(watchedShows.showId, showId), eq(watchedShows.userId, userId)),
+      });
+    }),
+  getWatchedShowsByUser: publicProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+      }),
+    )
+    .query(({ input: { userId } }) => {
+      return db.select().from(watchedShows).where(eq(watchedShows.userId, userId));
     }),
   addWatchedShow: protectedProcedure
     .input(

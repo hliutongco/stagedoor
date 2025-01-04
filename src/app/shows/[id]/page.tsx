@@ -6,7 +6,7 @@ export default async function ShowView({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const user = await currentUser();
   const [show] = await trpc.shows.getShow({ id });
-  const [watchedShow] = await trpc.watchedShows.getWatchedShow({
+  const watchedShow = await trpc.watchedShows.getWatchedShow({
     showId: id,
     userId: user?.id ?? '',
   });
