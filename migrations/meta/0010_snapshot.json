@@ -1,6 +1,6 @@
 {
-  "id": "e127d9c9-f484-4e00-9676-cc27a9bdcc91",
-  "prevId": "33889e32-a379-4ab8-a597-a6028837ae81",
+  "id": "f48f87c6-ca53-40a8-907e-5f5fe5fc1f57",
+  "prevId": "e127d9c9-f484-4e00-9676-cc27a9bdcc91",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -81,8 +81,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.watched_show": {
-      "name": "watched_show",
+    "public.watched_shows": {
+      "name": "watched_shows",
       "schema": "",
       "columns": {
         "id": {

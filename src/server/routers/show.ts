@@ -12,6 +12,15 @@ export const showsRouter = router({
   getShows: publicProcedure.query(() => {
     return db.select().from(shows);
   }),
+  // getListOfShows: publicProcedure
+  //   .input(
+  //     z.object({
+  //       ids: z.string().array(),
+  //     }),
+  //   )
+  //   .query(({ input: { ids } }) => {
+  //     return db.select().from(shows).where(shows.id.in(ids));
+  //   }),
   getShow: publicProcedure
     .input(
       z.object({

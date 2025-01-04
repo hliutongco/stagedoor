@@ -1,5 +1,5 @@
 import { publicProcedure, protectedProcedure, router } from '../init-trpc';
-import { watchedShow } from '@/db/schema';
+import { watchedShows } from '@/db/schema';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
 import { z } from 'zod';
@@ -19,8 +19,8 @@ export const watchedShowRouter = router({
     .query(({ input: { showId, userId } }) => {
       return db
         .select()
-        .from(watchedShow)
-        .where(and(eq(watchedShow.showId, showId), eq(watchedShow.userId, userId)));
+        .from(watchedShows)
+        .where(and(eq(watchedShows.showId, showId), eq(watchedShows.userId, userId)));
     }),
   addWatchedShow: protectedProcedure
     .input(
@@ -30,7 +30,7 @@ export const watchedShowRouter = router({
       }),
     )
     .mutation(({ input: { showId, userId } }) => {
-      return db.insert(watchedShow).values({
+      return db.insert(watchedShows).values({
         showId,
         userId,
       });
@@ -44,7 +44,7 @@ export const watchedShowRouter = router({
     )
     .mutation(({ input: { showId, userId } }) => {
       return db
-        .delete(watchedShow)
-        .where(and(eq(watchedShow.showId, showId), eq(watchedShow.userId, userId)));
+        .delete(watchedShows)
+        .where(and(eq(watchedShows.showId, showId), eq(watchedShows.userId, userId)));
     }),
 });
