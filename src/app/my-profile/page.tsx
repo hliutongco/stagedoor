@@ -14,6 +14,7 @@ export default async function MyProfilePage() {
     <>
       <h1>{user?.firstName ?? 'User'}&apos;s Profile</h1>
       <div className="items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+        <h2>Your Playbill Collection</h2>
         {shows && <ShowsList shows={shows} />}
       </div>
     </>
