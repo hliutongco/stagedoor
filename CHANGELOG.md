@@ -1,5 +1,35 @@
 # CHANGELOG
 
+## [v0.2.0](https://github.com/hliutongco/stagedoor/releases/tag/v0.2.0) - 2025-01-04 19:11:36
+
+- Add Shows data to the homepage
+- Add basic user profile
+- Add functionality for marking a show as watched
+
+### Minor Release
+
+- WatchedShow:
+  - finish up watched show functionality and basic profile view (#27) ([5299880](https://github.com/hliutongco/stagedoor/commit/5299880e577986a58fd66f43d7748a2d522b953f)) ([#27](https://github.com/hliutongco/stagedoor/pull/27))
+
+### Patch Release
+
+- WatchedButton:
+  - add watched show functionality (#26) ([5d76dd6](https://github.com/hliutongco/stagedoor/commit/5d76dd6f976ee4654a08c62df6df204bf81d82ba)) ([#26](https://github.com/hliutongco/stagedoor/pull/26))
+
+- migrations:
+  - add watchedShow table (#25) ([a27f218](https://github.com/hliutongco/stagedoor/commit/a27f21823549bee5b6b035fe334d4bf2f5757ff2)) ([#25](https://github.com/hliutongco/stagedoor/pull/25))
+  - add playbill images (#23) ([48aa460](https://github.com/hliutongco/stagedoor/commit/48aa460ff8b5dfa9fb005ed957f8f08cf5640df1)) ([#23](https://github.com/hliutongco/stagedoor/pull/23))
+  - change id to uuid type (#15) ([afaf065](https://github.com/hliutongco/stagedoor/commit/afaf06595ecf3ecf88d1d035e41e26b3440b67ab)) ([#15](https://github.com/hliutongco/stagedoor/pull/15))
+
+- github/workflows:
+  - add title checker workflow (#22) ([8c79b7b](https://github.com/hliutongco/stagedoor/commit/8c79b7b54b2385fdba970ed7f7de28e11aa2ccd8)) ([#22](https://github.com/hliutongco/stagedoor/pull/22))
+  - change the release action (#21) ([d46c7cf](https://github.com/hliutongco/stagedoor/commit/d46c7cf93272267491cd74b594263ef0124e9385)) ([#21](https://github.com/hliutongco/stagedoor/pull/21))
+  - fix branch name ([065b3f1](https://github.com/hliutongco/stagedoor/commit/065b3f162d34a327391bf0a433797c244167f575)) ([#20](https://github.com/hliutongco/stagedoor/pull/20))
+  - try adding a new create tag workflow (#19) ([974730c](https://github.com/hliutongco/stagedoor/commit/974730c391562cf567c937e39951a6461875976c)) ([#19](https://github.com/hliutongco/stagedoor/pull/19))
+
+- CHANGELOG:
+  - update release notes ([f48ff66](https://github.com/hliutongco/stagedoor/commit/f48ff66ca41b2674bbce2008ad4ef210ac9fa920))
+
 ## [v0.1.0](https://github.com/hliutongco/stagedoor/releases/tag/v0.1.0) - 2024-12-29 18:04:45
 
 Add public and private procedures for tRPC as well as the setup for a basic tRPC API
