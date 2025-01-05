@@ -31,6 +31,15 @@ export const watchedShowRouter = router({
     .query(({ input: { userId } }) => {
       return db.select().from(watchedShows).where(eq(watchedShows.userId, userId));
     }),
+  getWatchedShowsByShow: publicProcedure
+    .input(
+      z.object({
+        showId: z.string().uuid(),
+      }),
+    )
+    .query(({ input: { showId } }) => {
+      return db.select().from(watchedShows).where(eq(watchedShows.showId, showId));
+    }),
   addWatchedShow: protectedProcedure
     .input(
       z.object({
