@@ -27,22 +27,22 @@ export const reviewRelations = relations(reviews, ({ one }) => ({
   }),
 }));
 
-export const watchedShows = pgTable('watched_shows', {
-  id: uuid().primaryKey().defaultRandom(),
-  showId: uuid('show_id'),
-  userId: text('user_id'),
-});
+// export const watchedShows = pgTable('watched_shows', {
+//   id: uuid().primaryKey().defaultRandom(),
+//   showId: uuid('show_id'),
+//   userId: text('user_id'),
+// });
 
-export const watchedShowsRelations = relations(watchedShows, ({ one }) => ({
-  show: one(shows, {
-    fields: [watchedShows.showId],
-    references: [shows.id],
-  }),
-}));
+// export const watchedShowsRelations = relations(watchedShows, ({ one }) => ({
+//   show: one(shows, {
+//     fields: [watchedShows.showId],
+//     references: [shows.id],
+//   }),
+// }));
 
-export const ratings = pgTable('ratings', {
-  id: uuid().primaryKey().defaultRandom(),
-  rating: decimal().notNull().default('0'),
-  showId: uuid('show_id'),
-  userId: text('user_id'),
-});
+// export const ratings = pgTable('ratings', {
+//   id: uuid().primaryKey().defaultRandom(),
+//   rating: decimal().notNull().default('0'),
+//   showId: uuid('show_id'),
+//   userId: text('user_id'),
+// });
