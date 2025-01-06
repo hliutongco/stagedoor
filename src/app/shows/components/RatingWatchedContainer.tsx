@@ -20,18 +20,18 @@ export default function RatingWatchedContainer({
   const [isWatched, setIsWatched] = useState(_isWatched);
   return (
     <>
+      <WatchedButton
+        id={showId}
+        isWatched={isWatched}
+        setIsWatched={setIsWatched}
+        userId={userId}
+      />
       <p>Your Rating:</p>
       <StarRating
         isWatched={isWatched}
         rating={rating}
         setIsWatched={setIsWatched}
         showId={showId}
-        userId={userId}
-      />
-      <WatchedButton
-        id={showId}
-        isWatched={isWatched}
-        setIsWatched={setIsWatched}
         userId={userId}
       />
     </>
