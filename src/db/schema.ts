@@ -1,4 +1,4 @@
-import { text, pgTable, uuid } from 'drizzle-orm/pg-core';
+import { text, pgTable, uuid, decimal } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 export const shows = pgTable('shows', {
@@ -39,3 +39,10 @@ export const watchedShowsRelations = relations(watchedShows, ({ one }) => ({
     references: [shows.id],
   }),
 }));
+
+export const ratings = pgTable('ratings', {
+  id: uuid().primaryKey().defaultRandom(),
+  rating: decimal().notNull().default('0'),
+  showId: uuid('show_id'),
+  userId: text('user_id'),
+});
