@@ -3,6 +3,7 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import { toast } from '@/components/hooks/use-toast';
 import { trpc } from '@/server/clients/client-api';
+import { useClerk } from '@clerk/nextjs';
 import './styles/star-rating.scss';
 
 interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -12,6 +13,7 @@ interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const StarRating = ({ rating, showId, userId }: RatingsProps) => {
+  const { redirectToSignIn } = useClerk();
   const [value, setValue] = useState(rating ?? '0');
   const createMutation = trpc.ratings.addRating.useMutation({
     onError: (error) => {
@@ -33,6 +35,10 @@ const StarRating = ({ rating, showId, userId }: RatingsProps) => {
   });
   const onValueChange = useCallback(
     (e: ChangeEvent) => {
+      if (!userId) {
+        redirectToSignIn();
+        return;
+      }
       const newValue = (e.target as HTMLInputElement).value;
       setValue(newValue);
       if (rating) {
@@ -41,7 +47,7 @@ const StarRating = ({ rating, showId, userId }: RatingsProps) => {
         createMutation.mutate({ rating: newValue, showId, userId });
       }
     },
-    [createMutation, rating, showId, updateMutation, userId],
+    [createMutation, rating, redirectToSignIn, showId, updateMutation, userId],
   );
 
   return (
