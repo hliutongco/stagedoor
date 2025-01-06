@@ -4,20 +4,22 @@ import { trpc } from '@/server/clients/client-api';
 import { useClerk } from '@clerk/nextjs';
 import { Badge } from '@/components/badge';
 import { Check } from 'lucide-react';
-import { useState } from 'react';
 import { useToast } from '@/components/hooks/use-toast';
+import { useRouter } from 'next/navigation';
 
 export default function WatchedButton({
   id,
-  isWatched: _isWatched,
+  isWatched,
+  setIsWatched,
   userId,
 }: {
   id: string;
   isWatched: boolean;
+  setIsWatched: (isWatched: boolean) => void;
   userId: string | undefined;
 }) {
+  const router = useRouter();
   const { redirectToSignIn } = useClerk();
-  const [isWatched, setIsWatched] = useState(_isWatched);
   const { toast } = useToast();
   const createMutation = trpc.watchedShows.addWatchedShow.useMutation({
     onError: (error) => {
@@ -54,6 +56,7 @@ export default function WatchedButton({
               }
               removeMutation.mutate({ showId: id, userId });
               setIsWatched(false);
+              router.refresh();
             }}
             role="button"
           >
@@ -70,6 +73,7 @@ export default function WatchedButton({
             }
             createMutation.mutate({ showId: id, userId });
             setIsWatched(true);
+            router.refresh();
           }}
         >
           I&apos;ve Seen This!

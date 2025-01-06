@@ -5,16 +5,35 @@ import { toast } from '@/components/hooks/use-toast';
 import { trpc } from '@/server/clients/client-api';
 import { useClerk } from '@clerk/nextjs';
 import './styles/star-rating.scss';
+import { useRouter } from 'next/navigation';
 
 interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
+  isWatched: boolean;
   rating: string | undefined;
+  setIsWatched: (isWatched: boolean) => void;
   showId: string;
   userId: string;
 }
 
-const StarRating = ({ rating, showId, userId }: RatingsProps) => {
+const StarRating = ({
+  isWatched,
+  rating,
+  setIsWatched,
+  showId,
+  userId,
+}: RatingsProps) => {
+  const router = useRouter();
   const { redirectToSignIn } = useClerk();
   const [value, setValue] = useState(rating ?? '0');
+  const createWatchedMutation = trpc.watchedShows.addWatchedShow.useMutation({
+    onError: (error) => {
+      toast({
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
+        description: error.message,
+      });
+    },
+  });
   const createMutation = trpc.ratings.addRating.useMutation({
     onError: (error) => {
       toast({
@@ -45,9 +64,25 @@ const StarRating = ({ rating, showId, userId }: RatingsProps) => {
         updateMutation.mutate({ rating: newValue, showId, userId });
       } else {
         createMutation.mutate({ rating: newValue, showId, userId });
+        if (!isWatched) {
+          setIsWatched(true);
+          createWatchedMutation.mutate({ showId, userId });
+          router.refresh();
+        }
       }
     },
-    [createMutation, rating, redirectToSignIn, showId, updateMutation, userId],
+    [
+      createMutation,
+      createWatchedMutation,
+      isWatched,
+      rating,
+      redirectToSignIn,
+      router,
+      setIsWatched,
+      showId,
+      updateMutation,
+      userId,
+    ],
   );
 
   return (
