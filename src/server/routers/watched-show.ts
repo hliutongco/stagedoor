@@ -1,13 +1,13 @@
-import { publicProcedure, protectedProcedure, router } from '../init-trpc';
-import { watchedShows } from '@/db/schema';
+import { protectedProcedure, publicProcedure, router } from '../init-trpc';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
 import { z } from 'zod';
 import { and, eq } from 'drizzle-orm';
-import * as schema from '../../db/schema';
+import * as schema from '@/db/schema';
 
 const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql, { schema });
+const watchedShows = schema.watchedShows;
 
 export const watchedShowRouter = router({
   getWatchedShow: publicProcedure

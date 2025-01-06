@@ -3,11 +3,11 @@ import { publicProcedure, router } from '../init-trpc';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { eq, inArray } from 'drizzle-orm';
 import { neon } from '@neondatabase/serverless';
-import { shows } from '../../db/schema';
-import * as schema from '../../db/schema';
+import * as schema from '@/db/schema';
 
 const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql, { schema });
+const shows = schema.shows;
 
 export const showsRouter = router({
   getShows: publicProcedure.query(() => {
