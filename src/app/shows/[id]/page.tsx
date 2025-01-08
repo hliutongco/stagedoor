@@ -8,20 +8,19 @@ export default async function ShowView({ params }: { params: Promise<{ id: strin
   const user = await currentUser();
   const userId = user?.id ?? '';
   const [show] = await trpc.shows.getShow({ id });
-  const watchedShow = await trpc.watchedShows.getWatchedShow({
-    showId: id,
-    userId,
-  });
-  const _rating = await trpc.ratings.getRating({ showId: id, userId });
+  const userShow = await trpc.userShows.getUserShow({ showId: id, userId });
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <h2>{show.title}</h2>
       <WatchedCount showId={id} />
       <RatingWatchedContainer
-        rating={_rating?.rating}
+        hasRatingOrReview={Boolean(userShow?.hasReviewOrRating)}
+        id={userShow?.id}
+        isWatched={Boolean(userShow?.isWatched)}
+        rating={userShow?.rating}
         showId={id}
         userId={userId}
-        isWatched={Boolean(watchedShow)}
       />
     </div>
   );

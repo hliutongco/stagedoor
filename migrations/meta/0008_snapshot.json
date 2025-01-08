@@ -1,5 +1,5 @@
 {
-  "id": "33889e32-a379-4ab8-a597-a6028837ae81",
+  "id": "c0a60d23-e2c1-4624-9685-c4584625a1b3",
   "prevId": "2f6fc47f-2144-47d2-8a78-c214ef60ba0b",
   "version": "7",
   "dialect": "postgresql",
@@ -8,12 +8,6 @@
       "name": "reviews",
       "schema": "",
       "columns": {
-        "body": {
-          "name": "body",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
         "id": {
           "name": "id",
           "type": "uuid",
@@ -21,14 +15,14 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
+        "body": {
+          "name": "body",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
         "show_id": {
           "name": "show_id",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "user_id": {
-          "name": "user_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": false
@@ -38,6 +32,12 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -81,8 +81,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.watched_show": {
-      "name": "watched_show",
+    "public.user_shows": {
+      "name": "user_shows",
       "schema": "",
       "columns": {
         "id": {
@@ -92,6 +92,27 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
+        "hasReviewOrRating": {
+          "name": "hasReviewOrRating",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "isWatched": {
+          "name": "isWatched",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "rating": {
+          "name": "rating",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0'"
+        },
         "show_id": {
           "name": "show_id",
           "type": "uuid",
@@ -100,7 +121,7 @@
         },
         "user_id": {
           "name": "user_id",
-          "type": "uuid",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         }

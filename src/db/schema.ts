@@ -1,4 +1,4 @@
-import { text, pgTable, uuid, decimal } from 'drizzle-orm/pg-core';
+import { boolean, decimal, pgTable, text, uuid } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 export const shows = pgTable('shows', {
@@ -9,15 +9,15 @@ export const shows = pgTable('shows', {
 
 export const showRelations = relations(shows, ({ many }) => ({
   reviews: many(reviews),
-  watchedShows: many(watchedShows),
+  userShows: many(userShows),
 }));
 
 export const reviews = pgTable('reviews', {
-  body: text().notNull(),
   id: uuid().primaryKey().defaultRandom(),
+  body: text().notNull(),
   showId: uuid('show_id'),
-  userId: text('user_id'),
   title: text().notNull(),
+  userId: text('user_id'),
 });
 
 export const reviewRelations = relations(reviews, ({ one }) => ({
@@ -27,22 +27,18 @@ export const reviewRelations = relations(reviews, ({ one }) => ({
   }),
 }));
 
-export const watchedShows = pgTable('watched_shows', {
+export const userShows = pgTable('user_shows', {
   id: uuid().primaryKey().defaultRandom(),
-  showId: uuid('show_id'),
-  userId: text('user_id'),
-});
-
-export const watchedShowsRelations = relations(watchedShows, ({ one }) => ({
-  show: one(shows, {
-    fields: [watchedShows.showId],
-    references: [shows.id],
-  }),
-}));
-
-export const ratings = pgTable('ratings', {
-  id: uuid().primaryKey().defaultRandom(),
+  hasReviewOrRating: boolean().notNull().default(false),
+  isWatched: boolean().notNull().default(false),
   rating: decimal().notNull().default('0'),
   showId: uuid('show_id'),
   userId: text('user_id'),
 });
+
+export const userShowsRelations = relations(userShows, ({ one }) => ({
+  show: one(shows, {
+    fields: [userShows.showId],
+    references: [shows.id],
+  }),
+}));

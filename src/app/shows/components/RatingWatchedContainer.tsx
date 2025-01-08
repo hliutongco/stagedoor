@@ -5,30 +5,36 @@ import StarRating from '@/components/../core/star-rating';
 import { useState } from 'react';
 
 interface RatingWatchedContainerProps {
+  hasRatingOrReview: boolean;
+  id: string | undefined;
+  isWatched: boolean;
   rating: string | undefined;
   showId: string;
   userId: string;
-  isWatched: boolean;
 }
 
 export default function RatingWatchedContainer({
+  hasRatingOrReview,
+  id,
+  isWatched: _isWatched,
   rating,
   showId,
   userId,
-  isWatched: _isWatched,
 }: RatingWatchedContainerProps) {
   const [isWatched, setIsWatched] = useState(_isWatched);
   return (
     <>
       <WatchedButton
-        id={showId}
+        hasRatingOrReview={hasRatingOrReview}
+        id={id}
         isWatched={isWatched}
         setIsWatched={setIsWatched}
+        showId={showId}
         userId={userId}
       />
       <p>Your Rating:</p>
       <StarRating
-        isWatched={isWatched}
+        id={id}
         rating={rating}
         setIsWatched={setIsWatched}
         showId={showId}
