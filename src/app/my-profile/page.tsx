@@ -5,7 +5,7 @@ import { trpc } from '@/server/clients/server-api';
 export default async function MyProfilePage() {
   const user = await currentUser();
   if (!user) return (await auth()).redirectToSignIn();
-  const _watchedShows = await trpc.watchedShows.getWatchedShowsByUser({
+  const _watchedShows = await trpc.userShows.getAllWatchedByUser({
     userId: user.id,
   });
   const watchedShows = _watchedShows.map((show) => show.showId ?? '');
