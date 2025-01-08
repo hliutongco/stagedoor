@@ -61,29 +61,8 @@
     {
       "idx": 8,
       "version": "7",
-      "when": 1735774472848,
-      "tag": "0008_parched_squadron_sinister",
-      "breakpoints": true
-    },
-    {
-      "idx": 9,
-      "version": "7",
-      "when": 1735962606899,
-      "tag": "0009_strange_senator_kelly",
-      "breakpoints": true
-    },
-    {
-      "idx": 10,
-      "version": "7",
-      "when": 1735962721931,
-      "tag": "0010_soft_jack_flag",
-      "breakpoints": true
-    },
-    {
-      "idx": 11,
-      "version": "7",
-      "when": 1736143194827,
-      "tag": "0011_brainy_starjammers",
+      "when": 1736196858868,
+      "tag": "0008_odd_preak",
       "breakpoints": true
     }
   ]

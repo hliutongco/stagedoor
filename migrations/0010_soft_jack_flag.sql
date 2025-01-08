@@ -1,1 +1,0 @@
-ALTER TABLE "watched_show" RENAME TO "watched_shows";

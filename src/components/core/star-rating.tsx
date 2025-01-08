@@ -4,28 +4,22 @@ import React, { ChangeEvent, useCallback, useState } from 'react';
 import { toast } from '@/components/hooks/use-toast';
 import { trpc } from '@/server/clients/client-api';
 import { useClerk } from '@clerk/nextjs';
-import './styles/star-rating.scss';
 import { useRouter } from 'next/navigation';
+import './styles/star-rating.scss';
 
 interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
-  isWatched: boolean;
+  id: string | undefined;
   rating: string | undefined;
   setIsWatched: (isWatched: boolean) => void;
   showId: string;
   userId: string;
 }
 
-const StarRating = ({
-  isWatched,
-  rating,
-  setIsWatched,
-  showId,
-  userId,
-}: RatingsProps) => {
+const StarRating = ({ id, rating, setIsWatched, showId, userId }: RatingsProps) => {
   const router = useRouter();
   const { redirectToSignIn } = useClerk();
   const [value, setValue] = useState(rating ?? '0');
-  const createWatchedMutation = trpc.watchedShows.addWatchedShow.useMutation({
+  const createRatingMutation = trpc.userShows.createWithRating.useMutation({
     onError: (error) => {
       toast({
         variant: 'destructive',
@@ -34,16 +28,7 @@ const StarRating = ({
       });
     },
   });
-  const createMutation = trpc.ratings.addRating.useMutation({
-    onError: (error) => {
-      toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
-        description: error.message,
-      });
-    },
-  });
-  const updateMutation = trpc.ratings.updateRating.useMutation({
+  const updateRatingMutation = trpc.userShows.changeRating.useMutation({
     onError: (error) => {
       toast({
         variant: 'destructive',
@@ -60,27 +45,22 @@ const StarRating = ({
       }
       const newValue = (e.target as HTMLInputElement).value;
       setValue(newValue);
-      if (rating) {
-        updateMutation.mutate({ rating: newValue, showId, userId });
+      if (id) {
+        updateRatingMutation.mutate({ id, rating: newValue });
       } else {
-        createMutation.mutate({ rating: newValue, showId, userId });
-        if (!isWatched) {
-          setIsWatched(true);
-          createWatchedMutation.mutate({ showId, userId });
-          router.refresh();
-        }
+        createRatingMutation.mutate({ rating: newValue, showId, userId });
       }
+      setIsWatched(true);
+      router.refresh();
     },
     [
-      createMutation,
-      createWatchedMutation,
-      isWatched,
-      rating,
+      createRatingMutation,
+      id,
       redirectToSignIn,
       router,
       setIsWatched,
       showId,
-      updateMutation,
+      updateRatingMutation,
       userId,
     ],
   );
