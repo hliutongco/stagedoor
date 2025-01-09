@@ -34,7 +34,7 @@ export const userShowRouter = router({
     )
     .mutation(({ input: { showId, userId, rating } }) => {
       return db.insert(userShows).values({
-        hasReviewOrRating: true,
+        hasRating: true,
         isWatched: true,
         showId,
         userId,
@@ -127,10 +127,19 @@ export const userShowRouter = router({
       return db
         .update(userShows)
         .set({
-          hasReviewOrRating: true,
+          hasRating: true,
           isWatched: true,
           rating,
         })
         .where(eq(userShows.id, id));
+    }),
+  deleteEmptyRecord: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().uuid(),
+      }),
+    )
+    .mutation(({ input: { id } }) => {
+      return db.delete(userShows).where(eq(userShows.id, id));
     }),
 });

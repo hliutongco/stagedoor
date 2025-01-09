@@ -29,7 +29,8 @@ export const reviewRelations = relations(reviews, ({ one }) => ({
 
 export const userShows = pgTable('user_shows', {
   id: uuid().primaryKey().defaultRandom(),
-  hasReviewOrRating: boolean().notNull().default(false),
+  hasRating: boolean().notNull().default(false),
+  hasReview: boolean().notNull().default(false),
   isWatched: boolean().notNull().default(false),
   rating: decimal().notNull().default('0'),
   showId: uuid('show_id'),
