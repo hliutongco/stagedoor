@@ -1,0 +1,2 @@
+ALTER TABLE "shows" ADD COLUMN "slug" text GENERATED ALWAYS AS (lower(regexp_replace(title, ' ', '-', 'g')) || '-' || year) STORED NOT NULL;--> statement-breakpoint
+ALTER TABLE "shows" ADD CONSTRAINT "shows_slug_unique" UNIQUE("slug");

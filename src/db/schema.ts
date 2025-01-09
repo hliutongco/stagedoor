@@ -1,4 +1,4 @@
-import { boolean, decimal, integer, pgTable, text, uuid } from 'drizzle-orm/pg-core';
+import { boolean, decimal, pgTable, text, uuid } from 'drizzle-orm/pg-core';
 import { sql, relations } from 'drizzle-orm';
 
 export const shows = pgTable('shows', {
@@ -7,11 +7,9 @@ export const shows = pgTable('shows', {
   slug: text()
     .notNull()
     .unique()
-    .generatedAlwaysAs(
-      sql`concat(lower(regexp_replace(title, '\s', '-', 'g')), '-', year)`,
-    ),
-  title: text().notNull().unique(),
-  year: integer().notNull(),
+    .generatedAlwaysAs(sql`lower(regexp_replace(title, ' ', '-', 'g')) || '-' || year`),
+  title: text().notNull(),
+  year: text().notNull().default(`${new Date().getFullYear()}`),
 });
 
 export const showRelations = relations(shows, ({ many }) => ({
