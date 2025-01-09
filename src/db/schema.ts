@@ -1,10 +1,17 @@
-import { boolean, decimal, pgTable, text, uuid } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
+import { boolean, decimal, integer, pgTable, text, uuid } from 'drizzle-orm/pg-core';
+import { sql, relations } from 'drizzle-orm';
 
 export const shows = pgTable('shows', {
   id: uuid().primaryKey().defaultRandom(),
   playbillImage: text().notNull().default(''),
-  title: text().notNull(),
+  slug: text()
+    .notNull()
+    .unique()
+    .generatedAlwaysAs(
+      sql`concat(lower(regexp_replace(title, '\s', '-', 'g')), '-', year)`,
+    ),
+  title: text().notNull().unique(),
+  year: integer().notNull(),
 });
 
 export const showRelations = relations(shows, ({ many }) => ({
