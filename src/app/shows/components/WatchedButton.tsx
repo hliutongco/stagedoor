@@ -46,6 +46,15 @@ export default function WatchedButton({
       });
     },
   });
+  const deleteMutation = trpc.userShows.deleteEmptyRecord.useMutation({
+    onError: (error) => {
+      toast({
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
+        description: error.message,
+      });
+    },
+  });
   const handleClick = useCallback(
     (value: boolean) => {
       if (!userId) {
@@ -63,6 +72,9 @@ export default function WatchedButton({
       }
       if (id) {
         updateMutation.mutate({ id, value });
+        if (!value) {
+          deleteMutation.mutate({ id });
+        }
         setIsWatched(value);
       } else {
         createMutation.mutate({ showId, userId });

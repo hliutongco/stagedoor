@@ -15,7 +15,7 @@ export default async function ShowView({ params }: { params: Promise<{ id: strin
       <h2>{show.title}</h2>
       <WatchedCount showId={id} />
       <RatingWatchedContainer
-        hasRatingOrReview={Boolean(userShow?.hasReviewOrRating)}
+        hasRatingOrReview={Boolean(userShow?.hasRating || userShow?.hasReview)}
         id={userShow?.id}
         isWatched={Boolean(userShow?.isWatched)}
         rating={userShow?.rating}
