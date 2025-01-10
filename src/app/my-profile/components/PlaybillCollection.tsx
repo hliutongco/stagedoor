@@ -19,7 +19,7 @@ export default async function PlaybillCollection({ shows }: ShowsListProps) {
         <div key={show.id}>
           <Link href={`/shows/${show.slug}`}>
             <Image alt={show.title} height={200} src={show.playbillImage} width={200} />
-            {show.rating !== '0' && <StarRating value={show.rating} />}
+            {show.rating !== '0' && <StarRating name={show.title} value={show.rating} />}
           </Link>
         </div>
       ))}
