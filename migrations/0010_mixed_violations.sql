@@ -1,0 +1,1 @@
+ALTER TABLE "shows" ADD COLUMN "year" text DEFAULT '2025' NOT NULL;

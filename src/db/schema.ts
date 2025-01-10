@@ -1,10 +1,15 @@
 import { boolean, decimal, pgTable, text, uuid } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
+import { sql, relations } from 'drizzle-orm';
 
 export const shows = pgTable('shows', {
   id: uuid().primaryKey().defaultRandom(),
   playbillImage: text().notNull().default(''),
+  slug: text()
+    .notNull()
+    .unique()
+    .generatedAlwaysAs(sql`lower(regexp_replace(title, ' ', '-', 'g')) || '-' || year`),
   title: text().notNull(),
+  year: text().notNull().default(`${new Date().getFullYear()}`),
 });
 
 export const showRelations = relations(shows, ({ many }) => ({
