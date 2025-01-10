@@ -25,11 +25,11 @@ export const showsRouter = router({
   getShow: publicProcedure
     .input(
       z.object({
-        id: z.string().uuid(),
+        slug: z.string(),
       }),
     )
-    .query(({ input: { id } }) => {
-      return db.select().from(shows).where(eq(shows.id, id));
+    .query(({ input: { slug } }) => {
+      return db.select().from(shows).where(eq(shows.slug, slug));
     }),
 });
 // export type definition of router
