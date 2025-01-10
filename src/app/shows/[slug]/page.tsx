@@ -24,6 +24,7 @@ export default async function ShowView({
         isWatched={Boolean(userShow?.isWatched)}
         rating={userShow?.rating}
         showId={show?.id ?? ''}
+        slug={slug}
         userId={userId}
       />
     </div>

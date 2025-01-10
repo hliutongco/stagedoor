@@ -14,6 +14,7 @@ interface WatchedButtonProps {
   isWatched: boolean;
   setIsWatched: (isWatched: boolean) => void;
   showId: string;
+  slug: string;
   userId: string | undefined;
 }
 
@@ -23,6 +24,7 @@ export default function WatchedButton({
   isWatched,
   setIsWatched,
   showId,
+  slug,
   userId,
 }: WatchedButtonProps) {
   const router = useRouter();
@@ -80,16 +82,19 @@ export default function WatchedButton({
         createMutation.mutate({ showId, userId });
         setIsWatched(value);
       }
+      router.push(`/shows/${slug}`);
       router.refresh();
     },
     [
       createMutation,
+      deleteMutation,
       hasRatingOrReview,
       id,
       redirectToSignIn,
       router,
       setIsWatched,
       showId,
+      slug,
       toast,
       updateMutation,
       userId,
