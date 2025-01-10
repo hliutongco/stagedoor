@@ -1,11 +1,11 @@
 'use client';
 
 import React, { ChangeEvent, useCallback, useState } from 'react';
-import { toast } from '@/components/hooks/use-toast';
+import { toast } from '@/components/ui/hooks/use-toast';
 import { trpc } from '@/server/clients/client-api';
 import { useClerk } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
-import './styles/star-rating.scss';
+import '../styles/star-rating.css';
 
 interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
   id: string | undefined;

@@ -16,7 +16,9 @@ export default async function ShowView({
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h2>{show.title}</h2>
+      <h2>
+        {show.title} ({show.year})
+      </h2>
       <WatchedCount showId={show?.id ?? ''} />
       <RatingWatchedContainer
         hasRatingOrReview={Boolean(userShow?.hasRating || userShow?.hasReview)}

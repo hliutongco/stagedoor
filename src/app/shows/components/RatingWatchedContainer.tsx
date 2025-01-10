@@ -1,7 +1,7 @@
 'use client';
 
 import WatchedButton from '../components/WatchedButton';
-import StarRating from '@/components/../core/star-rating';
+import StarRating from '@/components/core/star-rating/dynamic';
 import { useState } from 'react';
 
 interface RatingWatchedContainerProps {
