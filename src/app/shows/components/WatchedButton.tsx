@@ -1,10 +1,10 @@
 'use client';
-import { Button } from '@/components/button';
+import { Button } from '@/components/ui/button';
 import { trpc } from '@/server/clients/client-api';
 import { useClerk } from '@clerk/nextjs';
-import { Badge } from '@/components/badge';
+import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
-import { useToast } from '@/components/hooks/use-toast';
+import { useToast } from '@/components/ui/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
