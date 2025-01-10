@@ -12,10 +12,11 @@ interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
   rating: string | undefined;
   setIsWatched: (isWatched: boolean) => void;
   showId: string;
+  slug: string;
   userId: string;
 }
 
-const StarRating = ({ id, rating, setIsWatched, showId, userId }: RatingsProps) => {
+const StarRating = ({ id, rating, setIsWatched, showId, slug, userId }: RatingsProps) => {
   const router = useRouter();
   const { redirectToSignIn } = useClerk();
   const [value, setValue] = useState(rating ?? '0');
@@ -51,6 +52,7 @@ const StarRating = ({ id, rating, setIsWatched, showId, userId }: RatingsProps) 
         createRatingMutation.mutate({ rating: newValue, showId, userId });
       }
       setIsWatched(true);
+      router.push(`/shows/${slug}`);
       router.refresh();
     },
     [
@@ -60,6 +62,7 @@ const StarRating = ({ id, rating, setIsWatched, showId, userId }: RatingsProps) 
       router,
       setIsWatched,
       showId,
+      slug,
       updateRatingMutation,
       userId,
     ],
