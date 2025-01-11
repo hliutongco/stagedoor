@@ -12,7 +12,14 @@ export default async function ShowsList({
       {shows.map((show) => (
         <div key={show.id}>
           <Link href={`/shows/${show.slug}`}>
-            <Image alt={show.title} height={200} src={show.playbillImage} width={200} />
+            <Image
+              alt={show.title}
+              height={315}
+              priority
+              src={show.playbillImage}
+              style={{ height: '315px', width: '200px' }}
+              width={200}
+            />
             <span>
               {show.title} ({show.year})
             </span>

@@ -5,7 +5,7 @@ import { toast } from '@/components/ui/hooks/use-toast';
 import { trpc } from '@/server/clients/client-api';
 import { useClerk } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
-import '../styles/star-rating.css';
+import '../styles/star-rating.scss';
 
 interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
   id: string | undefined;
