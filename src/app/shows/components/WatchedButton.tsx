@@ -118,7 +118,9 @@ export default function WatchedButton({
         </>
       )}
       {!isWatched && (
-        <Button onClick={() => handleClick(true)}>I&apos;ve Seen This!</Button>
+        <Button className="text-black" onClick={() => handleClick(true)}>
+          I&apos;ve Seen This!
+        </Button>
       )}
     </>
   );

@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <TRPCProvider>
       <ClerkProvider>
         <html lang="en">
-          <body className={`font-normal ${readExPro.className}`}>
+          <body className={`font-normal text-black ${readExPro.className}`}>
             <TopNav />
             {children}
             <Toaster />
