@@ -10,8 +10,8 @@ export default async function TopNav() {
   const user = await currentUser();
   return (
     <div
-      className="bg-primary border-b border-black
-    flex gap-4 items-center h-[52px] justify-between px-3 py-2 sticky top-0 w-full"
+      className="bg-primary border-b border-black fixed
+    flex gap-4 items-center h-[52px] justify-between px-3 py-2 top-0 w-full"
     >
       <Link href="/">
         <h1 className={`text-3xl ${figtree_font.className}`}>StageDoor</h1>
