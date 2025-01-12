@@ -26,7 +26,11 @@ export default async function TopNav() {
       <div>
         <SignedOut>
           <SignInButton>
-            <Button size="sm" variant="default">
+            <Button
+              className="font-normal hover:underline text-black text-lg"
+              size="sm"
+              variant="default"
+            >
               Sign In
             </Button>
           </SignInButton>
