@@ -9,8 +9,14 @@ export default {
   ],
   theme: {
     extend: {
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
       colors: {
-        background: 'hsl(var(--background))',
+        background: 'var(--background)',
+        black: 'var(--black)',
         foreground: 'hsl(var(--foreground))',
         card: {
           DEFAULT: 'hsl(var(--card))',
@@ -21,23 +27,23 @@ export default {
           foreground: 'hsl(var(--popover-foreground))',
         },
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
+          DEFAULT: 'var(--primary)',
           foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
+          DEFAULT: 'var(--secondary)',
           foreground: 'hsl(var(--secondary-foreground))',
         },
         muted: {
-          DEFAULT: 'hsl(var(--muted))',
+          DEFAULT: 'var(--muted)',
           foreground: 'hsl(var(--muted-foreground))',
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
+          DEFAULT: 'var(--danger)',
           foreground: 'hsl(var(--accent-foreground))',
         },
         destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
+          DEFAULT: 'var(--danger)',
           foreground: 'hsl(var(--destructive-foreground))',
         },
         border: 'hsl(var(--border))',
@@ -51,10 +57,31 @@ export default {
           '5': 'hsl(var(--chart-5))',
         },
       },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+      fontFamily: {
+        sans: ['var(--font-read-ex-pro)'],
+      },
+      fontSize: {
+        sm: 'var(--text-sm)',
+        base: 'var(--text-base)',
+        lg: 'var(--text-lg)',
+        xl: 'var(--text-xl)',
+        '2xl': 'var(--text-2xl)',
+        '3xl': 'var(--text-3xl)',
+        '4xl': 'var(--text-4xl)',
+        '5xl': 'var(--text-5xl)',
+      },
+      fontWeight: {
+        light: 'var(--font-200)',
+        normal: 'var(--font-300)',
+        medium: 'var(--font-400)',
+        bold: 'var(--font-500)',
+        'extra-bold': 'var(--font-600)',
+      },
+      screens: {
+        sm: '480px',
+        md: '768px',
+        lg: '976px',
+        xl: '1440px',
       },
     },
   },

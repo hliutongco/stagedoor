@@ -8,17 +8,20 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    /* Colors */
+    --background: #fdf7f0;
+    --black: #332c3b;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
+    --danger: #d5374c;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
+    --primary: #e2a6a3;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
+    --secondary: #e9e4dd;
     --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
+    --muted: #3c3c3c;
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
@@ -32,6 +35,24 @@ body {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    
+    /* Font Weight */
+    --font-200: 200;
+    --font-300: 300;
+    --font-400: 400;
+    --font-500: 500;
+    --font-600: 600;
+
+    /* Font Size */
+    --text-sm: 0.8rem;
+    --text-base: 1rem;
+    --text-lg: 1.25rem;
+    --text-xl: 1.563rem;
+    --text-2xl: 1.953rem;
+    --text-3xl: 2.441rem;
+    --text-4xl: 3.052rem;
+    --text-5xl: 3.815rem;
+
     --radius: 0.5rem;
   }
   .dark {

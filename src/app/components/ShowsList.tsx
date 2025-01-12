@@ -8,7 +8,7 @@ export default async function ShowsList({
   shows: (typeof Show.$inferSelect)[];
 }) {
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="flex flex-wrap gap-4">
       {shows.map((show) => (
         <div key={show.id}>
           <Link href={`/shows/${show.slug}`}>
@@ -20,9 +20,9 @@ export default async function ShowsList({
               style={{ height: '315px', width: '200px' }}
               width={200}
             />
-            <span>
+            <p className="hover:underline">
               {show.title} ({show.year})
-            </span>
+            </p>
           </Link>
         </div>
       ))}
