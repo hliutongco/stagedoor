@@ -9,6 +9,11 @@ export default {
   ],
   theme: {
     extend: {
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
@@ -51,10 +56,21 @@ export default {
           '5': 'hsl(var(--chart-5))',
         },
       },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+      fontFamily: {
+        sans: ['var(--font-read-ex-pro)'],
+      },
+      fontWeight: {
+        light: 'var(--font-200)',
+        normal: 'var(--font-300)',
+        medium: 'var(--font-400)',
+        bold: 'var(--font-500)',
+        'extra-bold': 'var(--font-600)',
+      },
+      screens: {
+        sm: '480px',
+        md: '768px',
+        lg: '976px',
+        xl: '1440px',
       },
     },
   },
