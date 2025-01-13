@@ -1,5 +1,7 @@
-import { boolean, decimal, pgTable, text, uuid } from 'drizzle-orm/pg-core';
+import { boolean, decimal, pgEnum, pgTable, text, uuid } from 'drizzle-orm/pg-core';
 import { sql, relations } from 'drizzle-orm';
+
+const showTypeEnum = pgEnum('type', ['musical', 'play']);
 
 export const shows = pgTable('shows', {
   id: uuid().primaryKey().defaultRandom(),
@@ -9,6 +11,7 @@ export const shows = pgTable('shows', {
     .unique()
     .generatedAlwaysAs(sql`lower(regexp_replace(title, ' ', '-', 'g')) || '-' || year`),
   title: text().notNull(),
+  type: showTypeEnum().default('musical'),
   year: text().notNull().default(`${new Date().getFullYear()}`),
 });
 
