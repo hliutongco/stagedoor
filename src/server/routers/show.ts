@@ -13,6 +13,12 @@ export const showsRouter = router({
   getShows: publicProcedure.query(() => {
     return db.select().from(shows);
   }),
+  getMusicals: publicProcedure.query(() => {
+    return db.select().from(shows).where(eq(shows.type, 'musical'));
+  }),
+  getPlays: publicProcedure.query(() => {
+    return db.select().from(shows).where(eq(shows.type, 'play'));
+  }),
   getShowsById: publicProcedure
     .input(
       z.object({

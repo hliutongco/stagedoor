@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import ShowsList from './components/ShowsList';
 import { trpc } from '@/server/clients/server-api';
+import { Separator } from '@/components/ui/separator';
 
 export const metadata: Metadata = {
   title: 'StageDoor',
@@ -8,25 +9,27 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const shows = await trpc.shows.getShows();
+  const musicals = await trpc.shows.getMusicals();
+  const plays = await trpc.shows.getPlays();
 
   return (
     <main>
-      <div className="grid grid-rows-[20lopx_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-        <div className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-          <h1 className="font-bold text-5xl">Current Musicals</h1>
-          <div>{shows && <ShowsList shows={shows} />}</div>
+      <div className="min-h-screen mb-10 sm:p-10">
+        <h2 className="font-bold text-5xl text-center">Now Showing</h2>
+        <div className="mt-5">
+          <h3 className="font-medium text-3xl">Musicals</h3>
+          <Separator className="mb-3 bg-secondary" />
+          <div className="mx-auto w-3/4">
+            {musicals && <ShowsList shows={musicals} />}
+          </div>
+        </div>
+        <div className="mt-5">
+          <h3 className="font-medium text-3xl">Straight Plays</h3>
+          <Separator className="mb-3 bg-secondary" />
+          <div className="mx-auto w-3/4">{plays && <ShowsList shows={plays} />}</div>
         </div>
       </div>
-      <div className="bg-primary grid grid-rows-[20lopx_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-        <div className="flex flex-col gap-8 row-start-2 items-center sm:items-start text-black">
-          <h1 className="font-bold text-5xl">Current Straight Plays</h1>
-          <div>{shows && <ShowsList shows={shows} />}</div>
-        </div>
-      </div>
-      <footer className="bg-black flex gap-6 items-center justify-between p-3 row-start-3 ">
-        <span className="text-primary text-sm">made by helen ♡</span>
-      </footer>
+      <div className="bg-primary min-h-screen sm:p-10"></div>
     </main>
   );
 }
