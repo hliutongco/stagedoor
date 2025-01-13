@@ -1,18 +1,12 @@
 'use client';
 
-import Link from 'next/link';
+import ErrorComponent from '@/app/components/Error';
 
 export default function GlobalError({ error }: { error: Error }) {
   return (
     <html>
       <body>
-        <div className="globalErrorContainer">
-          <div className="globalError">
-            <h2>Internal Error</h2>
-            <p>Error Message: {error.message}</p>
-          </div>
-          Go Back to the <Link href="/">Home Page</Link>
-        </div>
+        <ErrorComponent error={error} />
       </body>
     </html>
   );

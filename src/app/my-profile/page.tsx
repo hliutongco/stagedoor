@@ -24,7 +24,7 @@ export default async function MyProfilePage() {
   });
   return (
     <>
-      <h1 className="font-bold text-4xl">{user?.firstName ?? 'User'}&apos;s Profile</h1>
+      <h1 className="font-bold sm:text-3xl lg:text-5xl mt-10 text-center">Your Profile</h1>
       {watchedShows && <PlaybillCollection shows={watchedShows} />}
     </>
   );

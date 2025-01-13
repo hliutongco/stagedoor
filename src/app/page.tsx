@@ -15,16 +15,16 @@ export default async function Home() {
   return (
     <main>
       <div className="min-h-screen mb-10 sm:p-10">
-        <h2 className="font-bold text-5xl text-center">Now Showing</h2>
+        <h2 className="font-bold sm:text-3xl lg:text-5xl text-center">Now Showing</h2>
         <div className="mt-5">
-          <h3 className="font-medium text-3xl">Musicals</h3>
+          <h3 className="font-medium sm:text-xl lg:text-3xl">Musicals</h3>
           <Separator className="mb-3 bg-secondary" />
           <div className="mx-auto w-3/4">
             {musicals && <ShowsList shows={musicals} />}
           </div>
         </div>
         <div className="mt-5">
-          <h3 className="font-medium text-3xl">Straight Plays</h3>
+          <h3 className="font-medium sm:text-xl lg:text-3xl">Straight Plays</h3>
           <Separator className="mb-3 bg-secondary" />
           <div className="mx-auto w-3/4">{plays && <ShowsList shows={plays} />}</div>
         </div>

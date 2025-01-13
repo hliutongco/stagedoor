@@ -28,6 +28,12 @@ const StarRating = ({ id, rating, setIsWatched, showId, slug, userId }: RatingsP
         description: error.message,
       });
     },
+    onSuccess: () =>
+      toast({
+        variant: 'default',
+        title: 'Success!',
+        description: 'Rating successfully saved!',
+      }),
   });
   const updateRatingMutation = trpc.userShows.changeRating.useMutation({
     onError: (error) => {
@@ -37,6 +43,12 @@ const StarRating = ({ id, rating, setIsWatched, showId, slug, userId }: RatingsP
         description: error.message,
       });
     },
+    onSuccess: () =>
+      toast({
+        variant: 'default',
+        title: 'Success!',
+        description: 'Rating successfully saved!',
+      }),
   });
   const onValueChange = useCallback(
     (e: ChangeEvent) => {

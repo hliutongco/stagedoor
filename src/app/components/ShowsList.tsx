@@ -15,28 +15,30 @@ export default async function ShowsList({
   shows: (typeof Show.$inferSelect)[];
 }) {
   return (
-    <Carousel className="w-full">
+    <Carousel
+      className="w-full"
+      opts={{ loop: true, skipSnaps: true, slidesToScroll: 3 }}
+    >
       <CarouselContent className="ml-1">
         {shows.map((show) => (
-          <CarouselItem className="md:basis-1/2 lg:basis-1/5" key={show.id}>
-            <Link href={`/shows/${show.slug}`}>
+          <CarouselItem className="sm:basis-1/3 lg:basis-1/5" key={show.id}>
+            <Link className="contents" href={`/shows/${show.slug}`}>
               <Image
                 alt={show.title}
                 height={276}
                 priority
                 src={show.playbillImage}
-                style={{ height: '276px', width: '175px' }}
                 width={175}
               />
-              <p className="hover:underline">
+              <span className="hover:underline">
                 {show.title} ({show.year})
-              </p>
+              </span>
             </Link>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="hover:bg-primary" />
+      <CarouselNext className="hover:bg-primary" />
     </Carousel>
   );
 }

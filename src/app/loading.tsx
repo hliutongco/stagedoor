@@ -10,20 +10,20 @@ export default function Loading() {
         <div className="items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
           <div className="grid grid-cols-4 gap-4">
             <div>
-              <Skeleton className="h-[315px] mt-2 rounded-md w-[200px]" />
-              <Skeleton className="h-[25px] mt-2 rounded-md w-[150px]" />
+              <Skeleton className="bg-secondary h-[315px] mt-2 rounded-md w-[200px]" />
+              <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[150px]" />
             </div>
             <div>
-              <Skeleton className="h-[315px] mt-2 rounded-md w-[200px]" />
-              <Skeleton className="h-[25px] mt-2 rounded-md w-[150px]" />
+              <Skeleton className="bg-secondary h-[315px] mt-2 rounded-md w-[200px]" />
+              <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[150px]" />
             </div>
             <div>
-              <Skeleton className="h-[315px] mt-2 rounded-md w-[200px]" />
-              <Skeleton className="h-[25px] mt-2 rounded-md w-[150px]" />
+              <Skeleton className="bg-secondary h-[315px] mt-2 rounded-md w-[200px]" />
+              <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[150px]" />
             </div>
             <div>
-              <Skeleton className="h-[315px] mt-2 rounded-md w-[200px]" />
-              <Skeleton className="h-[25px] mt-2 rounded-md w-[150px]" />
+              <Skeleton className="bg-secondary h-[315px] mt-2 rounded-md w-[200px]" />
+              <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[150px]" />
             </div>
           </div>
         </div>
