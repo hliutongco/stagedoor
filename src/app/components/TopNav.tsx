@@ -11,7 +11,7 @@ export default async function TopNav() {
   return (
     <div
       className="bg-primary border-b border-black fixed
-    flex gap-4 items-center h-[52px] justify-between px-3 py-2 top-0 w-full"
+    flex gap-4 items-center h-[52px] justify-between px-3 py-2 top-0 w-full z-10"
     >
       <Link href="/">
         <h1 className={`text-3xl ${figtree_font.className}`}>StageDoor</h1>
