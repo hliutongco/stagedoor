@@ -6,7 +6,8 @@ import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
 import { useToast } from '@/components/ui/hooks/use-toast';
 import { useRouter } from 'next/navigation';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import { Spinner } from '@/components/ui/spinner';
 
 interface WatchedButtonProps {
   hasRatingOrReview: boolean;
@@ -14,7 +15,6 @@ interface WatchedButtonProps {
   isWatched: boolean;
   setIsWatched: (isWatched: boolean) => void;
   showId: string;
-  slug: string;
   userId: string | undefined;
 }
 
@@ -24,37 +24,36 @@ export default function WatchedButton({
   isWatched,
   setIsWatched,
   showId,
-  slug,
-  userId,
+  userId = '',
 }: WatchedButtonProps) {
   const router = useRouter();
   const { redirectToSignIn } = useClerk();
   const { toast } = useToast();
+  const utils = trpc.useUtils();
   const createMutation = trpc.userShows.createWithWatchedShow.useMutation({
     onError: (error) => {
       toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
         description: error.message,
+        title: 'Uh oh! Something went wrong.',
+        variant: 'destructive',
       });
     },
-  });
-  const updateMutation = trpc.userShows.toggleWatchedShow.useMutation({
-    onError: (error) => {
-      toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
-        description: error.message,
-      });
+    onSuccess: async () => {
+      await utils.userShows.invalidate();
+      router.refresh();
     },
   });
   const deleteMutation = trpc.userShows.deleteEmptyRecord.useMutation({
     onError: (error) => {
       toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
         description: error.message,
+        title: 'Uh oh! Something went wrong.',
+        variant: 'destructive',
       });
+    },
+    onSuccess: async () => {
+      await utils.userShows.invalidate();
+      router.refresh();
     },
   });
   const handleClick = useCallback(
@@ -65,45 +64,48 @@ export default function WatchedButton({
       }
       if (hasRatingOrReview && !value) {
         toast({
-          variant: 'destructive',
-          title: 'Uh oh! Something went wrong.',
+          variant: 'default',
           description:
             'This show cannot be marked as not watched because of a rating or review',
         });
         return;
       }
-      if (id) {
-        updateMutation.mutate({ id, value });
-        if (!value) {
-          deleteMutation.mutate({ id });
-        }
-        setIsWatched(value);
-      } else {
+      if (!isWatched && !hasRatingOrReview) {
         createMutation.mutate({ showId, userId });
-        setIsWatched(value);
+      } else if (id) {
+        deleteMutation.mutate({ id });
+      } else {
+        toast({
+          description: 'Please refresh the page and try again',
+          title: 'Uh oh! Something went wrong.',
+          variant: 'destructive',
+        });
+        return;
       }
-      router.push(`/shows/${slug}`);
-      router.refresh();
+      setIsWatched(value);
     },
     [
       createMutation,
       deleteMutation,
       hasRatingOrReview,
       id,
+      isWatched,
       redirectToSignIn,
-      router,
       setIsWatched,
       showId,
-      slug,
       toast,
-      updateMutation,
       userId,
     ],
+  );
+  const isLoading = useMemo(
+    () => createMutation.isPending || deleteMutation.isPending,
+    [createMutation, deleteMutation],
   );
 
   return (
     <>
-      {isWatched && (
+      {isLoading && <Spinner />}
+      {!isLoading && isWatched && (
         <>
           <Badge variant="secondary">
             <Check className="mr-1" size="20" /> I&apos;ve Seen This!
@@ -117,7 +119,7 @@ export default function WatchedButton({
           </span>
         </>
       )}
-      {!isWatched && (
+      {!isLoading && !isWatched && (
         <Button className="text-black" onClick={() => handleClick(true)}>
           I&apos;ve Seen This!
         </Button>

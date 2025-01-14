@@ -10,7 +10,6 @@ interface RatingWatchedContainerProps {
   isWatched: boolean;
   rating: string | undefined;
   showId: string;
-  slug: string;
   userId: string;
 }
 
@@ -20,7 +19,6 @@ export default function RatingWatchedContainer({
   isWatched: _isWatched,
   rating,
   showId,
-  slug,
   userId,
 }: RatingWatchedContainerProps) {
   const [isWatched, setIsWatched] = useState(_isWatched);
@@ -32,16 +30,16 @@ export default function RatingWatchedContainer({
         isWatched={isWatched}
         setIsWatched={setIsWatched}
         showId={showId}
-        slug={slug}
         userId={userId}
       />
       <p>Your Rating:</p>
       <StarRating
+        hasRatingOrReview={hasRatingOrReview}
         id={id}
+        isWatched={isWatched}
         rating={rating}
         setIsWatched={setIsWatched}
         showId={showId}
-        slug={slug}
         userId={userId}
       />
     </div>

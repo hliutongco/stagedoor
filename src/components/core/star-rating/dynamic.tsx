@@ -8,47 +8,63 @@ import { useRouter } from 'next/navigation';
 import '../styles/star-rating.scss';
 
 interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
+  hasRatingOrReview: boolean;
   id: string | undefined;
+  isWatched: boolean;
   rating: string | undefined;
   setIsWatched: (isWatched: boolean) => void;
   showId: string;
-  slug: string;
   userId: string;
 }
 
-const StarRating = ({ id, rating, setIsWatched, showId, slug, userId }: RatingsProps) => {
+const StarRating = ({
+  hasRatingOrReview,
+  id,
+  isWatched,
+  rating,
+  setIsWatched,
+  showId,
+  userId,
+}: RatingsProps) => {
   const router = useRouter();
   const { redirectToSignIn } = useClerk();
   const [value, setValue] = useState(rating ?? '0');
+  const utils = trpc.useUtils();
   const createRatingMutation = trpc.userShows.createWithRating.useMutation({
     onError: (error) => {
       toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
         description: error.message,
+        title: 'Uh oh! Something went wrong.',
+        variant: 'destructive',
       });
     },
-    onSuccess: () =>
+    onSuccess: async () => {
+      await utils.userShows.invalidate();
+      router.refresh();
       toast({
-        variant: 'default',
-        title: 'Success!',
         description: 'Rating successfully saved!',
-      }),
+        title: 'Success!',
+        variant: 'default',
+      });
+    },
   });
   const updateRatingMutation = trpc.userShows.changeRating.useMutation({
     onError: (error) => {
       toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
         description: error.message,
+        title: 'Uh oh! Something went wrong.',
+        variant: 'destructive',
       });
     },
-    onSuccess: () =>
+    onSuccess: async () => {
+      await utils.userShows.invalidate();
+      router.refresh();
       toast({
-        variant: 'default',
-        title: 'Success!',
         description: 'Rating successfully saved!',
-      }),
+        title: 'Success!',
+        variant: 'default',
+      });
+    },
   });
   const onValueChange = useCallback(
     (e: ChangeEvent) => {
@@ -58,23 +74,28 @@ const StarRating = ({ id, rating, setIsWatched, showId, slug, userId }: RatingsP
       }
       const newValue = (e.target as HTMLInputElement).value;
       setValue(newValue);
-      if (id) {
+      if (!isWatched && !hasRatingOrReview) {
+        createRatingMutation.mutate({ rating: newValue, showId, userId });
+      } else if (id) {
         updateRatingMutation.mutate({ id, rating: newValue });
       } else {
-        createRatingMutation.mutate({ rating: newValue, showId, userId });
+        toast({
+          description: 'Please refresh the page and try again',
+          title: 'Uh oh! Something went wrong.',
+          variant: 'destructive',
+        });
+        return;
       }
       setIsWatched(true);
-      router.push(`/shows/${slug}`);
-      router.refresh();
     },
     [
       createRatingMutation,
+      hasRatingOrReview,
       id,
+      isWatched,
       redirectToSignIn,
-      router,
       setIsWatched,
       showId,
-      slug,
       updateRatingMutation,
       userId,
     ],
