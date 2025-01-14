@@ -5,7 +5,7 @@ import { useClerk } from '@clerk/nextjs';
 import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
 import { useToast } from '@/components/ui/hooks/use-toast';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
 interface WatchedButtonProps {
@@ -24,36 +24,40 @@ export default function WatchedButton({
   isWatched,
   setIsWatched,
   showId,
-  slug,
+  // slug,
   userId,
 }: WatchedButtonProps) {
-  const router = useRouter();
+  // const router = useRouter();
   const { redirectToSignIn } = useClerk();
   const { toast } = useToast();
+  const utils = trpc.useContext();
   const createMutation = trpc.userShows.createWithWatchedShow.useMutation({
+    onSuccess: () => {
+      utils.userShows.getUserShow.invalidate();
+    },
     onError: (error) => {
       toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
         description: error.message,
+        title: 'Uh oh! Something went wrong.',
+        variant: 'destructive',
       });
     },
   });
   const updateMutation = trpc.userShows.toggleWatchedShow.useMutation({
     onError: (error) => {
       toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
         description: error.message,
+        title: 'Uh oh! Something went wrong.',
+        variant: 'destructive',
       });
     },
   });
   const deleteMutation = trpc.userShows.deleteEmptyRecord.useMutation({
     onError: (error) => {
       toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
         description: error.message,
+        title: 'Uh oh! Something went wrong.',
+        variant: 'destructive',
       });
     },
   });
@@ -81,15 +85,15 @@ export default function WatchedButton({
         }
       } else {
         toast({
-          variant: 'destructive',
-          title: 'Uh oh! Something went wrong.',
           description: 'Please refresh the page and try again',
+          title: 'Uh oh! Something went wrong.',
+          variant: 'destructive',
         });
         return;
       }
       setIsWatched(value);
-      router.refresh();
-      router.push(`/shows/${slug}`);
+      // router.refresh();
+      // router.push(`/shows/${slug}`);
     },
     [
       createMutation,
@@ -98,10 +102,10 @@ export default function WatchedButton({
       id,
       isWatched,
       redirectToSignIn,
-      router,
+      // router,
       setIsWatched,
       showId,
-      slug,
+      // slug,
       toast,
       updateMutation,
       userId,

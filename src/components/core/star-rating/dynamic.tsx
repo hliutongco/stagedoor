@@ -34,24 +34,24 @@ const StarRating = ({
   const createRatingMutation = trpc.userShows.createWithRating.useMutation({
     onError: (error) => {
       toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
         description: error.message,
+        title: 'Uh oh! Something went wrong.',
+        variant: 'destructive',
       });
     },
     onSuccess: () =>
       toast({
-        variant: 'default',
-        title: 'Success!',
         description: 'Rating successfully saved!',
+        title: 'Success!',
+        variant: 'default',
       }),
   });
   const updateRatingMutation = trpc.userShows.changeRating.useMutation({
     onError: (error) => {
       toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
         description: error.message,
+        title: 'Uh oh! Something went wrong.',
+        variant: 'destructive',
       });
     },
     onSuccess: () =>
@@ -75,9 +75,9 @@ const StarRating = ({
         updateRatingMutation.mutate({ id, rating: newValue });
       } else {
         toast({
-          variant: 'destructive',
-          title: 'Uh oh! Something went wrong.',
           description: 'Please refresh the page and try again',
+          title: 'Uh oh! Something went wrong.',
+          variant: 'destructive',
         });
         return;
       }
