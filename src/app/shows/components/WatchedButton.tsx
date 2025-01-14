@@ -72,16 +72,24 @@ export default function WatchedButton({
         });
         return;
       }
-      if (id) {
-        updateMutation.mutate({ id, value });
-        if (!value) {
-          deleteMutation.mutate({ id });
-        }
-        setIsWatched(value);
-      } else {
+      if (!isWatched && !hasRatingOrReview) {
         createMutation.mutate({ showId, userId });
-        setIsWatched(value);
+      } else {
+        if (!id) {
+          toast({
+            variant: 'destructive',
+            title: 'Uh oh! Something went wrong.',
+            description: 'Please refresh the page and try again',
+          });
+          return;
+        } else {
+          updateMutation.mutate({ id, value });
+          if (!value) {
+            deleteMutation.mutate({ id });
+          }
+        }
       }
+      setIsWatched(value);
       router.push(`/shows/${slug}`);
       router.refresh();
     },
@@ -90,6 +98,7 @@ export default function WatchedButton({
       deleteMutation,
       hasRatingOrReview,
       id,
+      isWatched,
       redirectToSignIn,
       router,
       setIsWatched,

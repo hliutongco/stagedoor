@@ -37,7 +37,9 @@ export default function RatingWatchedContainer({
       />
       <p>Your Rating:</p>
       <StarRating
+        hasRatingOrReview={hasRatingOrReview}
         id={id}
+        isWatched={isWatched}
         rating={rating}
         setIsWatched={setIsWatched}
         showId={showId}

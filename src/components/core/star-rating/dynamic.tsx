@@ -8,7 +8,9 @@ import { useRouter } from 'next/navigation';
 import '../styles/star-rating.scss';
 
 interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
+  hasRatingOrReview: boolean;
   id: string | undefined;
+  isWatched: boolean;
   rating: string | undefined;
   setIsWatched: (isWatched: boolean) => void;
   showId: string;
@@ -16,7 +18,16 @@ interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
   userId: string;
 }
 
-const StarRating = ({ id, rating, setIsWatched, showId, slug, userId }: RatingsProps) => {
+const StarRating = ({
+  hasRatingOrReview,
+  id,
+  isWatched,
+  rating,
+  setIsWatched,
+  showId,
+  slug,
+  userId,
+}: RatingsProps) => {
   const router = useRouter();
   const { redirectToSignIn } = useClerk();
   const [value, setValue] = useState(rating ?? '0');
@@ -58,10 +69,19 @@ const StarRating = ({ id, rating, setIsWatched, showId, slug, userId }: RatingsP
       }
       const newValue = (e.target as HTMLInputElement).value;
       setValue(newValue);
-      if (id) {
-        updateRatingMutation.mutate({ id, rating: newValue });
-      } else {
+      if (!isWatched && !hasRatingOrReview) {
         createRatingMutation.mutate({ rating: newValue, showId, userId });
+      } else {
+        if (!id) {
+          toast({
+            variant: 'destructive',
+            title: 'Uh oh! Something went wrong.',
+            description: 'Please refresh the page and try again',
+          });
+          return;
+        } else {
+          updateRatingMutation.mutate({ id, rating: newValue });
+        }
       }
       setIsWatched(true);
       router.push(`/shows/${slug}`);
@@ -69,7 +89,9 @@ const StarRating = ({ id, rating, setIsWatched, showId, slug, userId }: RatingsP
     },
     [
       createRatingMutation,
+      hasRatingOrReview,
       id,
+      isWatched,
       redirectToSignIn,
       router,
       setIsWatched,
