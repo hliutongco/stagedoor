@@ -7,6 +7,7 @@ import { Check } from 'lucide-react';
 import { useToast } from '@/components/ui/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
+import { revalidatePath } from 'next/cache';
 
 interface WatchedButtonProps {
   hasRatingOrReview: boolean;
@@ -74,24 +75,22 @@ export default function WatchedButton({
       }
       if (!isWatched && !hasRatingOrReview) {
         createMutation.mutate({ showId, userId });
-      } else {
-        if (!id) {
-          toast({
-            variant: 'destructive',
-            title: 'Uh oh! Something went wrong.',
-            description: 'Please refresh the page and try again',
-          });
-          return;
-        } else {
-          updateMutation.mutate({ id, value });
-          if (!value) {
-            deleteMutation.mutate({ id });
-          }
+      } else if (id) {
+        updateMutation.mutate({ id, value });
+        if (!value) {
+          deleteMutation.mutate({ id });
         }
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'Uh oh! Something went wrong.',
+          description: 'Please refresh the page and try again',
+        });
+        return;
       }
       setIsWatched(value);
+      revalidatePath(`/shows/${slug}`);
       router.push(`/shows/${slug}`);
-      router.refresh();
     },
     [
       createMutation,
