@@ -32,7 +32,7 @@ export default function RatingWatchedContainer({
         isWatched={isWatched}
         setIsWatched={setIsWatched}
         showId={showId}
-        slug={slug}
+        // slug={slug}
         userId={userId}
       />
       <p>Your Rating:</p>
