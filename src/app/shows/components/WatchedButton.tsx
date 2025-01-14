@@ -44,6 +44,9 @@ export default function WatchedButton({
     },
   });
   const updateMutation = trpc.userShows.toggleWatchedShow.useMutation({
+    onSuccess: () => {
+      utils.userShows.getUserShow.invalidate();
+    },
     onError: (error) => {
       toast({
         description: error.message,
@@ -53,6 +56,9 @@ export default function WatchedButton({
     },
   });
   const deleteMutation = trpc.userShows.deleteEmptyRecord.useMutation({
+    onSuccess: () => {
+      utils.userShows.getUserShow.invalidate();
+    },
     onError: (error) => {
       toast({
         description: error.message,
