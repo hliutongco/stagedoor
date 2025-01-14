@@ -6,7 +6,8 @@ import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
 import { useToast } from '@/components/ui/hooks/use-toast';
 import { useRouter } from 'next/navigation';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import { Spinner } from '@/components/ui/spinner';
 
 interface WatchedButtonProps {
   hasRatingOrReview: boolean;
@@ -14,7 +15,7 @@ interface WatchedButtonProps {
   isWatched: boolean;
   setIsWatched: (isWatched: boolean) => void;
   showId: string;
-  slug: string;
+  // slug: string;
   userId: string | undefined;
 }
 
@@ -24,7 +25,7 @@ export default function WatchedButton({
   isWatched,
   setIsWatched,
   showId,
-  slug,
+  // slug,
   userId,
 }: WatchedButtonProps) {
   const router = useRouter();
@@ -34,6 +35,7 @@ export default function WatchedButton({
   const createMutation = trpc.userShows.createWithWatchedShow.useMutation({
     onSuccess: () => {
       utils.userShows.invalidate();
+      console.log('Success!');
     },
     onError: (error) => {
       toast({
@@ -46,6 +48,7 @@ export default function WatchedButton({
   const updateMutation = trpc.userShows.toggleWatchedShow.useMutation({
     onSuccess: () => {
       utils.userShows.invalidate();
+      console.log('Success!');
     },
     onError: (error) => {
       toast({
@@ -58,6 +61,7 @@ export default function WatchedButton({
   const deleteMutation = trpc.userShows.deleteEmptyRecord.useMutation({
     onSuccess: () => {
       utils.userShows.invalidate();
+      console.log('Success!');
     },
     onError: (error) => {
       toast({
@@ -75,8 +79,7 @@ export default function WatchedButton({
       }
       if (hasRatingOrReview && !value) {
         toast({
-          variant: 'destructive',
-          title: 'Uh oh! Something went wrong.',
+          variant: 'default',
           description:
             'This show cannot be marked as not watched because of a rating or review',
         });
@@ -85,11 +88,13 @@ export default function WatchedButton({
       if (!isWatched && !hasRatingOrReview) {
         createMutation.mutate({ showId, userId });
       } else if (id) {
-        updateMutation.mutate({ id, value });
         if (!value) {
           deleteMutation.mutate({ id });
+        } else {
+          updateMutation.mutate({ id, value });
         }
       } else {
+        console.log(id);
         toast({
           description: 'Please refresh the page and try again',
           title: 'Uh oh! Something went wrong.',
@@ -98,8 +103,8 @@ export default function WatchedButton({
         return;
       }
       setIsWatched(value);
+      // router.push(`/shows/${slug}`);
       router.refresh();
-      router.push(`/shows/${slug}`);
     },
     [
       createMutation,
@@ -111,16 +116,22 @@ export default function WatchedButton({
       router,
       setIsWatched,
       showId,
-      slug,
+      // slug,
       toast,
       updateMutation,
       userId,
     ],
   );
+  const isLoading = useMemo(
+    () =>
+      createMutation.isPending || deleteMutation.isPending || updateMutation.isPending,
+    [createMutation, deleteMutation, updateMutation],
+  );
 
   return (
     <>
-      {isWatched && (
+      {isLoading && <Spinner />}
+      {!isLoading && isWatched && (
         <>
           <Badge variant="secondary">
             <Check className="mr-1" size="20" /> I&apos;ve Seen This!
@@ -134,7 +145,7 @@ export default function WatchedButton({
           </span>
         </>
       )}
-      {!isWatched && (
+      {!isLoading && !isWatched && (
         <Button className="text-black" onClick={() => handleClick(true)}>
           I&apos;ve Seen This!
         </Button>
