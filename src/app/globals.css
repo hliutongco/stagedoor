@@ -35,6 +35,12 @@ body {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+
+    /* Breakpoints */
+    --screen-sm: '480px';
+    --screen-md: '768px';
+    --screen-lg: '980px';
+    --screen-xl: '1440px';
     
     /* Font Weight */
     --font-200: 200;

@@ -25,7 +25,7 @@ export default function RatingWatchedContainer({
 }: RatingWatchedContainerProps) {
   const [isWatched, setIsWatched] = useState(_isWatched);
   return (
-    <>
+    <div className="flex flex-col gap-4 items-center">
       <WatchedButton
         hasRatingOrReview={hasRatingOrReview}
         id={id}
@@ -44,6 +44,6 @@ export default function RatingWatchedContainer({
         slug={slug}
         userId={userId}
       />
-    </>
+    </div>
   );
 }

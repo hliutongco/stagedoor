@@ -15,22 +15,24 @@ interface ShowsListProps {
 export default async function PlaybillCollection({ shows }: ShowsListProps) {
   return (
     <>
-      <h2 className="font-bold text-2xl">Your Playbill Collection</h2>
-      <div className="items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+      <h2 className="font-bold sm:text-xl lg:text-3xl text-center">
+        Your Playbill Collection
+      </h2>
+      <div className="items-center justify-items-center min-h-screen pb-20 gap-16 sm:p-4 lg:p-8">
         {!shows.length && (
           <div className="text-center text-sm">
             Rate or Review a show to add it to your collection!
           </div>
         )}
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {shows.map((show) => (
             <div key={show.id}>
               <Link href={`/shows/${show.slug}`}>
                 <Image
                   alt={show.title}
-                  height={200}
+                  height={276}
                   src={show.playbillImage}
-                  width={200}
+                  width={175}
                 />
                 {show.rating !== '0' && (
                   <StarRating name={show.title} value={show.rating} />

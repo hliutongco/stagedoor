@@ -14,11 +14,11 @@ export default async function TopNav() {
     flex gap-4 items-center h-[52px] justify-between px-3 py-2 top-0 w-full z-10"
     >
       <Link href="/">
-        <h1 className={`text-3xl ${figtree_font.className}`}>StageDoor</h1>
+        <h1 className={`sm:text-xl lg:text-3xl ${figtree_font.className}`}>StageDoor</h1>
       </Link>
       <div className="flex items-center justify-end w-full">
         {user && (
-          <Link className="hover:underline text-lg" href="/my-profile">
+          <Link className="hover:underline sm:text-base md:text-lg" href="/my-profile">
             Your Profile
           </Link>
         )}
