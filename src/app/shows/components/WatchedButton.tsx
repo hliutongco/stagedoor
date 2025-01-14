@@ -30,10 +30,11 @@ export default function WatchedButton({
   const { redirectToSignIn } = useClerk();
   const { toast } = useToast();
   const utils = trpc.useUtils();
-  const getUserShow = trpc.userShows.getUserShow.useQuery({ showId, userId });
+  // const getUserShow = trpc.userShows.getUserShow.useQuery({ showId, userId });
   const createMutation = trpc.userShows.createWithWatchedShow.useMutation({
     onSuccess: async () => {
       await utils.userShows.invalidate();
+      router.refresh();
     },
     onError: (error) => {
       toast({
@@ -44,8 +45,9 @@ export default function WatchedButton({
     },
   });
   const deleteMutation = trpc.userShows.deleteEmptyRecord.useMutation({
-    onSuccess: () => {
-      utils.userShows.invalidate();
+    onSuccess: async () => {
+      await utils.userShows.invalidate();
+      router.refresh();
     },
     onError: (error) => {
       toast({
@@ -74,30 +76,29 @@ export default function WatchedButton({
       } else if (id) {
         deleteMutation.mutate({ id });
       } else {
-        const _id = getUserShow.data?.id;
-        if (_id) {
-          deleteMutation.mutate({ id: _id });
-        } else {
-          toast({
-            description: 'Please refresh the page and try again',
-            title: 'Uh oh! Something went wrong.',
-            variant: 'destructive',
-          });
-          return;
-        }
+        // const _id = getUserShow.data?.id;
+        // if (_id) {
+        //   deleteMutation.mutate({ id: _id });
+        // } else {
+        toast({
+          description: 'Please refresh the page and try again',
+          title: 'Uh oh! Something went wrong.',
+          variant: 'destructive',
+        });
+        return;
+        // }
       }
       setIsWatched(value);
-      router.refresh();
     },
     [
       createMutation,
       deleteMutation,
-      getUserShow,
+      // getUserShow,
       hasRatingOrReview,
       id,
       isWatched,
       redirectToSignIn,
-      router,
+      // router,
       setIsWatched,
       showId,
       toast,
@@ -105,8 +106,8 @@ export default function WatchedButton({
     ],
   );
   const isLoading = useMemo(
-    () => createMutation.isPending || deleteMutation.isPending || getUserShow.isPending,
-    [createMutation, deleteMutation, getUserShow],
+    () => createMutation.isPending || deleteMutation.isPending,
+    [createMutation, deleteMutation],
   );
 
   return (
