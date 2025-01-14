@@ -30,31 +30,30 @@ export default function WatchedButton({
   const { redirectToSignIn } = useClerk();
   const { toast } = useToast();
   const utils = trpc.useUtils();
-  // const getUserShow = trpc.userShows.getUserShow.useQuery({ showId, userId });
   const createMutation = trpc.userShows.createWithWatchedShow.useMutation({
-    onSuccess: async () => {
-      await utils.userShows.invalidate();
-      router.refresh();
-    },
     onError: (error) => {
       toast({
         description: error.message,
         title: 'Uh oh! Something went wrong.',
         variant: 'destructive',
       });
+    },
+    onSuccess: async () => {
+      await utils.userShows.invalidate();
+      router.refresh();
     },
   });
   const deleteMutation = trpc.userShows.deleteEmptyRecord.useMutation({
-    onSuccess: async () => {
-      await utils.userShows.invalidate();
-      router.refresh();
-    },
     onError: (error) => {
       toast({
         description: error.message,
         title: 'Uh oh! Something went wrong.',
         variant: 'destructive',
       });
+    },
+    onSuccess: async () => {
+      await utils.userShows.invalidate();
+      router.refresh();
     },
   });
   const handleClick = useCallback(
@@ -76,29 +75,22 @@ export default function WatchedButton({
       } else if (id) {
         deleteMutation.mutate({ id });
       } else {
-        // const _id = getUserShow.data?.id;
-        // if (_id) {
-        //   deleteMutation.mutate({ id: _id });
-        // } else {
         toast({
           description: 'Please refresh the page and try again',
           title: 'Uh oh! Something went wrong.',
           variant: 'destructive',
         });
         return;
-        // }
       }
       setIsWatched(value);
     },
     [
       createMutation,
       deleteMutation,
-      // getUserShow,
       hasRatingOrReview,
       id,
       isWatched,
       redirectToSignIn,
-      // router,
       setIsWatched,
       showId,
       toast,

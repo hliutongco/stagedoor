@@ -14,7 +14,6 @@ interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
   rating: string | undefined;
   setIsWatched: (isWatched: boolean) => void;
   showId: string;
-  slug: string;
   userId: string;
 }
 
@@ -25,12 +24,12 @@ const StarRating = ({
   rating,
   setIsWatched,
   showId,
-  slug,
   userId,
 }: RatingsProps) => {
   const router = useRouter();
   const { redirectToSignIn } = useClerk();
   const [value, setValue] = useState(rating ?? '0');
+  const utils = trpc.useUtils();
   const createRatingMutation = trpc.userShows.createWithRating.useMutation({
     onError: (error) => {
       toast({
@@ -39,12 +38,15 @@ const StarRating = ({
         variant: 'destructive',
       });
     },
-    onSuccess: () =>
+    onSuccess: async () => {
+      await utils.userShows.invalidate();
+      router.refresh();
       toast({
         description: 'Rating successfully saved!',
         title: 'Success!',
         variant: 'default',
-      }),
+      });
+    },
   });
   const updateRatingMutation = trpc.userShows.changeRating.useMutation({
     onError: (error) => {
@@ -54,12 +56,15 @@ const StarRating = ({
         variant: 'destructive',
       });
     },
-    onSuccess: () =>
+    onSuccess: async () => {
+      await utils.userShows.invalidate();
+      router.refresh();
       toast({
-        variant: 'default',
-        title: 'Success!',
         description: 'Rating successfully saved!',
-      }),
+        title: 'Success!',
+        variant: 'default',
+      });
+    },
   });
   const onValueChange = useCallback(
     (e: ChangeEvent) => {
@@ -82,8 +87,6 @@ const StarRating = ({
         return;
       }
       setIsWatched(true);
-      router.refresh();
-      router.push(`/shows/${slug}`);
     },
     [
       createRatingMutation,
@@ -91,10 +94,8 @@ const StarRating = ({
       id,
       isWatched,
       redirectToSignIn,
-      router,
       setIsWatched,
       showId,
-      slug,
       updateRatingMutation,
       userId,
     ],
