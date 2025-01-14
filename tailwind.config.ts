@@ -78,7 +78,7 @@ export default {
         'extra-bold': 'var(--font-600)',
       },
       screens: {
-        sm: '480px',
+        sm: '360px',
         md: '768px',
         lg: '1005px',
         xl: '1440px',
