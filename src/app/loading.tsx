@@ -2,29 +2,32 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function Loading() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <div className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h1>
-          <Skeleton className="h-[25px] w-[200px] rounded-md" />
-        </h1>
-        <div className="items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-          <div className="grid grid-cols-4 gap-4">
-            <div>
-              <Skeleton className="bg-secondary h-[315px] mt-2 rounded-md w-[200px]" />
-              <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[150px]" />
-            </div>
-            <div>
-              <Skeleton className="bg-secondary h-[315px] mt-2 rounded-md w-[200px]" />
-              <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[150px]" />
-            </div>
-            <div>
-              <Skeleton className="bg-secondary h-[315px] mt-2 rounded-md w-[200px]" />
-              <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[150px]" />
-            </div>
-            <div>
-              <Skeleton className="bg-secondary h-[315px] mt-2 rounded-md w-[200px]" />
-              <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[150px]" />
-            </div>
+    <div className="min-h-screen mb-10 sm:p-10">
+      <div className="flex flex-col items-center">
+        <Skeleton className="bg-secondary h-[75px] rounded-md sm:w-3/4 lg:w-1/3" />
+      </div>
+      <Skeleton className="bg-secondary h-[50px] mt-10 rounded-md w-[200px]" />
+      <div className="items-center justify-items-center min-h-screen sm:p-4 lg:p-8">
+        <div className="grid sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div>
+            <Skeleton className="bg-secondary sm:h-[170px] lg:h-[276px] mt-2 rounded-md sm:w-[120px] lg:w-[175px]" />
+            <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md sm:w-[100px] lg:w-[150px]" />
+          </div>
+          <div>
+            <Skeleton className="bg-secondary sm:h-[170px] lg:h-[276px] mt-2 rounded-md sm:w-[120px] lg:w-[175px]" />
+            <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md sm:w-[100px] lg:w-[150px]" />
+          </div>
+          <div>
+            <Skeleton className="bg-secondary sm:h-[170px] lg:h-[276px] mt-2 rounded-md sm:w-[120px] lg:w-[175px]" />
+            <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md sm:w-[100px] lg:w-[150px]" />
+          </div>
+          <div>
+            <Skeleton className="bg-secondary sm:h-[170px] lg:h-[276px] mt-2 rounded-md sm:w-[120px] lg:w-[175px]" />
+            <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md sm:w-[100px] lg:w-[150px]" />
+          </div>
+          <div>
+            <Skeleton className="bg-secondary sm:h-[170px] lg:h-[276px] mt-2 rounded-md sm:w-[120px] lg:w-[175px]" />
+            <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md sm:w-[100px] lg:w-[150px]" />
           </div>
         </div>
       </div>

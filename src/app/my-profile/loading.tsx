@@ -3,25 +3,32 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function Loading() {
   return (
     <>
-      <h1>
-        <Skeleton className="h-[25px] w-[200px] rounded-md" />
-      </h1>
-      <div className="items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-        <div className="grid grid-cols-4 gap-4">
+      <div className="gap-16 items-center justify-items-center min-h-screen mt-10 sm:p-4 lg:p-8 pb-20">
+        <Skeleton className="bg-secondary h-[75px] rounded-md w-1/3" />
+        <Skeleton className="bg-secondary h-[50px] my-4 rounded-md w-1/3" />
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           <div>
-            <Skeleton className="bg-secondary h-[315px] mt-2 rounded-md w-[200px]" />
+            <Skeleton className="bg-secondary h-[276px] mt-2 rounded-md w-[175px]" />
             <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[150px]" />
           </div>
           <div>
-            <Skeleton className="bg-secondary h-[315px] mt-2 rounded-md w-[200px]" />
+            <Skeleton className="bg-secondary h-[276px] mt-2 rounded-md w-[175px]" />
             <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[150px]" />
           </div>
           <div>
-            <Skeleton className="bg-secondary h-[315px] mt-2 rounded-md w-[200px]" />
+            <Skeleton className="bg-secondary h-[276px] mt-2 rounded-md w-[175px]" />
             <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[150px]" />
           </div>
           <div>
-            <Skeleton className="bg-secondary h-[315px] mt-2 rounded-md w-[200px]" />
+            <Skeleton className="bg-secondary h-[276px] mt-2 rounded-md w-[175px]" />
+            <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[150px]" />
+          </div>
+          <div>
+            <Skeleton className="bg-secondary h-[276px] mt-2 rounded-md w-[175px]" />
+            <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[150px]" />
+          </div>
+          <div>
+            <Skeleton className="bg-secondary h-[276px] mt-2 rounded-md w-[175px]" />
             <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[150px]" />
           </div>
         </div>
