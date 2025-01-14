@@ -71,21 +71,19 @@ const StarRating = ({
       setValue(newValue);
       if (!isWatched && !hasRatingOrReview) {
         createRatingMutation.mutate({ rating: newValue, showId, userId });
+      } else if (id) {
+        updateRatingMutation.mutate({ id, rating: newValue });
       } else {
-        if (!id) {
-          toast({
-            variant: 'destructive',
-            title: 'Uh oh! Something went wrong.',
-            description: 'Please refresh the page and try again',
-          });
-          return;
-        } else {
-          updateRatingMutation.mutate({ id, rating: newValue });
-        }
+        toast({
+          variant: 'destructive',
+          title: 'Uh oh! Something went wrong.',
+          description: 'Please refresh the page and try again',
+        });
+        return;
       }
       setIsWatched(true);
-      router.push(`/shows/${slug}`);
       router.refresh();
+      router.push(`/shows/${slug}`);
     },
     [
       createRatingMutation,

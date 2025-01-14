@@ -7,7 +7,6 @@ import { Check } from 'lucide-react';
 import { useToast } from '@/components/ui/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
-import { revalidatePath } from 'next/cache';
 
 interface WatchedButtonProps {
   hasRatingOrReview: boolean;
@@ -89,7 +88,7 @@ export default function WatchedButton({
         return;
       }
       setIsWatched(value);
-      revalidatePath(`/shows/${slug}`);
+      router.refresh();
       router.push(`/shows/${slug}`);
     },
     [
