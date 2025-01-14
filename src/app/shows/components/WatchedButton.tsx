@@ -5,7 +5,7 @@ import { useClerk } from '@clerk/nextjs';
 import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
 import { useToast } from '@/components/ui/hooks/use-toast';
-// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
 interface WatchedButtonProps {
@@ -24,16 +24,16 @@ export default function WatchedButton({
   isWatched,
   setIsWatched,
   showId,
-  // slug,
+  slug,
   userId,
 }: WatchedButtonProps) {
-  // const router = useRouter();
+  const router = useRouter();
   const { redirectToSignIn } = useClerk();
   const { toast } = useToast();
-  const utils = trpc.useContext();
+  const utils = trpc.useUtils();
   const createMutation = trpc.userShows.createWithWatchedShow.useMutation({
     onSuccess: () => {
-      utils.userShows.getUserShow.invalidate();
+      utils.userShows.invalidate();
     },
     onError: (error) => {
       toast({
@@ -45,7 +45,7 @@ export default function WatchedButton({
   });
   const updateMutation = trpc.userShows.toggleWatchedShow.useMutation({
     onSuccess: () => {
-      utils.userShows.getUserShow.invalidate();
+      utils.userShows.invalidate();
     },
     onError: (error) => {
       toast({
@@ -57,7 +57,7 @@ export default function WatchedButton({
   });
   const deleteMutation = trpc.userShows.deleteEmptyRecord.useMutation({
     onSuccess: () => {
-      utils.userShows.getUserShow.invalidate();
+      utils.userShows.invalidate();
     },
     onError: (error) => {
       toast({
@@ -98,8 +98,8 @@ export default function WatchedButton({
         return;
       }
       setIsWatched(value);
-      // router.refresh();
-      // router.push(`/shows/${slug}`);
+      router.refresh();
+      router.push(`/shows/${slug}`);
     },
     [
       createMutation,
@@ -108,10 +108,10 @@ export default function WatchedButton({
       id,
       isWatched,
       redirectToSignIn,
-      // router,
+      router,
       setIsWatched,
       showId,
-      // slug,
+      slug,
       toast,
       updateMutation,
       userId,
