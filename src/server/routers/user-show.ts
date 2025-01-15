@@ -133,6 +133,21 @@ export const userShowRouter = router({
         })
         .where(eq(userShows.id, id));
     }),
+  removeRating: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().uuid(),
+      }),
+    )
+    .mutation(({ input: { id } }) => {
+      return db
+        .update(userShows)
+        .set({
+          hasRating: false,
+          rating: '0',
+        })
+        .where(eq(userShows.id, id));
+    }),
   deleteEmptyRecord: protectedProcedure
     .input(
       z.object({

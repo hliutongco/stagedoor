@@ -23,7 +23,7 @@ export default function RatingWatchedContainer({
 }: RatingWatchedContainerProps) {
   const [isWatched, setIsWatched] = useState(_isWatched);
   return (
-    <div className="flex flex-col gap-4 items-center">
+    <div className="flex flex-col gap-8 items-center">
       <WatchedButton
         hasRatingOrReview={hasRatingOrReview}
         id={id}
@@ -32,16 +32,18 @@ export default function RatingWatchedContainer({
         showId={showId}
         userId={userId}
       />
-      <p>Your Rating:</p>
-      <StarRating
-        hasRatingOrReview={hasRatingOrReview}
-        id={id}
-        isWatched={isWatched}
-        rating={rating}
-        setIsWatched={setIsWatched}
-        showId={showId}
-        userId={userId}
-      />
+      <div className="flex flex-col gap-2 items-center">
+        <p>Your Rating:</p>
+        <StarRating
+          hasRatingOrReview={hasRatingOrReview}
+          id={id}
+          isWatched={isWatched}
+          rating={rating}
+          setIsWatched={setIsWatched}
+          showId={showId}
+          userId={userId}
+        />
+      </div>
     </div>
   );
 }
