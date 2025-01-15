@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import ShowsList from '../components/ShowsList';
 import { trpc } from '@/server/clients/server-api';
-import { Separator } from '@/components/ui/separator';
+import { Separator } from '@/components/ui/';
 
 export const metadata: Metadata = {
   title: 'StageDoor',

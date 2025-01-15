@@ -1,5 +1,5 @@
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/';
 import Link from 'next/link';
 import { currentUser } from '@clerk/nextjs/server';
 import { Figtree } from 'next/font/google';

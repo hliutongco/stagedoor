@@ -1,13 +1,18 @@
 'use client';
-import { Button } from '@/components/ui/button';
 import { trpc } from '@/server/clients/client-api';
 import { useClerk } from '@clerk/nextjs';
-import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
 import { useToast } from '@/components/ui/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
-import { Spinner } from '@/components/ui/spinner';
+import {
+  Button,
+  Spinner,
+  TooltipProvider,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from '@/components/ui/index';
 
 interface WatchedButtonProps {
   hasRatingOrReview: boolean;
@@ -106,18 +111,16 @@ export default function WatchedButton({
     <>
       {isLoading && <Spinner />}
       {!isLoading && isWatched && (
-        <>
-          <Badge variant="secondary">
-            <Check className="mr-1" size="20" /> I&apos;ve Seen This!
-          </Badge>
-          <span
-            className="hover:underline text-sm"
-            onClick={() => handleClick(false)}
-            role="button"
-          >
-            Click to mark as not watched
-          </span>
-        </>
+        <TooltipProvider delayDuration={100}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button onClick={() => handleClick(false)} variant="secondary">
+                <Check className="mr-1" size="30" /> I&apos;ve Seen This!
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Undo</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       )}
       {!isLoading && !isWatched && (
         <Button className="text-black" onClick={() => handleClick(true)}>

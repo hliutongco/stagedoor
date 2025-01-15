@@ -2,7 +2,7 @@ import './globals.css';
 import TopNav from './components/TopNav';
 import { ClerkProvider } from '@clerk/nextjs';
 import { TRPCProvider } from '@/server/clients/client-api';
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/';
 
 import { Readex_Pro } from 'next/font/google';
 
