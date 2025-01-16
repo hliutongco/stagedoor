@@ -58,6 +58,23 @@ export const reviewRouter = router({
         where: eq(reviews.id, id),
       });
     }),
+  createReview: protectedProcedure
+    .input(
+      z.object({
+        body: z.string(),
+        showId: z.string().uuid(),
+        title: z.string(),
+        userId: z.string(),
+      }),
+    )
+    .mutation(({ input: { body, showId, title, userId } }) => {
+      return db.insert(reviews).values({
+        body,
+        showId,
+        title,
+        userId,
+      });
+    }),
 });
 // export type definition of router
 export type ReviewRouter = typeof reviewRouter;
