@@ -13,22 +13,52 @@ import {
   Textarea,
 } from '@/components/ui/';
 import { useForm } from 'react-hook-form';
-// import { trpc } from '@/server/clients/client-api';
+import { trpc } from '@/server/clients/client-api';
+import { useCallback, useState } from 'react';
 
 type FormData = { body: Text; title: Text };
 
-export default function ReviewModal() {
+export default function ReviewModal({
+  showId,
+  userId,
+}: {
+  showId: string;
+  userId: string;
+}) {
   const {
-    register,
     formState: { errors },
     handleSubmit,
+    register,
+    reset,
   } = useForm<FormData>();
-  // const createMutation = trpc.reviews.createReview.useMutation({ title });
+  const createMutation = trpc.reviews.createReview.useMutation({
+    onError: (error) => {
+      toast({
+        description: error.message,
+        title: 'Uh oh! Something went wrong.',
+        variant: 'destructive',
+      });
+    },
+    onSuccess: async () => {
+      await utils.reviews.invalidate();
+      router.refresh();
+    },
+  });
+  const [open, toggleOpen] = useState(false);
+  const handleOpen = useCallback(
+    (value) => {
+      toggleOpen(value);
+      reset();
+    },
+    [toggleOpen, reset],
+  );
   const onSubmit = (data: FormData) => {
-    console.log(data);
+    const { body, title } = data;
+    createMutation.mutate({ body, showId, title, userId });
+    handleOpen(false);
   };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={handleOpen}>
       <DialogTrigger asChild>
         <Button className="hover:bg-outline" variant="outline">
           Write Review
@@ -77,6 +107,7 @@ export default function ReviewModal() {
             <Button
               className="mt-4 text-black"
               onClick={handleSubmit(onSubmit)}
+              type="submit"
               variant="default"
             >
               Submit

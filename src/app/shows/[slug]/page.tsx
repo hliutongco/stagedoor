@@ -41,7 +41,7 @@ export default async function ShowView({
       <div className="bg-primary min-h-[50svh] mt-10 sm:p-4 lg:p-8">
         <div className="flex justify-between mb-2">
           <h2 className="font-bold sm:text-lg lg:text-2xl">All Reviews</h2>
-          <ReviewModal />
+          <ReviewModal showId={show?.id ?? ''} userId={userId ?? ''} />
         </div>
         <Separator className="bg-muted" />
         <div className="flex flex-col my-2 pt-6">
