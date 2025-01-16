@@ -22,22 +22,6 @@ export const reviewRouter = router({
     .query(({ input: { ids } }) => {
       return db.select().from(reviews).where(inArray(reviews.id, ids));
     }),
-  getReviewsByShow: publicProcedure
-    .input(
-      z.object({
-        id: z.string().uuid().optional(),
-        showId: z.string().uuid(),
-      }),
-    )
-    .query(({ input: { id, showId } }) => {
-      if (id) {
-        return db
-          .select()
-          .from(reviews)
-          .where(and(eq(reviews.showId, showId), not(eq(reviews.id, id))));
-      }
-      return db.select().from(reviews).where(eq(reviews.showId, showId));
-    }),
   getReviewsByUser: publicProcedure
     .input(
       z.object({
@@ -47,17 +31,7 @@ export const reviewRouter = router({
     .query(({ input: { userId } }) => {
       return db.select().from(reviews).where(eq(reviews.userId, userId));
     }),
-  getReview: publicProcedure
-    .input(
-      z.object({
-        id: z.string().uuid(),
-      }),
-    )
-    .query(({ input: { id } }) => {
-      return db.query.reviews.findFirst({
-        where: eq(reviews.id, id),
-      });
-    }),
+  // TODO: create validation for max 10 reviews per UserShow
   createReview: protectedProcedure
     .input(
       z.object({
@@ -76,5 +50,5 @@ export const reviewRouter = router({
       });
     }),
 });
-// export type definition of router
+
 export type ReviewRouter = typeof reviewRouter;

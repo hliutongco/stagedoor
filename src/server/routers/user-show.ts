@@ -51,6 +51,9 @@ export const userShowRouter = router({
     .query(({ input: { showId, userId } }) => {
       return db.query.userShows.findFirst({
         where: and(eq(userShows.showId, showId), eq(userShows.userId, userId)),
+        with: {
+          reviews: true,
+        },
       });
     }),
   getAllWatchedByUser: publicProcedure

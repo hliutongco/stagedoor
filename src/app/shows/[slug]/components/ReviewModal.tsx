@@ -33,8 +33,8 @@ const formSchema = z.object({
     .min(10, {
       message: 'The review must be at least 10 characters',
     })
-    .max(20000, {
-      message: 'The max length is 20,000 characters',
+    .max(30000, {
+      message: 'The max length is 30,000 characters',
     }),
   title: z
     .string()
