@@ -35,7 +35,9 @@ export const showsRouter = router({
       }),
     )
     .query(({ input: { slug } }) => {
-      return db.select().from(shows).where(eq(shows.slug, slug));
+      return db.query.shows.findFirst({
+        where: eq(shows.slug, slug),
+      });
     }),
 });
 // export type definition of router
