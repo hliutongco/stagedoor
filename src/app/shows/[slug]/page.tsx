@@ -3,7 +3,8 @@ import { currentUser } from '@clerk/nextjs/server';
 import WatchedCount from '../components/WatchedCount';
 import RatingWatchedContainer from '../components/RatingWatchedContainer';
 import Image from 'next/image';
-import { Button, Separator } from '@/components/ui';
+import { Separator } from '@/components/ui';
+import ReviewModal from './components/ReviewModal';
 
 export default async function ShowView({
   params,
@@ -13,7 +14,7 @@ export default async function ShowView({
   const { slug } = await params;
   const user = await currentUser();
   const userId = user?.id ?? '';
-  const [show] = await trpc.shows.getShow({ slug: decodeURIComponent(slug) });
+  const show = await trpc.shows.getShow({ slug: decodeURIComponent(slug) });
   const userShow = await trpc.userShows.getUserShow({ showId: show?.id ?? '', userId });
 
   return (
@@ -40,9 +41,7 @@ export default async function ShowView({
       <div className="bg-primary min-h-[50svh] mt-10 sm:p-4 lg:p-8">
         <div className="flex justify-between mb-2">
           <h2 className="font-bold sm:text-lg lg:text-2xl">All Reviews</h2>
-          <Button className="hover:bg-outline" variant="outline">
-            Write Review
-          </Button>
+          <ReviewModal />
         </div>
         <Separator className="bg-muted" />
         <div className="flex flex-col my-2 pt-6">
