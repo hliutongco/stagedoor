@@ -21,12 +21,17 @@ export default async function ShowView({
     <>
       <div className="my-10 sm:p-4 lg:p-8">
         <h2 className="font-bold sm:text-2xl lg:text-4xl text-center">
-          {show.title} ({show.year})
+          {show?.title ?? ''} ({show?.year ?? ''})
         </h2>
         <WatchedCount showId={show?.id ?? ''} />
         <div className="grid sm:grid-cols-1 md:grid-cols-2">
           <div className="flex flex-col gap-4 items-center sm:mb-4">
-            <Image alt={show.title} height={394} src={show.playbillImage} width={250} />
+            <Image
+              alt={show?.title ?? ''}
+              height={394}
+              src={show?.playbillImage ?? ''}
+              width={250}
+            />
           </div>
           <RatingWatchedContainer
             hasRatingOrReview={Boolean(userShow?.hasRating || userShow?.hasReview)}

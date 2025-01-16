@@ -9,14 +9,42 @@ import {
   DialogTitle,
   DialogTrigger,
   Input,
-  Label,
   Textarea,
 } from '@/components/ui/';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { trpc } from '@/server/clients/client-api';
 import { useCallback, useState } from 'react';
+import { toast } from '@/components/ui/hooks/use-toast';
+import { useRouter } from 'next/navigation';
 
-type FormData = { body: Text; title: Text };
+const formSchema = z.object({
+  body: z
+    .string()
+    .min(10, {
+      message: 'The review must be at least 10 characters',
+    })
+    .max(20000, {
+      message: 'The max length is 20,000 characters',
+    }),
+  title: z
+    .string()
+    .nonempty({
+      message: 'The title must be at least 1 character',
+    })
+    .max(200, {
+      message: 'The max length is 200 characters',
+    }),
+});
 
 export default function ReviewModal({
   showId,
@@ -25,12 +53,16 @@ export default function ReviewModal({
   showId: string;
   userId: string;
 }) {
-  const {
-    formState: { errors },
-    handleSubmit,
-    register,
-    reset,
-  } = useForm<FormData>();
+  const router = useRouter();
+  const utils = trpc.useUtils();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      body: '',
+      title: '',
+    },
+  });
+  const { control, handleSubmit, reset } = form;
   const createMutation = trpc.reviews.createReview.useMutation({
     onError: (error) => {
       toast({
@@ -46,13 +78,13 @@ export default function ReviewModal({
   });
   const [open, toggleOpen] = useState(false);
   const handleOpen = useCallback(
-    (value) => {
+    (value: boolean) => {
       toggleOpen(value);
       reset();
     },
-    [toggleOpen, reset],
+    [reset, toggleOpen],
   );
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
     const { body, title } = data;
     createMutation.mutate({ body, showId, title, userId });
     handleOpen(false);
@@ -71,49 +103,58 @@ export default function ReviewModal({
             Fill in the fields below to add your review
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Label htmlFor="review-title">Title</Label>
-          <Input
-            {...register('title', {
-              maxLength: {
-                message: 'The max length is 200 characters',
-                value: 200,
-              },
-              required: 'The title is required',
-            })}
-            className={errors.title ? 'border-destructive' : ''}
-            id="review-title"
-            type="text"
-          />
-          {errors.title && (
-            <p className="mb-4 text-destructive text-sm">{errors.title.message}</p>
-          )}
-          <Label htmlFor="review-body">Review</Label>
-          <Textarea
-            {...register('body', {
-              minLength: {
-                message: 'The review must be at least 10 characters',
-                value: 10,
-              },
-              required: 'The review cannot be empty',
-            })}
-            className={errors.body ? 'border-destructive' : ''}
-            id="review-body"
-          />
-          {errors.body && (
-            <p className="mb-4 text-destructive text-sm">{errors.body.message}</p>
-          )}
-          <div className="flex justify-end">
-            <Button
-              className="mt-4 text-black"
-              onClick={handleSubmit(onSubmit)}
-              type="submit"
-              variant="default"
-            >
-              Submit
-            </Button>
-          </div>
-        </form>
+        <Form {...form}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <FormField
+              control={control}
+              name="title"
+              render={({ field, formState }) => (
+                <FormItem>
+                  <FormLabel htmlFor="review-title">Title</FormLabel>
+                  <FormControl>
+                    <Input {...field} id="review-title" placeholder="Title" type="text" />
+                  </FormControl>
+                  {formState.errors.title && (
+                    <FormMessage className="text-sm">
+                      {formState.errors.title.message}
+                    </FormMessage>
+                  )}
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={control}
+              name="body"
+              render={({ field, formState }) => (
+                <FormItem className="mt-4">
+                  <FormLabel htmlFor="review-body">Review</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      id="review-body"
+                      placeholder="Write your review"
+                    />
+                  </FormControl>
+                  {formState.errors.body && (
+                    <FormMessage className="text-sm">
+                      {formState.errors.body.message}
+                    </FormMessage>
+                  )}
+                </FormItem>
+              )}
+            />
+            <div className="flex justify-end">
+              <Button
+                className="mt-4 text-black"
+                onClick={handleSubmit(onSubmit)}
+                type="submit"
+                variant="default"
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );
