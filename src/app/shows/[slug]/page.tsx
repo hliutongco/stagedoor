@@ -5,6 +5,7 @@ import RatingWatchedContainer from '../components/RatingWatchedContainer';
 import Image from 'next/image';
 import { Separator } from '@/components/ui';
 import ReviewModal from './components/ReviewModal';
+import { ReactNode } from 'react';
 
 export default async function ShowView({
   params,
@@ -16,7 +17,6 @@ export default async function ShowView({
   const userId = user?.id ?? '';
   const show = await trpc.shows.getShow({ slug: decodeURIComponent(slug) });
   const userShow = await trpc.userShows.getUserShow({ showId: show?.id ?? '', userId });
-
   return (
     <>
       <div className="my-10 sm:p-4 lg:p-8">
@@ -34,7 +34,7 @@ export default async function ShowView({
             />
           </div>
           <RatingWatchedContainer
-            hasRatingOrReview={Boolean(userShow?.hasRating || userShow?.hasReview)}
+            hasRatingOrReview={Boolean(userShow?.hasRating || userShow?.reviews.length)}
             id={userShow?.id}
             isWatched={Boolean(userShow?.isWatched)}
             rating={userShow?.rating}
@@ -46,18 +46,28 @@ export default async function ShowView({
       <div className="bg-primary min-h-[50svh] mt-10 sm:p-4 lg:p-8">
         <div className="flex justify-between mb-2">
           <h2 className="font-bold sm:text-lg lg:text-2xl">All Reviews</h2>
-          <ReviewModal showId={show?.id ?? ''} userId={userId ?? ''} />
+          <ReviewModal
+            showId={show?.id ?? ''}
+            userId={userId ?? ''}
+            userShowId={userShow?.id}
+          />
         </div>
         <Separator className="bg-muted" />
         <div className="flex flex-col my-2 pt-6">
-          <div className="grid grid-cols-4">
-            <div className="p-2 text-center">
-              {/* <Image alt="user" src=""></Image> */}
-              Helen L.
-            </div>
-            <div className="col-span-3 p-2">some review text</div>
-          </div>
-          <p className="text-center">Nothing for now!</p>
+          {show?.reviews.map<ReactNode>((review) => {
+            return (
+              <div className="grid grid-cols-4" key={review.id}>
+                <div className="p-2 text-center">
+                  {/* <Image alt="user" src=""></Image> */}
+                </div>
+                <div className="col-span-3 p-2">
+                  <p className="font-bold text-sm">{review.title}</p>
+                  <p>{review.body}</p>
+                </div>
+              </div>
+            );
+          })}
+          {!show?.reviews?.length && <p className="text-center">Nothing for now!</p>}
         </div>
       </div>
     </>

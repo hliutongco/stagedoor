@@ -26,6 +26,7 @@ export const reviews = pgTable('reviews', {
   showId: uuid('show_id'),
   title: text().notNull(),
   userId: text('user_id'),
+  userShowId: uuid('user_show_id').notNull(),
 });
 
 export const reviewRelations = relations(reviews, ({ one }) => ({
@@ -33,19 +34,33 @@ export const reviewRelations = relations(reviews, ({ one }) => ({
     fields: [reviews.showId],
     references: [shows.id],
   }),
+  userShow: one(userShows, {
+    fields: [reviews.userShowId],
+    references: [userShows.id],
+  }),
 }));
+
+export const users = pgTable('users', {
+  id: text().primaryKey(),
+  firstName: text(),
+  imageUrl: text().notNull(),
+  lastName: text(),
+  username: text(),
+});
 
 export const userShows = pgTable('user_shows', {
   id: uuid().primaryKey().defaultRandom(),
-  hasRating: boolean().notNull().default(false),
-  hasReview: boolean().notNull().default(false),
+  hasRating: boolean()
+    .notNull()
+    .generatedAlwaysAs(sql`CASE WHEN rating = '0' THEN false ELSE true END`),
   isWatched: boolean().notNull().default(false),
   rating: decimal().notNull().default('0'),
   showId: uuid('show_id'),
   userId: text('user_id'),
 });
 
-export const userShowsRelations = relations(userShows, ({ one }) => ({
+export const userShowsRelations = relations(userShows, ({ many, one }) => ({
+  reviews: many(reviews),
   show: one(shows, {
     fields: [userShows.showId],
     references: [shows.id],

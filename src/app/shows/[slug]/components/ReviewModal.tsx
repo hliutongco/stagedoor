@@ -49,9 +49,11 @@ const formSchema = z.object({
 export default function ReviewModal({
   showId,
   userId,
+  userShowId,
 }: {
   showId: string;
   userId: string;
+  userShowId: string | undefined;
 }) {
   const router = useRouter();
   const utils = trpc.useUtils();
@@ -63,6 +65,19 @@ export default function ReviewModal({
     },
   });
   const { control, handleSubmit, reset } = form;
+  const createUserShowMutation = trpc.userShows.createWithWatchedShow.useMutation({
+    onError: (error) => {
+      toast({
+        description: error.message,
+        title: 'Uh oh! Something went wrong.',
+        variant: 'destructive',
+      });
+    },
+    onSuccess: async () => {
+      await utils.userShows.invalidate();
+      router.refresh();
+    },
+  });
   const createMutation = trpc.reviews.createReview.useMutation({
     onError: (error) => {
       toast({
@@ -84,9 +99,14 @@ export default function ReviewModal({
     },
     [reset, toggleOpen],
   );
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
     const { body, title } = data;
-    createMutation.mutate({ body, showId, title, userId });
+    if (userShowId) {
+      createMutation.mutate({ body, showId, title, userId, userShowId });
+    } else {
+      const [{ id }] = await createUserShowMutation.mutateAsync({ showId, userId });
+      createMutation.mutate({ body, showId, title, userId, userShowId: id });
+    }
     handleOpen(false);
   };
   return (

@@ -37,6 +37,9 @@ export const showsRouter = router({
     .query(({ input: { slug } }) => {
       return db.query.shows.findFirst({
         where: eq(shows.slug, slug),
+        with: {
+          reviews: true,
+        },
       });
     }),
 });

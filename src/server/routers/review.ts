@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { protectedProcedure, publicProcedure, router } from '../init-trpc';
 import { drizzle } from 'drizzle-orm/neon-http';
-import { and, eq, inArray, not } from 'drizzle-orm';
+import { eq, inArray } from 'drizzle-orm';
 import { neon } from '@neondatabase/serverless';
 import * as schema from '@/db/schema';
 
@@ -22,22 +22,6 @@ export const reviewRouter = router({
     .query(({ input: { ids } }) => {
       return db.select().from(reviews).where(inArray(reviews.id, ids));
     }),
-  getReviewsByShow: publicProcedure
-    .input(
-      z.object({
-        id: z.string().uuid().optional(),
-        showId: z.string().uuid(),
-      }),
-    )
-    .query(({ input: { id, showId } }) => {
-      if (id) {
-        return db
-          .select()
-          .from(reviews)
-          .where(and(eq(reviews.showId, showId), not(eq(reviews.id, id))));
-      }
-      return db.select().from(reviews).where(eq(reviews.showId, showId));
-    }),
   getReviewsByUser: publicProcedure
     .input(
       z.object({
@@ -47,17 +31,6 @@ export const reviewRouter = router({
     .query(({ input: { userId } }) => {
       return db.select().from(reviews).where(eq(reviews.userId, userId));
     }),
-  getReview: publicProcedure
-    .input(
-      z.object({
-        id: z.string().uuid(),
-      }),
-    )
-    .query(({ input: { id } }) => {
-      return db.query.reviews.findFirst({
-        where: eq(reviews.id, id),
-      });
-    }),
   createReview: protectedProcedure
     .input(
       z.object({
@@ -65,14 +38,16 @@ export const reviewRouter = router({
         showId: z.string().uuid(),
         title: z.string(),
         userId: z.string(),
+        userShowId: z.string(),
       }),
     )
-    .mutation(({ input: { body, showId, title, userId } }) => {
+    .mutation(({ input: { body, showId, title, userId, userShowId } }) => {
       return db.insert(reviews).values({
         body,
         showId,
         title,
         userId,
+        userShowId,
       });
     }),
 });
