@@ -17,12 +17,15 @@ export const userShowRouter = router({
         userId: z.string(),
       }),
     )
-    .mutation(({ input: { showId, userId } }) => {
-      return db.insert(userShows).values({
-        isWatched: true,
-        showId,
-        userId,
-      });
+    .mutation(async ({ input: { showId, userId } }) => {
+      return db
+        .insert(userShows)
+        .values({
+          isWatched: true,
+          showId,
+          userId,
+        })
+        .returning();
     }),
   createWithRating: protectedProcedure
     .input(
@@ -34,7 +37,6 @@ export const userShowRouter = router({
     )
     .mutation(({ input: { showId, userId, rating } }) => {
       return db.insert(userShows).values({
-        hasRating: true,
         isWatched: true,
         showId,
         userId,
@@ -51,6 +53,9 @@ export const userShowRouter = router({
     .query(({ input: { showId, userId } }) => {
       return db.query.userShows.findFirst({
         where: and(eq(userShows.showId, showId), eq(userShows.userId, userId)),
+        with: {
+          reviews: true,
+        },
       });
     }),
   getAllWatchedByUser: publicProcedure
@@ -127,7 +132,6 @@ export const userShowRouter = router({
       return db
         .update(userShows)
         .set({
-          hasRating: true,
           isWatched: true,
           rating,
         })
@@ -143,7 +147,6 @@ export const userShowRouter = router({
       return db
         .update(userShows)
         .set({
-          hasRating: false,
           rating: '0',
         })
         .where(eq(userShows.id, id));
