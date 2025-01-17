@@ -1,5 +1,60 @@
 # CHANGELOG
 
+## [v0.5.0](https://github.com/hliutongco/stagedoor/releases/tag/v0.5.0) - 2025-01-16 19:26:34
+
+Users can now create reviews using the Create a Review modal on the show view pages
+
+### Minor Release
+
+- ReviewModal:
+  - add create review form and review trpc router (#43) ([838c572](https://github.com/hliutongco/stagedoor/commit/838c572ffa4d27e14fba5330c7d48ca3d9105bb0)) ([#43](https://github.com/hliutongco/stagedoor/pull/43))
+
+- schema:
+  - add usershows table (#30) ([734f235](https://github.com/hliutongco/stagedoor/commit/734f2351c49fda7354d966b94ce7e25df5b9c983)) ([#30](https://github.com/hliutongco/stagedoor/pull/30))
+
+- star-rating:
+  - add star rating component (#29) ([512103e](https://github.com/hliutongco/stagedoor/commit/512103ed7c36b71feba82c9fb7f6bc4861a9390a)) ([#29](https://github.com/hliutongco/stagedoor/pull/29))
+
+### Patch Release
+
+- tailwind.config:
+  - fix mobile view and star rating (#42) ([a4e506f](https://github.com/hliutongco/stagedoor/commit/a4e506f26ea55f09194534197934cffc65e869c4)) ([#42](https://github.com/hliutongco/stagedoor/pull/42))
+  - tailwind theme (#37) ([d60d34c](https://github.com/hliutongco/stagedoor/commit/d60d34c3fdcc3dbdedd8a18b9fba7ee2d935f8c2)) ([#37](https://github.com/hliutongco/stagedoor/pull/37))
+
+- RatingWatchedContainer:
+  - attempt to fix bug (#40) ([8856ed9](https://github.com/hliutongco/stagedoor/commit/8856ed96f40bf2b1ea83c3a81a2d1bc329ee4947)) ([#40](https://github.com/hliutongco/stagedoor/pull/40))
+
+- loading:
+  - loading screens (#39) ([77316d2](https://github.com/hliutongco/stagedoor/commit/77316d2a40d5f89ac694a6c74cb2f77b29223aec)) ([#39](https://github.com/hliutongco/stagedoor/pull/39))
+
+- ShowsList:
+  - visual changes (#38) ([9dac49e](https://github.com/hliutongco/stagedoor/commit/9dac49e97868a6ea43671719b99564b4fa2bacf5)) ([#38](https://github.com/hliutongco/stagedoor/pull/38))
+
+- error.tsx:
+  - add generic error pages (#36) ([44dcda6](https://github.com/hliutongco/stagedoor/commit/44dcda640ce1e72e37e904aa01d4acdc38bcf656)) ([#36](https://github.com/hliutongco/stagedoor/pull/36))
+
+- showslist:
+  - data refresh (#35) ([94b30bd](https://github.com/hliutongco/stagedoor/commit/94b30bdfdd094b9ee3f640251c53cdc09f1866b4)) ([#35](https://github.com/hliutongco/stagedoor/pull/35))
+
+- my-profile:
+  - add static star rating to user profile (#34) ([3487180](https://github.com/hliutongco/stagedoor/commit/34871803e17d469d42f28c95565e81b4d37e5d0d)) ([#34](https://github.com/hliutongco/stagedoor/pull/34))
+
+- general:
+  - add slug to url (#33) ([4260689](https://github.com/hliutongco/stagedoor/commit/4260689c2fb50485bdd3198f2e3f0ea814305d8a)) ([#33](https://github.com/hliutongco/stagedoor/pull/33))
+
+- migrations:
+  - apply migrations correctly ([8ab24ad](https://github.com/hliutongco/stagedoor/commit/8ab24ad9b6fe95cd1934d4a9e71dc4bc25c0e4d0))
+  - split hasReviewOrRating into two columns (#31) ([acab7c0](https://github.com/hliutongco/stagedoor/commit/acab7c0d18a597d0413c79282fd07282f47a9eea)) ([#31](https://github.com/hliutongco/stagedoor/pull/31))
+
+- schema:
+  - add slug to shows table (#32) ([bd7fe84](https://github.com/hliutongco/stagedoor/commit/bd7fe84adcb3b9578b1b59a1ceb69912db010153)) ([#32](https://github.com/hliutongco/stagedoor/pull/32))
+
+- CHANGELOG:
+  - update release notes ([10824f5](https://github.com/hliutongco/stagedoor/commit/10824f50810c7eac6eb8f273415d84c547b2c464))
+
+- WatchedCount:
+  - add watched count (#28) ([fbe7180](https://github.com/hliutongco/stagedoor/commit/fbe718037f559913983eafec67e1719999229fd2)) ([#28](https://github.com/hliutongco/stagedoor/pull/28))
+
 ## [v0.2.0](https://github.com/hliutongco/stagedoor/releases/tag/v0.2.0) - 2025-01-04 19:11:36
 
 - Add Shows data to the homepage
