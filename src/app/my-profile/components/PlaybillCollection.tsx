@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import StarRating from '@/components/core/star-rating/static';
+import StarRating from '@/components/core/star-rating';
 
 interface ShowsListProps {
   shows: {

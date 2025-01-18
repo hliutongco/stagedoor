@@ -23,9 +23,10 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { trpc } from '@/server/clients/client-api';
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { toast } from '@/components/ui/hooks/use-toast';
 import { useRouter } from 'next/navigation';
+import { IsWatchedContext } from './isWatchedProvider';
 
 const formSchema = z.object({
   body: z
@@ -56,6 +57,7 @@ export default function ReviewModal({
   userShowId: string | undefined;
 }) {
   const router = useRouter();
+  const { setIsWatched } = useContext(IsWatchedContext);
   const utils = trpc.useUtils();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -89,6 +91,11 @@ export default function ReviewModal({
     onSuccess: async () => {
       await utils.reviews.invalidate();
       router.refresh();
+      toast({
+        description: 'Your review was successfully submitted.',
+        title: 'Success!',
+        variant: 'default',
+      });
     },
   });
   const [open, toggleOpen] = useState(false);
@@ -105,6 +112,7 @@ export default function ReviewModal({
       createMutation.mutate({ body, showId, title, userId, userShowId });
     } else {
       const [{ id }] = await createUserShowMutation.mutateAsync({ showId, userId });
+      setIsWatched(true);
       createMutation.mutate({ body, showId, title, userId, userShowId: id });
     }
     handleOpen(false);

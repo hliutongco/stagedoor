@@ -1,34 +1,26 @@
 'use client';
 
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
 import { toast } from '@/components/ui/hooks/use-toast';
 import { trpc } from '@/server/clients/client-api';
 import { useClerk } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import '../styles/star-rating.scss';
 import RemoveRating from './remove-rating';
+import { IsWatchedContext } from '../../[slug]/components/isWatchedProvider';
 
 interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
   hasRatingOrReview: boolean;
   id: string | undefined;
-  isWatched: boolean;
   rating: string | undefined;
-  setIsWatched: (isWatched: boolean) => void;
   showId: string;
   userId: string;
 }
 
-const StarRating = ({
-  hasRatingOrReview,
-  id,
-  isWatched,
-  rating,
-  setIsWatched,
-  showId,
-  userId,
-}: RatingsProps) => {
+const StarRating = ({ hasRatingOrReview, id, rating, showId, userId }: RatingsProps) => {
   const router = useRouter();
   const { redirectToSignIn } = useClerk();
+  const { isWatched, setIsWatched } = useContext(IsWatchedContext);
   const [value, setValue] = useState(rating ?? '0');
   const utils = trpc.useUtils();
   const createRatingMutation = trpc.userShows.createWithRating.useMutation({
