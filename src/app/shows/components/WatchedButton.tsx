@@ -4,7 +4,7 @@ import { useClerk } from '@clerk/nextjs';
 import { Check } from 'lucide-react';
 import { useToast } from '@/components/ui/hooks/use-toast';
 import { useRouter } from 'next/navigation';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import {
   Button,
   Spinner,
@@ -13,12 +13,13 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from '@/components/ui/index';
+import { IsWatchedContext } from '../[slug]/components/isWatchedProvider';
 
 interface WatchedButtonProps {
   hasRatingOrReview: boolean;
   id: string | undefined;
-  isWatched: boolean;
-  setIsWatched: (isWatched: boolean) => void;
+  // isWatched: boolean;
+  // setIsWatched: (isWatched: boolean) => void;
   showId: string;
   userId: string | undefined;
 }
@@ -26,11 +27,17 @@ interface WatchedButtonProps {
 export default function WatchedButton({
   hasRatingOrReview,
   id,
-  isWatched,
-  setIsWatched,
+  // isWatched: _isWatched,
+  // setIsWatched,
   showId,
   userId = '',
 }: WatchedButtonProps) {
+  // const searchParams = useSearchParams();
+  // const isWatchedDefaultValue = useMemo(() => {
+  //   return Boolean(searchParams.get('isWatched') === 'true') || _isWatched;
+  // }, [searchParams, _isWatched]);
+  // const [isWatched, setIsWatched] = useState(isWatchedDefaultValue);
+  const { isWatched, setIsWatched } = useContext(IsWatchedContext);
   const router = useRouter();
   const { redirectToSignIn } = useClerk();
   const { toast } = useToast();

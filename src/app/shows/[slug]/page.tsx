@@ -1,11 +1,13 @@
 import { trpc } from '@/server/clients/server-api';
 import { currentUser } from '@clerk/nextjs/server';
-import WatchedCount from '../components/WatchedCount';
-import RatingWatchedContainer from '../components/RatingWatchedContainer';
+import { ReactNode } from 'react';
 import Image from 'next/image';
 import { Separator } from '@/components/ui';
+import IsWatchedProvider from './components/isWatchedProvider';
 import ReviewModal from './components/ReviewModal';
-import { ReactNode } from 'react';
+import StarRating from '../components/star-rating/dynamic';
+import WatchedButton from '../components/WatchedButton';
+import WatchedCount from '../components/WatchedCount';
 
 export default async function ShowView({
   params,
@@ -18,7 +20,7 @@ export default async function ShowView({
   const show = await trpc.shows.getShow({ slug: decodeURIComponent(slug) });
   const userShow = await trpc.userShows.getUserShow({ showId: show?.id ?? '', userId });
   return (
-    <>
+    <IsWatchedProvider isWatched={Boolean(userShow?.isWatched)}>
       <div className="my-10 sm:p-4 lg:p-8">
         <h2 className="font-bold sm:text-2xl lg:text-4xl text-center">
           {show?.title ?? ''} ({show?.year ?? ''})
@@ -33,14 +35,34 @@ export default async function ShowView({
               width={250}
             />
           </div>
-          <RatingWatchedContainer
+          {/* <RatingWatchedContainer
             hasRatingOrReview={Boolean(userShow?.hasRating || userShow?.reviews.length)}
             id={userShow?.id}
-            isWatched={Boolean(userShow?.isWatched)}
+            // isWatched={Boolean(userShow?.isWatched)}
             rating={userShow?.rating}
             showId={show?.id ?? ''}
             userId={userId}
-          />
+          /> */}
+          <div className="flex flex-col gap-8 items-center">
+            <WatchedButton
+              hasRatingOrReview={Boolean(userShow?.hasRating || userShow?.reviews.length)}
+              id={userShow?.id}
+              showId={show?.id ?? ''}
+              userId={userId}
+            />
+            <div className="flex flex-col gap-2 items-center">
+              <p>Your Rating:</p>
+              <StarRating
+                hasRatingOrReview={Boolean(
+                  userShow?.hasRating || userShow?.reviews.length,
+                )}
+                id={userShow?.id}
+                rating={userShow?.rating}
+                showId={show?.id ?? ''}
+                userId={userId}
+              />
+            </div>
+          </div>
         </div>
       </div>
       <div className="bg-primary min-h-[50svh] mt-10 sm:p-4 lg:p-8">
@@ -70,6 +92,6 @@ export default async function ShowView({
           {!show?.reviews?.length && <p className="text-center">Nothing for now!</p>}
         </div>
       </div>
-    </>
+    </IsWatchedProvider>
   );
 }

@@ -1,4 +1,4 @@
-import '../styles/star-rating.scss';
+import './styles/star-rating.scss';
 
 export default function StarRating({ name, value }: { name: string; value: string }) {
   return (
