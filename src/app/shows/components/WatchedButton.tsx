@@ -18,8 +18,6 @@ import { IsWatchedContext } from '../[slug]/components/isWatchedProvider';
 interface WatchedButtonProps {
   hasRatingOrReview: boolean;
   id: string | undefined;
-  // isWatched: boolean;
-  // setIsWatched: (isWatched: boolean) => void;
   showId: string;
   userId: string | undefined;
 }
@@ -27,16 +25,9 @@ interface WatchedButtonProps {
 export default function WatchedButton({
   hasRatingOrReview,
   id,
-  // isWatched: _isWatched,
-  // setIsWatched,
   showId,
   userId = '',
 }: WatchedButtonProps) {
-  // const searchParams = useSearchParams();
-  // const isWatchedDefaultValue = useMemo(() => {
-  //   return Boolean(searchParams.get('isWatched') === 'true') || _isWatched;
-  // }, [searchParams, _isWatched]);
-  // const [isWatched, setIsWatched] = useState(isWatchedDefaultValue);
   const { isWatched, setIsWatched } = useContext(IsWatchedContext);
   const router = useRouter();
   const { redirectToSignIn } = useClerk();

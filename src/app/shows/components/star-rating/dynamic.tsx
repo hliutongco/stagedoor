@@ -12,22 +12,12 @@ import { IsWatchedContext } from '../../[slug]/components/isWatchedProvider';
 interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
   hasRatingOrReview: boolean;
   id: string | undefined;
-  // isWatched: boolean;
   rating: string | undefined;
-  // setIsWatched: (isWatched: boolean) => void;
   showId: string;
   userId: string;
 }
 
-const StarRating = ({
-  hasRatingOrReview,
-  id,
-  // isWatched,
-  rating,
-  // setIsWatched,
-  showId,
-  userId,
-}: RatingsProps) => {
+const StarRating = ({ hasRatingOrReview, id, rating, showId, userId }: RatingsProps) => {
   const router = useRouter();
   const { redirectToSignIn } = useClerk();
   const { isWatched, setIsWatched } = useContext(IsWatchedContext);

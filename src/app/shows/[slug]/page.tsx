@@ -35,14 +35,6 @@ export default async function ShowView({
               width={250}
             />
           </div>
-          {/* <RatingWatchedContainer
-            hasRatingOrReview={Boolean(userShow?.hasRating || userShow?.reviews.length)}
-            id={userShow?.id}
-            // isWatched={Boolean(userShow?.isWatched)}
-            rating={userShow?.rating}
-            showId={show?.id ?? ''}
-            userId={userId}
-          /> */}
           <div className="flex flex-col gap-8 items-center">
             <WatchedButton
               hasRatingOrReview={Boolean(userShow?.hasRating || userShow?.reviews.length)}
