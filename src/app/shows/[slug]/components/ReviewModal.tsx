@@ -28,6 +28,7 @@ import { useCallback, useContext, useState } from 'react';
 import { toast } from '@/components/ui/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { IsWatchedContext } from './isWatchedProvider';
+import { useClerk } from '@clerk/nextjs';
 
 const formSchema = z.object({
   body: z
@@ -58,6 +59,7 @@ export default function ReviewModal({
   userShowId: string | undefined;
 }) {
   const router = useRouter();
+  const { redirectToSignIn } = useClerk();
   const { setIsWatched } = useContext(IsWatchedContext);
   const utils = trpc.useUtils();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -102,10 +104,14 @@ export default function ReviewModal({
   const [open, toggleOpen] = useState(false);
   const handleOpen = useCallback(
     (value: boolean) => {
+      if (!userId) {
+        redirectToSignIn();
+        return;
+      }
       toggleOpen(value);
       reset();
     },
-    [reset, toggleOpen],
+    [redirectToSignIn, reset, toggleOpen, userId],
   );
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     const { body, title } = data;
