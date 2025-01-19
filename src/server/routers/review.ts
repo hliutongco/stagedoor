@@ -50,6 +50,15 @@ export const reviewRouter = router({
         userShowId,
       });
     }),
+  deleteReview: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().uuid(),
+      }),
+    )
+    .mutation(({ input: { id } }) => {
+      return db.delete(reviews).where(eq(reviews.id, id));
+    }),
 });
 // export type definition of router
 export type ReviewRouter = typeof reviewRouter;
