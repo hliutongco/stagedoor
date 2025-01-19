@@ -8,6 +8,7 @@ import ReviewModal from './components/ReviewModal';
 import StarRating from '../components/star-rating/dynamic';
 import WatchedButton from '../components/WatchedButton';
 import WatchedCount from '../components/WatchedCount';
+import ReviewCard from './components/ReviewCard';
 
 export default async function ShowView({
   params,
@@ -75,7 +76,10 @@ export default async function ShowView({
                   {/* <Image alt="user" src=""></Image> */}
                 </div>
                 <div className="col-span-3 p-2">
-                  <p className="font-bold text-sm">{review.title}</p>
+                  <p className="flex font-bold justify-between text-sm">
+                    <span>{review.title}</span>
+                    {user && <ReviewCard review={review} />}
+                  </p>
                   <p>{review.body}</p>
                 </div>
               </div>

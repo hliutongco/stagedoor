@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
   Input,
+  Spinner,
   Textarea,
 } from '@/components/ui/';
 import {
@@ -120,9 +121,7 @@ export default function ReviewModal({
   return (
     <Dialog open={open} onOpenChange={handleOpen}>
       <DialogTrigger asChild>
-        <Button className="hover:bg-outline" variant="outline">
-          Write Review
-        </Button>
+        <Button variant="outline">Write Review</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -131,58 +130,68 @@ export default function ReviewModal({
             Fill in the fields below to add your review
           </DialogDescription>
         </DialogHeader>
-        <Form {...form}>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <FormField
-              control={control}
-              name="title"
-              render={({ field, formState }) => (
-                <FormItem>
-                  <FormLabel htmlFor="review-title">Title</FormLabel>
-                  <FormControl>
-                    <Input {...field} id="review-title" placeholder="Title" type="text" />
-                  </FormControl>
-                  {formState.errors.title && (
-                    <FormMessage className="text-sm">
-                      {formState.errors.title.message}
-                    </FormMessage>
-                  )}
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={control}
-              name="body"
-              render={({ field, formState }) => (
-                <FormItem className="mt-4">
-                  <FormLabel htmlFor="review-body">Review</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      id="review-body"
-                      placeholder="Write your review"
-                    />
-                  </FormControl>
-                  {formState.errors.body && (
-                    <FormMessage className="text-sm">
-                      {formState.errors.body.message}
-                    </FormMessage>
-                  )}
-                </FormItem>
-              )}
-            />
-            <div className="flex justify-end">
-              <Button
-                className="mt-4 text-black"
-                onClick={handleSubmit(onSubmit)}
-                type="submit"
-                variant="default"
-              >
-                Submit
-              </Button>
-            </div>
-          </form>
-        </Form>
+        {(createMutation.isPending || createUserShowMutation.isPending) && (
+          <Spinner className="my-24" />
+        )}
+        {!createMutation.isPending && !createUserShowMutation.isPending && (
+          <Form {...form}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <FormField
+                control={control}
+                name="title"
+                render={({ field, formState }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="review-title">Title</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        id="review-title"
+                        placeholder="Title"
+                        type="text"
+                      />
+                    </FormControl>
+                    {formState.errors.title && (
+                      <FormMessage className="text-sm">
+                        {formState.errors.title.message}
+                      </FormMessage>
+                    )}
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={control}
+                name="body"
+                render={({ field, formState }) => (
+                  <FormItem className="mt-4">
+                    <FormLabel htmlFor="review-body">Review</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        id="review-body"
+                        placeholder="Write your review"
+                      />
+                    </FormControl>
+                    {formState.errors.body && (
+                      <FormMessage className="text-sm">
+                        {formState.errors.body.message}
+                      </FormMessage>
+                    )}
+                  </FormItem>
+                )}
+              />
+              <div className="flex justify-end">
+                <Button
+                  className="mt-4 text-black"
+                  onClick={handleSubmit(onSubmit)}
+                  type="submit"
+                  variant="default"
+                >
+                  Submit
+                </Button>
+              </div>
+            </form>
+          </Form>
+        )}
       </DialogContent>
     </Dialog>
   );
