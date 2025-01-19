@@ -50,6 +50,17 @@ export const reviewRouter = router({
         userShowId,
       });
     }),
+  editReview: protectedProcedure
+    .input(
+      z.object({
+        body: z.string(),
+        id: z.string().uuid(),
+        title: z.string(),
+      }),
+    )
+    .mutation(({ input: { body, id, title } }) => {
+      return db.update(reviews).set({ body, title }).where(eq(reviews.id, id));
+    }),
   deleteReview: protectedProcedure
     .input(
       z.object({
