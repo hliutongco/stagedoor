@@ -170,7 +170,7 @@ export default function ReviewCard({ review }: { review: typeof reviews.$inferSe
                     <Button variant="secondary">Close</Button>
                   </DialogClose>
                   <DialogClose asChild>
-                    <Button onClick={handleSubmit(handleEditClick)} variant="default">
+                    <Button type="submit" variant="default">
                       Submit
                     </Button>
                   </DialogClose>
