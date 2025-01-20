@@ -3,6 +3,7 @@
 import {
   Button,
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -185,13 +186,11 @@ export default function ReviewModal({
                   </FormItem>
                 )}
               />
-              <div className="flex justify-end">
-                <Button
-                  className="mt-4 text-black"
-                  onClick={handleSubmit(onSubmit)}
-                  type="submit"
-                  variant="default"
-                >
+              <div className="flex gap-2 justify-end mt-4">
+                <DialogClose asChild>
+                  <Button variant="secondary">Close</Button>
+                </DialogClose>
+                <Button onClick={handleSubmit(onSubmit)} type="submit" variant="default">
                   Submit
                 </Button>
               </div>

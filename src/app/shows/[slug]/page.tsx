@@ -76,10 +76,10 @@ export default async function ShowView({
                   {/* <Image alt="user" src=""></Image> */}
                 </div>
                 <div className="col-span-3 p-2">
-                  <p className="flex font-bold justify-between text-sm">
+                  <div className="flex font-bold gap-2 justify-between pb-0 text-sm">
                     <span>{review.title}</span>
                     {user && <ReviewCard review={review} />}
-                  </p>
+                  </div>
                   <p>{review.body}</p>
                 </div>
               </div>
