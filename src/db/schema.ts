@@ -34,6 +34,10 @@ export const reviewRelations = relations(reviews, ({ one }) => ({
     fields: [reviews.showId],
     references: [shows.id],
   }),
+  user: one(users, {
+    fields: [reviews.userId],
+    references: [users.id],
+  }),
   userShow: one(userShows, {
     fields: [reviews.userShowId],
     references: [userShows.id],
@@ -47,6 +51,10 @@ export const users = pgTable('users', {
   lastName: text(),
   username: text(),
 });
+
+export const userRelations = relations(users, ({ many }) => ({
+  reviews: many(reviews),
+}));
 
 export const userShows = pgTable('user_shows', {
   id: uuid().primaryKey().defaultRandom(),
