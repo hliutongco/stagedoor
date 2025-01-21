@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { protectedProcedure, publicProcedure, router } from '../init-trpc';
 import { drizzle } from 'drizzle-orm/neon-http';
-import { eq, inArray } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { neon } from '@neondatabase/serverless';
 import * as schema from '@/db/schema';
 
@@ -13,24 +13,6 @@ export const reviewRouter = router({
   getReviews: publicProcedure.query(() => {
     return db.select().from(reviews);
   }),
-  getReviewsById: publicProcedure
-    .input(
-      z.object({
-        ids: z.string().array(),
-      }),
-    )
-    .query(({ input: { ids } }) => {
-      return db.select().from(reviews).where(inArray(reviews.id, ids));
-    }),
-  getReviewsByUser: publicProcedure
-    .input(
-      z.object({
-        userId: z.string(),
-      }),
-    )
-    .query(({ input: { userId } }) => {
-      return db.select().from(reviews).where(eq(reviews.userId, userId));
-    }),
   createReview: protectedProcedure
     .input(
       z.object({

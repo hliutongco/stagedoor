@@ -47,6 +47,14 @@ export const userRouter = router({
     .query(({ input: { id } }) => {
       return db.query.users.findFirst({
         where: eq(users.id, id),
+        with: {
+          reviews: true,
+          userShows: {
+            with: {
+              show: true,
+            },
+          },
+        },
       });
     }),
 });

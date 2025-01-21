@@ -7,7 +7,6 @@ import IsWatchedProvider from './components/isWatchedProvider';
 import ReviewModal from './components/ReviewModal';
 import StarRating from '../components/star-rating/dynamic';
 import WatchedButton from '../components/WatchedButton';
-import WatchedCount from '../components/WatchedCount';
 import ReviewCard from './components/ReviewCard';
 
 export default async function ShowView({
@@ -26,7 +25,9 @@ export default async function ShowView({
         <h2 className="font-bold sm:text-2xl lg:text-4xl text-center">
           {show?.title ?? ''} ({show?.year ?? ''})
         </h2>
-        <WatchedCount showId={show?.id ?? ''} />
+        <div className="py-4 text-center text-sm">
+          {show?.userShows.length ?? 0} people have watched this show
+        </div>
         <div className="grid sm:grid-cols-1 md:grid-cols-2">
           <div className="flex flex-col gap-4 items-center sm:mb-4">
             <Image
@@ -71,11 +72,24 @@ export default async function ShowView({
         <div className="flex flex-col my-2 pt-6">
           {show?.reviews.map<ReactNode>((review) => {
             return (
-              <div className="grid grid-cols-4" key={review.id}>
-                <div className="p-2 text-center">
-                  {/* <Image alt="user" src=""></Image> */}
+              <div className="grid grid-cols-4 lg:grid-cols-5" key={review.id}>
+                <div className="flex flex-col items-center p-2 text-center">
+                  <Image
+                    alt={review.user?.username + 'profile picture'}
+                    className="rounded-sm"
+                    height={75}
+                    src={review.user?.imageUrl ?? ''}
+                    width={75}
+                  />
+                  {review.user?.username ? (
+                    <span>{review.user?.username}</span>
+                  ) : (
+                    <span>
+                      {review.user?.firstName} {review.user?.lastName}
+                    </span>
+                  )}
                 </div>
-                <div className="col-span-3 p-2">
+                <div className="col-span-3 lg:col-span-4 p-2">
                   <div className="flex font-bold gap-2 justify-between pb-0 text-sm">
                     <span>{review.title}</span>
                     {user && <ReviewCard review={review} />}
