@@ -28,11 +28,11 @@
 
 /***** CSS Magic to Highlight Stars on Hover *****/
 
-.rating > input:checked ~ label, /* show gold star when clicked */
-.rating:not(.hover-disabled):not(:checked) > label:hover, /* hover current star */
-.rating:not(.hover-disabled):not(:checked) > label:hover ~ label { color: var(--primary);  } /* hover previous stars in list */
+.rating > input:checked ~ label { color: var(--primary);  } /* show pink star when clicked */ 
 
+.rating:not(.hover-disabled):not(:checked) > label:hover, /* hover current star */ 
+.rating:not(.hover-disabled):not(:checked) > label:hover ~ label, /* hover previous stars in list */
 .rating:not(.hover-disabled) > input:checked + label:hover, /* hover current star when changing rating */
 .rating:not(.hover-disabled) > input:checked ~ label:hover,
 .rating:not(.hover-disabled) > label:hover ~ input:checked ~ label, /* lighten current selection */
-.rating:not(.hover-disabled) > input:checked ~ label:hover ~ label { color: var(--primary);  } 
+.rating:not(.hover-disabled) > input:checked ~ label:hover ~ label { color: var(--danger);  } 

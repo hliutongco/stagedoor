@@ -1,6 +1,7 @@
 import { currentUser } from '@clerk/nextjs/server';
 import PlaybillCollection from './components/PlaybillCollection';
 import { trpc } from '@/server/clients/server-api';
+import ReviewCollection from './components/ReviewCollection';
 
 export default async function MyProfilePage() {
   const _user = await currentUser();
@@ -23,6 +24,7 @@ export default async function MyProfilePage() {
         Your Profile
       </h1>
       {watchedShows && <PlaybillCollection shows={watchedShows} />}
+      <ReviewCollection reviews={user?.reviews ?? []} />
     </>
   );
 }

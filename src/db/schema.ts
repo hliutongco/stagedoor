@@ -1,4 +1,12 @@
-import { boolean, decimal, pgEnum, pgTable, text, uuid } from 'drizzle-orm/pg-core';
+import {
+  boolean,
+  decimal,
+  pgEnum,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+} from 'drizzle-orm/pg-core';
 import { sql, relations } from 'drizzle-orm';
 
 const showTypeEnum = pgEnum('type', ['musical', 'play']);
@@ -23,9 +31,14 @@ export const showRelations = relations(shows, ({ many }) => ({
 export const reviews = pgTable('reviews', {
   id: uuid().primaryKey().defaultRandom(),
   body: text().notNull(),
+  createdAt: timestamp().defaultNow(),
   showId: uuid('show_id'),
   title: text().notNull(),
   userId: text('user_id'),
+  updatedAt: timestamp()
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
   userShowId: uuid('user_show_id').notNull(),
 });
 
@@ -59,12 +72,17 @@ export const userRelations = relations(users, ({ many }) => ({
 
 export const userShows = pgTable('user_shows', {
   id: uuid().primaryKey().defaultRandom(),
+  createdAt: timestamp().defaultNow(),
   hasRating: boolean()
     .notNull()
     .generatedAlwaysAs(sql`CASE WHEN rating = '0' THEN false ELSE true END`),
   isWatched: boolean().notNull().default(false),
   rating: decimal().notNull().default('0'),
   showId: uuid('show_id'),
+  updatedAt: timestamp()
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
   userId: text('user_id'),
 });
 
