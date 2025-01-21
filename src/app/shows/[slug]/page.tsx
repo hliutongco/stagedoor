@@ -90,9 +90,9 @@ export default async function ShowView({
                   )}
                 </div>
                 <div className="col-span-3 lg:col-span-4 p-2">
-                  <div className="flex font-bold gap-2 justify-between pb-0 text-sm">
+                  <div className="flex font-bold gap-2 justify-between pb-0">
                     <span>{review.title}</span>
-                    {user && <ReviewCard review={review} />}
+                    {user?.id === review.userId && <ReviewCard review={review} />}
                   </div>
                   <p>{review.body}</p>
                 </div>

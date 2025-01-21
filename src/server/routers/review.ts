@@ -13,6 +13,21 @@ export const reviewRouter = router({
   getReviews: publicProcedure.query(() => {
     return db.select().from(reviews);
   }),
+  getReview: publicProcedure
+    .input(
+      z.object({
+        id: z.string().uuid(),
+      }),
+    )
+    .query(({ input: { id } }) => {
+      return db.query.reviews.findFirst({
+        where: eq(reviews.id, id),
+        with: {
+          show: true,
+          user: true,
+        },
+      });
+    }),
   createReview: protectedProcedure
     .input(
       z.object({
