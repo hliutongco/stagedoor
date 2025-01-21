@@ -38,7 +38,12 @@ export const showsRouter = router({
       return db.query.shows.findFirst({
         where: eq(shows.slug, slug),
         with: {
-          reviews: true,
+          reviews: {
+            with: {
+              user: true,
+            },
+          },
+          userShows: true,
         },
       });
     }),

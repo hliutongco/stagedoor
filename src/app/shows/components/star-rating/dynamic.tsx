@@ -5,7 +5,7 @@ import { toast } from '@/components/ui/hooks/use-toast';
 import { trpc } from '@/server/clients/client-api';
 import { useClerk } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
-import '../styles/star-rating.scss';
+import '@/components/core/styles/star-rating.scss';
 import RemoveRating from './remove-rating';
 import { IsWatchedContext } from '../../[slug]/components/isWatchedProvider';
 

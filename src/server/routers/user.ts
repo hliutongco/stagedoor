@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { protectedProcedure, publicProcedure, router } from '../init-trpc';
 import { drizzle } from 'drizzle-orm/neon-http';
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 import { neon } from '@neondatabase/serverless';
 import * as schema from '@/db/schema';
 
@@ -47,6 +47,21 @@ export const userRouter = router({
     .query(({ input: { id } }) => {
       return db.query.users.findFirst({
         where: eq(users.id, id),
+        with: {
+          reviews: {
+            orderBy: (reviews) => desc(reviews.updatedAt),
+            with: {
+              show: true,
+              userShow: true,
+            },
+          },
+          userShows: {
+            orderBy: (userShows) => desc(userShows.updatedAt),
+            with: {
+              show: true,
+            },
+          },
+        },
       });
     }),
 });

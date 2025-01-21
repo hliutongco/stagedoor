@@ -2,7 +2,7 @@ import { protectedProcedure, publicProcedure, router } from '../init-trpc';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
 import { z } from 'zod';
-import { and, eq, not } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 import * as schema from '@/db/schema';
 
 const sql = neon(process.env.DATABASE_URL!);
@@ -57,54 +57,6 @@ export const userShowRouter = router({
           reviews: true,
         },
       });
-    }),
-  getAllWatchedByUser: publicProcedure
-    .input(
-      z.object({
-        userId: z.string(),
-      }),
-    )
-    .query(({ input: { userId } }) => {
-      return db
-        .select()
-        .from(userShows)
-        .where(and(eq(userShows.userId, userId), eq(userShows.isWatched, true)));
-    }),
-  getAllRatingsByUser: publicProcedure
-    .input(
-      z.object({
-        userId: z.string(),
-      }),
-    )
-    .query(({ input: { userId } }) => {
-      return db
-        .select()
-        .from(userShows)
-        .where(and(eq(userShows.userId, userId), not(eq(userShows.rating, '0'))));
-    }),
-  getAllWatchedByShow: publicProcedure
-    .input(
-      z.object({
-        showId: z.string().uuid(),
-      }),
-    )
-    .query(({ input: { showId } }) => {
-      return db
-        .select()
-        .from(userShows)
-        .where(and(eq(userShows.showId, showId), eq(userShows.isWatched, true)));
-    }),
-  getAllRatingsByShow: publicProcedure
-    .input(
-      z.object({
-        showId: z.string().uuid(),
-      }),
-    )
-    .query(({ input: { showId } }) => {
-      return db
-        .select()
-        .from(userShows)
-        .where(and(eq(userShows.showId, showId), not(eq(userShows.rating, '0'))));
     }),
   toggleWatchedShow: protectedProcedure
     .input(
