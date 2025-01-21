@@ -29,7 +29,7 @@ export const userRouter = router({
         username,
       });
     }),
-  deleteUser: protectedProcedure
+  deleteUser: publicProcedure
     .input(
       z.object({
         id: z.string(),
