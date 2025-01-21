@@ -1,12 +1,11 @@
-import { auth, currentUser } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs/server';
 import PlaybillCollection from './components/PlaybillCollection';
 import { trpc } from '@/server/clients/server-api';
 
 export default async function MyProfilePage() {
   const user = await currentUser();
-  if (!user) return (await auth()).redirectToSignIn();
   const watchedUserShows = await trpc.userShows.getAllWatchedByUser({
-    userId: user.id,
+    userId: user?.id ?? '',
   });
   const watchedShowIds = watchedUserShows.map((show) => show.showId ?? '');
   const _watchedShows = await trpc.shows.getShowsById({ ids: watchedShowIds });
