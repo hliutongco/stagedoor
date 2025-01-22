@@ -69,10 +69,13 @@ export default async function ShowView({
             userShowId={userShow?.id}
           />
         </div>
-        <div className="flex flex-col my-2 pt-6">
+        <div className="flex flex-col mt-2">
           {show?.reviews.map<ReactNode>((review) => {
             return (
-              <div className="bg-background lg:min-h-[200px] rounded-md" key={review.id}>
+              <div
+                className="bg-background lg:min-h-[200px] mt-4 rounded-md"
+                key={review.id}
+              >
                 <div className="flex flex-col float-left items-center p-4 mx-4 text-center text-sm">
                   <Image
                     alt={review.user?.username + 'profile picture'}

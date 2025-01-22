@@ -33,7 +33,7 @@ export default function ReviewCollection({ reviews }: { reviews: ReviewCollectio
                   <span>{review.show?.title}</span>
                   {review.userShow?.rating !== '0' && (
                     <StarRating
-                      name={`${review.show?.title ?? ''}-review`}
+                      name={`${review.id ?? ''}-review`}
                       value={`${review.userShow?.rating}`}
                     />
                   )}
