@@ -1,5 +1,31 @@
 # CHANGELOG
 
+## [v0.6.0](https://github.com/hliutongco/stagedoor/releases/tag/v0.6.0) - 2025-01-21 05:36:25
+
+- Users can edit and delete reviews
+- Users can see their reviews on their profile
+
+### Minor Release
+
+- my-profile:
+  - add reviews to user profile (#50) ([812790b](https://github.com/hliutongco/stagedoor/commit/812790b6ec26c3c108c204c34791037abe25fd60)) ([#50](https://github.com/hliutongco/stagedoor/pull/50))
+
+### Patch Release
+
+- schema:
+  - set up createUser and deleteUser methods (#49) ([723ff50](https://github.com/hliutongco/stagedoor/commit/723ff5087a3bcc0f1687609de503c2f0e5e9b791)) ([#49](https://github.com/hliutongco/stagedoor/pull/49))
+  - add users table and usershow review relationship (#45) ([07a8bdc](https://github.com/hliutongco/stagedoor/commit/07a8bdc441ec06efb0c1621c8fa4f6a70e56e61b)) ([#45](https://github.com/hliutongco/stagedoor/pull/45))
+
+- ReviewCard:
+  - add edit review functionality (#48) ([d691582](https://github.com/hliutongco/stagedoor/commit/d691582c6cf5fe05c4bb11bbad26f0a5457e4316)) ([#48](https://github.com/hliutongco/stagedoor/pull/48))
+  - add ability to delete (#47) ([c0a8117](https://github.com/hliutongco/stagedoor/commit/c0a811779d959f44a3afe09561d912a5f7800de4)) ([#47](https://github.com/hliutongco/stagedoor/pull/47))
+
+- general:
+  - fix/watched button (#46) ([2c6de40](https://github.com/hliutongco/stagedoor/commit/2c6de4069e09c48c5c8eba2b2624ba608a553d04)) ([#46](https://github.com/hliutongco/stagedoor/pull/46))
+
+- CHANGELOG:
+  - update release notes ([cffaa8d](https://github.com/hliutongco/stagedoor/commit/cffaa8dd3450a0aee3a5889c4529ce1b8aaff548))
+
 ## [v0.5.0](https://github.com/hliutongco/stagedoor/releases/tag/v0.5.0) - 2025-01-16 19:26:34
 
 Users can now create reviews using the Create a Review modal on the show view pages
