@@ -1,6 +1,7 @@
 import StarRating from '@/components/core/star-rating';
 import { reviews as Review, shows as Show, userShows as UserShow } from '@/db/schema';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Review = typeof Review.$inferSelect;
 
@@ -17,26 +18,39 @@ export default function ReviewCollection({ reviews }: { reviews: ReviewCollectio
       {reviews.length && (
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full 2xl:w-auto">
           {reviews.map((review) => (
-            <div
-              className="bg-white col-span-1 flex flex-col my-4 p-4 rounded-md"
-              key={review.id}
-            >
-              <div className="flex flex-col items-center">
-                <Image
-                  alt={review.show?.title ?? ''}
-                  height={200}
-                  src={review.show?.playbillImage ?? ''}
-                  width={100}
-                />
-                <span>{review.show?.title}</span>
-                <StarRating
-                  name={`${review.show?.title ?? ''}-review`}
-                  value={`${review.userShow?.rating ?? '0'}`}
-                />
+            <Link href={`/reviews/${review.id}`} key={review.id}>
+              <div
+                className="bg-background col-span-1 flex flex-col my-4 p-4 rounded-md"
+                key={review.id}
+              >
+                <div className="flex flex-col items-center">
+                  <Image
+                    alt={review.show?.title ?? ''}
+                    height={200}
+                    src={review.show?.playbillImage ?? ''}
+                    width={100}
+                  />
+                  <span>{review.show?.title}</span>
+                  {review.userShow?.rating !== '0' && (
+                    <StarRating
+                      name={`${review.show?.title ?? ''}-review`}
+                      value={`${review.userShow?.rating}`}
+                    />
+                  )}
+                </div>
+                <p className="font-bold">{review.title}</p>
+                <div className="whitespace-pre-wrap">
+                  {review.body.length > 1000 ? (
+                    <>
+                      <p>{review.body.slice(0, 300)}...</p>
+                      <span className="float-right text-sm">Click to read more</span>
+                    </>
+                  ) : (
+                    <p>{review.body}</p>
+                  )}
+                </div>
               </div>
-              <p className="font-bold">{review.title}</p>
-              <p>{review.body}</p>
-            </div>
+            </Link>
           ))}
         </div>
       )}

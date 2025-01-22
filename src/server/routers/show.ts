@@ -41,6 +41,7 @@ export const showsRouter = router({
           reviews: {
             with: {
               user: true,
+              userShow: true,
             },
           },
           userShows: true,
