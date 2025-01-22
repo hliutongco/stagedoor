@@ -20,7 +20,7 @@ export default function ReviewCollection({ reviews }: { reviews: ReviewCollectio
           {reviews.map((review) => (
             <Link href={`/reviews/${review.id}`} key={review.id}>
               <div
-                className="bg-background col-span-1 flex flex-col my-4 p-4 rounded-md"
+                className="bg-background col-span-1 flex flex-col h-full my-4 p-4 rounded-md"
                 key={review.id}
               >
                 <div className="flex flex-col items-center">
