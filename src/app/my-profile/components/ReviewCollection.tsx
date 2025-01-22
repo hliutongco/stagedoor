@@ -20,7 +20,7 @@ export default function ReviewCollection({ reviews }: { reviews: ReviewCollectio
           {reviews.map((review) => (
             <Link href={`/reviews/${review.id}`} key={review.id}>
               <div
-                className="bg-white col-span-1 flex flex-col my-4 p-4 rounded-md"
+                className="bg-background col-span-1 flex flex-col my-4 p-4 rounded-md"
                 key={review.id}
               >
                 <div className="flex flex-col items-center">
@@ -31,13 +31,24 @@ export default function ReviewCollection({ reviews }: { reviews: ReviewCollectio
                     width={100}
                   />
                   <span>{review.show?.title}</span>
-                  <StarRating
-                    name={`${review.show?.title ?? ''}-review`}
-                    value={`${review.userShow?.rating ?? '0'}`}
-                  />
+                  {review.userShow?.rating !== '0' && (
+                    <StarRating
+                      name={`${review.show?.title ?? ''}-review`}
+                      value={`${review.userShow?.rating}`}
+                    />
+                  )}
                 </div>
                 <p className="font-bold">{review.title}</p>
-                <p>{review.body}</p>
+                <div className="whitespace-pre-wrap">
+                  {review.body.length > 1000 ? (
+                    <>
+                      <p>{review.body.slice(0, 300)}...</p>
+                      <span className="float-right text-sm">Click to read more</span>
+                    </>
+                  ) : (
+                    <p>{review.body}</p>
+                  )}
+                </div>
               </div>
             </Link>
           ))}

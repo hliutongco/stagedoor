@@ -2,12 +2,13 @@ import { trpc } from '@/server/clients/server-api';
 import { currentUser } from '@clerk/nextjs/server';
 import { ReactNode } from 'react';
 import Image from 'next/image';
-import { Separator } from '@/components/ui';
 import IsWatchedProvider from './components/isWatchedProvider';
 import ReviewModal from './components/ReviewModal';
 import StarRating from '../components/star-rating/dynamic';
+import { default as StarRatingStatic } from '@/components/core/star-rating';
 import WatchedButton from '../components/WatchedButton';
 import ReviewCard from './components/ReviewCard';
+import Link from 'next/link';
 
 export default async function ShowView({
   params,
@@ -68,33 +69,46 @@ export default async function ShowView({
             userShowId={userShow?.id}
           />
         </div>
-        <Separator className="bg-muted" />
         <div className="flex flex-col my-2 pt-6">
           {show?.reviews.map<ReactNode>((review) => {
             return (
-              <div className="grid grid-cols-4 lg:grid-cols-5" key={review.id}>
-                <div className="flex flex-col items-center p-2 text-center">
+              <div className="bg-background lg:min-h-[200px] rounded-md" key={review.id}>
+                <div className="flex flex-col float-left items-center p-4 mx-4 text-center text-sm">
                   <Image
                     alt={review.user?.username + 'profile picture'}
-                    className="rounded-sm"
-                    height={75}
+                    className="rounded-md"
+                    height={50}
                     src={review.user?.imageUrl ?? ''}
-                    width={75}
+                    width={50}
                   />
-                  {review.user?.username ? (
-                    <span>{review.user?.username}</span>
-                  ) : (
-                    <span>
-                      {review.user?.firstName} {review.user?.lastName}
-                    </span>
-                  )}
+                  {review.user?.username}
                 </div>
-                <div className="col-span-3 lg:col-span-4 p-2">
+                <div className="col-span-3 lg:col-span-4 p-4">
                   <div className="flex font-bold gap-2 justify-between pb-0">
-                    <span>{review.title}</span>
+                    <div className="flex flex-col md:flex-row items-start md:items-center gap-2">
+                      <span className="text-base md:text-lg">{review.title}</span>
+                      <StarRatingStatic
+                        name={review.id}
+                        value={`${review.userShow.rating}`}
+                      />
+                    </div>
                     {user?.id === review.userId && <ReviewCard review={review} />}
                   </div>
-                  <p>{review.body}</p>
+                  <p className="whitespace-pre-wrap">
+                    {review.body.length > 1000 ? (
+                      <>
+                        <span>{review.body.slice(0, 1000) + '...'}</span>
+                        <Link
+                          className="ml-2 text-primary text-sm"
+                          href={`/reviews/${review.id}`}
+                        >
+                          Click to read more
+                        </Link>
+                      </>
+                    ) : (
+                      <span>{review.body}</span>
+                    )}
+                  </p>
                 </div>
               </div>
             );

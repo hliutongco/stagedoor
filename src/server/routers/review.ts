@@ -25,6 +25,7 @@ export const reviewRouter = router({
         with: {
           show: true,
           user: true,
+          userShow: true,
         },
       });
     }),

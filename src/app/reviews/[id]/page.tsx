@@ -1,7 +1,9 @@
 import ReviewCard from '@/app/shows/[slug]/components/ReviewCard';
+import StarRating from '@/components/core/star-rating';
 import { trpc } from '@/server/clients/server-api';
 import { currentUser } from '@clerk/nextjs/server';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default async function ReviewPage({
   params,
@@ -13,7 +15,7 @@ export default async function ReviewPage({
   const review = await trpc.reviews.getReview({ id });
   if (review === undefined) throw new Error('Review not found');
   return (
-    <div className="min-h-[95vh] p-6">
+    <div className="min-h-[95vh] mt-10 sm:p-4 lg:p-8">
       <h2 className="font-bold sm:text-xl lg:text-3xl text-center">{review.title}</h2>
       <span className="flex items-center gap-2 justify-center">
         <Image
@@ -23,25 +25,30 @@ export default async function ReviewPage({
           src={review.user?.imageUrl ?? ''}
           width={20}
         />
-        {review.user?.username ?? `${review.user?.firstName} ${review.user?.lastName}`}
+        {review.user?.username}
       </span>
       {user?.id === review.userId && (
         <div className="flex justify-end">
           <ReviewCard review={review} />
         </div>
       )}
-      <div className="grid grid-cols-4 lg:grid-cols-5">
-        <div className="flex flex-col items-center p-2 text-center">
-          <Image
-            alt={review.show?.title ?? ''}
-            className="rounded-sm"
-            height={400}
-            src={review.show?.playbillImage ?? ''}
-            width={200}
-          />
-          {review.show?.title}
+      <div className="">
+        <div className="flex flex-col md:float-left items-center pb-8 px-10 p-2">
+          <Link className="text-center" href={`/shows/${review.show?.slug}`}>
+            <Image
+              alt={review.show?.title ?? ''}
+              className="rounded-sm"
+              height={400}
+              src={review.show?.playbillImage ?? ''}
+              width={200}
+            />
+            {review.show?.title}
+          </Link>
+          {review.userShow?.rating !== '0' && (
+            <StarRating name={review.title} value={`${review.userShow.rating}`} />
+          )}
         </div>
-        <p className="p-4">{review.body}</p>
+        <p className="p-4 whitespace-pre-wrap">{review.body}</p>
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ export const userRouter = router({
         id: z.string(),
         imageUrl: z.string(),
         lastName: z.string().nullable(),
-        username: z.string().nullable(),
+        username: z.string(),
       }),
     )
     .mutation(({ input: { firstName, id, imageUrl, lastName, username } }) => {
