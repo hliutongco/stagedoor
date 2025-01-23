@@ -13,7 +13,7 @@ interface ReviewCollection extends Review {
 export default function ReviewCollection({ reviews }: { reviews: ReviewCollection[] }) {
   return (
     <div className="bg-primary items-center justify-items-center min-h-screen pb-20 gap-16 sm:p-4 lg:p-8 text-black">
-      <h2 className="font-bold mb-4 sm:text-xl lg:text-3xl text-center">Your Reviews</h2>
+      <h2 className="font-bold mb-4 sm:text-xl lg:text-3xl text-center">Reviews</h2>
       {!reviews.length && <div className="text-center">Nothing for now!</div>}
       {reviews.length && (
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full 2xl:w-auto">

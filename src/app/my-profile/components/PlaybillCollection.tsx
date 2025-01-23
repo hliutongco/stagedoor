@@ -16,7 +16,7 @@ export default async function PlaybillCollection({ shows }: ShowsListProps) {
   return (
     <>
       <h2 className="font-bold sm:text-xl lg:text-3xl text-center">
-        Your Playbill Collection
+        Playbill Collection
       </h2>
       <div className="items-center justify-items-center min-h-screen pb-20 gap-16 sm:p-4 lg:p-8">
         {!shows.length && (

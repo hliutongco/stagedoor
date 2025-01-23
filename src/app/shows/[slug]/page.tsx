@@ -76,16 +76,18 @@ export default async function ShowView({
                 className="bg-background lg:min-h-[200px] mt-4 rounded-md"
                 key={review.id}
               >
-                <div className="flex flex-col float-left items-center p-4 mx-4 text-center text-sm">
-                  <Image
-                    alt={review.user?.username + 'profile picture'}
-                    className="rounded-md"
-                    height={50}
-                    src={review.user?.imageUrl ?? ''}
-                    width={50}
-                  />
-                  {review.user?.username}
-                </div>
+                <Link href={`/users/${review.user?.username}`}>
+                  <div className="flex flex-col float-left items-center p-4 mx-4 text-center text-sm">
+                    <Image
+                      alt={review.user?.username + 'profile picture'}
+                      className="rounded-md"
+                      height={50}
+                      src={review.user?.imageUrl ?? ''}
+                      width={50}
+                    />
+                    {review.user?.username}
+                  </div>
+                </Link>
                 <div className="col-span-3 lg:col-span-4 p-4">
                   <div className="flex font-bold gap-2 justify-between pb-0">
                     <div className="flex flex-col md:flex-row items-start md:items-center gap-2">

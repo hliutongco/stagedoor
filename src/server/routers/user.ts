@@ -41,12 +41,12 @@ export const userRouter = router({
   getUser: protectedProcedure
     .input(
       z.object({
-        id: z.string(),
+        username: z.string(),
       }),
     )
-    .query(({ input: { id } }) => {
+    .query(({ input: { username } }) => {
       return db.query.users.findFirst({
-        where: eq(users.id, id),
+        where: eq(users.username, username),
         with: {
           reviews: {
             orderBy: (reviews) => desc(reviews.updatedAt),
