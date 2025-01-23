@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { protectedProcedure, publicProcedure, router } from '../init-trpc';
+import { publicProcedure, router } from '../init-trpc';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { desc, eq } from 'drizzle-orm';
 import { neon } from '@neondatabase/serverless';
@@ -38,15 +38,15 @@ export const userRouter = router({
     .mutation(({ input: { id } }) => {
       return db.delete(users).where(eq(users.id, id));
     }),
-  getUser: protectedProcedure
+  getUser: publicProcedure
     .input(
       z.object({
-        id: z.string(),
+        username: z.string(),
       }),
     )
-    .query(({ input: { id } }) => {
+    .query(({ input: { username } }) => {
       return db.query.users.findFirst({
-        where: eq(users.id, id),
+        where: eq(users.username, username),
         with: {
           reviews: {
             orderBy: (reviews) => desc(reviews.updatedAt),

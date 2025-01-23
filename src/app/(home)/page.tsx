@@ -38,8 +38,8 @@ export default async function Home() {
         <div className="gap-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 items-center mt-8">
           {reviews.map((review) => (
             <div
-              key={review.id}
               className="bg-background flex flex-col h-full mb-10 p-4 relative rounded-md w-full"
+              key={review.id}
             >
               <h4 className="font-bold text-center sm:text-lg lg:text-xl">
                 {review.title}
@@ -69,16 +69,18 @@ export default async function Home() {
                   <span>{review.body}</span>
                 )}
               </div>
-              <div className="absolute bottom-3 flex gap-2 items-center">
-                <Image
-                  alt={review.user?.username + 'profile picture'}
-                  className="rounded-2xl"
-                  height={30}
-                  src={review.user?.imageUrl ?? ''}
-                  width={30}
-                />
-                {review.user?.username}
-              </div>
+              <Link href={`/users/${review.user?.username}`}>
+                <div className="absolute bottom-3 flex gap-2 items-center">
+                  <Image
+                    alt={review.user?.username + 'profile picture'}
+                    className="rounded-2xl"
+                    height={30}
+                    src={review.user?.imageUrl ?? ''}
+                    width={30}
+                  />
+                  {review.user?.username}
+                </div>
+              </Link>
             </div>
           ))}
         </div>

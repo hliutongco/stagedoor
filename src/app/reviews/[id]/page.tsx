@@ -17,16 +17,18 @@ export default async function ReviewPage({
   return (
     <div className="min-h-[95vh] mt-10 sm:p-4 lg:p-8">
       <h2 className="font-bold sm:text-xl lg:text-3xl text-center">{review.title}</h2>
-      <span className="flex items-center gap-2 justify-center">
-        <Image
-          alt={review.user?.username ?? 'review-user'}
-          className="rounded-sm"
-          height={20}
-          src={review.user?.imageUrl ?? ''}
-          width={20}
-        />
-        {review.user?.username}
-      </span>
+      <Link href={`/users/${review.user?.username}`}>
+        <span className="flex items-center gap-2 justify-center">
+          <Image
+            alt={review.user?.username ?? 'review-user'}
+            className="rounded-sm"
+            height={20}
+            src={review.user?.imageUrl ?? ''}
+            width={20}
+          />
+          {review.user?.username}
+        </span>
+      </Link>
       {user?.id === review.userId && (
         <div className="flex justify-end">
           <ReviewCard review={review} />
