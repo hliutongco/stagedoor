@@ -4,6 +4,7 @@ import { trpc } from '@/server/clients/server-api';
 import { Separator } from '@/components/ui/';
 import StarRating from '@/components/core/star-rating';
 import Link from 'next/link';
+import CloudinaryImage from '@/app/components/CloudinaryImage';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
@@ -48,11 +49,11 @@ export default async function Home() {
                 <StarRating name={review.id} value={`${review.userShow.rating}`} />
               </div>
               <div className="mt-2">
-                <Image
+                <CloudinaryImage
                   alt={review.show?.title ?? ''}
                   className="float-left px-2"
                   height={150}
-                  src={review.show?.playbillImage ?? ''}
+                  src={review.show?.slug ?? ''}
                   width={100}
                 />
                 {review.body.length > 1000 ? (
