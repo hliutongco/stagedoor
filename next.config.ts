@@ -2,7 +2,18 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [process.env.AWS_URL!, 'img.clerk.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'img.clerk.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: process.env.AWS_URL!,
+        pathname: '**',
+      },
+    ],
   },
 };
 
