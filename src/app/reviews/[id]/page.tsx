@@ -1,3 +1,4 @@
+import CloudinaryImage from '@/app/components/CloudinaryImage';
 import ReviewCard from '@/app/shows/[slug]/components/ReviewCard';
 import StarRating from '@/components/core/star-rating';
 import { trpc } from '@/server/clients/server-api';
@@ -37,11 +38,11 @@ export default async function ReviewPage({
       <div className="">
         <div className="flex flex-col md:float-left items-center pb-8 px-10 p-2">
           <Link className="text-center" href={`/shows/${review.show?.slug}`}>
-            <Image
+            <CloudinaryImage
               alt={review.show?.title ?? ''}
               className="rounded-sm"
               height={400}
-              src={review.show?.playbillImage ?? ''}
+              src={review.show?.slug ?? ''}
               width={200}
             />
             {review.show?.title}
