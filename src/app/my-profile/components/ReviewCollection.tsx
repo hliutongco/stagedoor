@@ -1,6 +1,7 @@
 import CloudinaryImage from '@/app/components/CloudinaryImage';
 import StarRating from '@/components/core/star-rating';
 import { reviews as Review, shows as Show, userShows as UserShow } from '@/db/schema';
+import { transformCharacters } from '@/lib/utils/index';
 import Link from 'next/link';
 
 type Review = typeof Review.$inferSelect;
@@ -27,7 +28,7 @@ export default function ReviewCollection({ reviews }: { reviews: ReviewCollectio
                   <CloudinaryImage
                     alt={review.show?.title ?? ''}
                     height={200}
-                    src={review.show?.slug ?? ''}
+                    src={transformCharacters(review.show?.slug ?? '')}
                     width={100}
                   />
                   <span>{review.show?.title}</span>

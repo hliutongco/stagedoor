@@ -10,6 +10,7 @@ import WatchedButton from '../components/WatchedButton';
 import ReviewCard from './components/ReviewCard';
 import Link from 'next/link';
 import CloudinaryImage from '@/app/components/CloudinaryImage';
+import { transformCharacters } from '@/lib/utils/index';
 
 export default async function ShowView({
   params,
@@ -35,7 +36,7 @@ export default async function ShowView({
             <CloudinaryImage
               alt={show?.title ?? ''}
               height={394}
-              src={show?.slug ?? ''}
+              src={transformCharacters(show?.slug ?? '')}
               width={250}
             />
           </div>

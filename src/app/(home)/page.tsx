@@ -6,6 +6,7 @@ import StarRating from '@/components/core/star-rating';
 import Link from 'next/link';
 import CloudinaryImage from '@/app/components/CloudinaryImage';
 import Image from 'next/image';
+import { transformCharacters } from '@/lib/utils/index';
 
 export const metadata: Metadata = {
   title: 'StageDoor',
@@ -53,7 +54,7 @@ export default async function Home() {
                   alt={review.show?.title ?? ''}
                   className="float-left px-2"
                   height={150}
-                  src={review.show?.slug ?? ''}
+                  src={transformCharacters(review.show?.slug ?? '')}
                   width={100}
                 />
                 {review.body.length > 1000 ? (

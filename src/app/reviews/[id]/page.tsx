@@ -1,6 +1,7 @@
 import CloudinaryImage from '@/app/components/CloudinaryImage';
 import ReviewCard from '@/app/shows/[slug]/components/ReviewCard';
 import StarRating from '@/components/core/star-rating';
+import { transformCharacters } from '@/lib/utils/index';
 import { trpc } from '@/server/clients/server-api';
 import { currentUser } from '@clerk/nextjs/server';
 import Image from 'next/image';
@@ -42,7 +43,7 @@ export default async function ReviewPage({
               alt={review.show?.title ?? ''}
               className="rounded-sm"
               height={400}
-              src={review.show?.slug ?? ''}
+              src={transformCharacters(review.show?.slug ?? '')}
               width={200}
             />
             {review.show?.title}

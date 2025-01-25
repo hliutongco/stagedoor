@@ -8,6 +8,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/';
 import CloudinaryImage from './CloudinaryImage';
+import { transformCharacters } from '@/lib/utils/index';
 
 export default async function ShowsList({
   shows,
@@ -27,7 +28,7 @@ export default async function ShowsList({
                 alt={show.title}
                 height={276}
                 priority
-                src={show.slug}
+                src={transformCharacters(show.slug)}
                 width={175}
               />
               <span className="hover:underline">
