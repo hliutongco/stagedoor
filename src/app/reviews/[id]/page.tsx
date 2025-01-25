@@ -1,5 +1,7 @@
+import CloudinaryImage from '@/app/components/CloudinaryImage';
 import ReviewCard from '@/app/shows/[slug]/components/ReviewCard';
 import StarRating from '@/components/core/star-rating';
+import { transformCharacters } from '@/lib/utils/index';
 import { trpc } from '@/server/clients/server-api';
 import { currentUser } from '@clerk/nextjs/server';
 import Image from 'next/image';
@@ -37,11 +39,11 @@ export default async function ReviewPage({
       <div className="">
         <div className="flex flex-col md:float-left items-center pb-8 px-10 p-2">
           <Link className="text-center" href={`/shows/${review.show?.slug}`}>
-            <Image
+            <CloudinaryImage
               alt={review.show?.title ?? ''}
               className="rounded-sm"
               height={400}
-              src={review.show?.playbillImage ?? ''}
+              src={transformCharacters(review.show?.slug ?? '')}
               width={200}
             />
             {review.show?.title}

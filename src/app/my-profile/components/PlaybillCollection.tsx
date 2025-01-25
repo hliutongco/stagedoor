@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import StarRating from '@/components/core/star-rating';
+import CloudinaryImage from '@/app/components/CloudinaryImage';
+import { transformCharacters } from '@/lib/utils/index';
 
 interface ShowsListProps {
   shows: {
@@ -28,10 +29,10 @@ export default async function PlaybillCollection({ shows }: ShowsListProps) {
           {shows.map((show) => (
             <div key={show.id}>
               <Link href={`/shows/${show.slug}`}>
-                <Image
+                <CloudinaryImage
                   alt={show.title}
                   height={276}
-                  src={show.playbillImage}
+                  src={transformCharacters(show.slug)}
                   width={175}
                 />
                 {show.rating !== '0' && (

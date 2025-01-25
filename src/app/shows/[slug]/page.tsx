@@ -9,6 +9,8 @@ import { default as StarRatingStatic } from '@/components/core/star-rating';
 import WatchedButton from '../components/WatchedButton';
 import ReviewCard from './components/ReviewCard';
 import Link from 'next/link';
+import CloudinaryImage from '@/app/components/CloudinaryImage';
+import { transformCharacters } from '@/lib/utils/index';
 
 export default async function ShowView({
   params,
@@ -31,10 +33,10 @@ export default async function ShowView({
         </div>
         <div className="grid sm:grid-cols-1 md:grid-cols-2">
           <div className="flex flex-col gap-4 items-center sm:mb-4">
-            <Image
+            <CloudinaryImage
               alt={show?.title ?? ''}
               height={394}
-              src={show?.playbillImage ?? ''}
+              src={transformCharacters(show?.slug ?? '')}
               width={250}
             />
           </div>

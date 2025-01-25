@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { shows as Show } from '@/db/schema';
 import {
   Carousel,
@@ -8,6 +7,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/';
+import CloudinaryImage from './CloudinaryImage';
+import { transformCharacters } from '@/lib/utils/index';
 
 export default async function ShowsList({
   shows,
@@ -23,11 +24,11 @@ export default async function ShowsList({
         {shows.map((show) => (
           <CarouselItem className="sm:basis-1/3 lg:basis-1/5" key={show.id}>
             <Link className="contents" href={`/shows/${show.slug}`}>
-              <Image
+              <CloudinaryImage
                 alt={show.title}
                 height={276}
                 priority
-                src={show.playbillImage}
+                src={transformCharacters(show.slug)}
                 width={175}
               />
               <span className="hover:underline">
