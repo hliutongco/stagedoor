@@ -59,6 +59,7 @@ export const reviewRelations = relations(reviews, ({ one }) => ({
 
 export const users = pgTable('users', {
   id: text().primaryKey(),
+  description: text(),
   firstName: text(),
   imageUrl: text().notNull(),
   lastName: text(),
