@@ -2,6 +2,8 @@ import { currentUser } from '@clerk/nextjs/server';
 import PlaybillCollection from './components/PlaybillCollection';
 import { trpc } from '@/server/clients/server-api';
 import ReviewCollection from './components/ReviewCollection';
+import Link from 'next/link';
+import Description from './components/Description';
 
 export default async function MyProfilePage() {
   const _user = await currentUser();
@@ -20,9 +22,16 @@ export default async function MyProfilePage() {
   });
   return (
     <>
-      <h1 className="font-bold sm:text-3xl lg:text-5xl mt-10 text-center">
-        Your Profile
-      </h1>
+      <p className="mt-10 text-center">
+        <Link
+          className="hover:underline text-primary text-sm"
+          href={`/users/${user?.username}`}
+        >
+          View Your Public Profile
+        </Link>
+      </p>
+      <h1 className="font-bold sm:text-xl lg:text-3xl text-center">Your Profile</h1>
+      <Description description={user?.description ?? ''} />
       {watchedShows && <PlaybillCollection shows={watchedShows} />}
       <ReviewCollection reviews={user?.reviews ?? []} />
     </>
