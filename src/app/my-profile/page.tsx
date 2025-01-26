@@ -31,7 +31,7 @@ export default async function MyProfilePage() {
         </Link>
       </p>
       <h1 className="font-bold sm:text-xl lg:text-3xl text-center">Your Profile</h1>
-      <Description description={user?.description ?? ''} />
+      <Description description={user?.description ?? ''} userId={user?.id} />
       {watchedShows && <PlaybillCollection shows={watchedShows} />}
       <ReviewCollection reviews={user?.reviews ?? []} />
     </>
