@@ -29,15 +29,15 @@ export default async function UserPage({
       <div className="flex gap-4 items-center justify-center my-3">
         <div className="flex flex-col text-center">
           <span className="text-xl lg:text-2xl">{watchedShows?.length ?? '0'}</span>
-          <span className="text-base  lg:text-xl">Shows</span>
+          <span className="text-base lg:text-xl">Shows</span>
         </div>
 
         <div className="flex flex-col text-center">
-          <span className="text-xl  lg:text-2xl">{user?.reviews.length ?? '0'}</span>
+          <span className="text-xl lg:text-2xl">{user?.reviews.length ?? '0'}</span>
           <span className="text-base lg:text-xl">Reviews</span>
         </div>
       </div>
-      <p>{user?.description}</p>
+      <p className="mb-4 mx-auto max-w-fit w-3/4 lg:w-1/2">{user?.description}</p>
       {watchedShows && <PlaybillCollection shows={watchedShows} />}
       <ReviewCollection reviews={user?.reviews ?? []} />
     </>

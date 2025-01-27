@@ -39,6 +39,13 @@ export default function Description({
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
   const utils = trpc.useUtils();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      description,
+    },
+  });
+  const { control, handleSubmit, reset } = form;
   const mutation = trpc.users.editUser.useMutation({
     onError: (error) => {
       toast({
@@ -57,13 +64,10 @@ export default function Description({
       });
     },
   });
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      description,
-    },
-  });
-  const { control, handleSubmit } = form;
+  const handleCancel = useCallback(() => {
+    setIsEditing(false);
+    reset();
+  }, [reset, setIsEditing]);
   const onSubmit: SubmitHandler<{ description: string }> = useCallback(
     ({ description }) => {
       if (!userId) throw new Error('User ID is required');
@@ -75,7 +79,7 @@ export default function Description({
   return (
     <>
       {isEditing && (
-        <div className="mx-auto w-1/2">
+        <div className="mx-auto w-3/4 md:w-1/2 xl:w-1/3">
           <Form {...form}>
             <form className="pb-14 relative" onSubmit={handleSubmit(onSubmit)}>
               <FormField
@@ -83,7 +87,7 @@ export default function Description({
                 name="description"
                 render={({ field, formState }) => (
                   <FormItem>
-                    <FormLabel className="font-normal text-base" htmlFor="description">
+                    <FormLabel className="text-base" htmlFor="description">
                       Description
                     </FormLabel>
                     <FormControl>
@@ -97,35 +101,41 @@ export default function Description({
                   </FormItem>
                 )}
               />
-              <Button
-                className="absolute bottom-4 mt-2 right-0"
-                size="sm"
-                type="submit"
-                variant="default"
-              >
-                Save
-              </Button>
+              <div className="absolute bottom-4 flex gap-2 mt-2 right-0">
+                <Button onClick={handleCancel} size="sm" type="button" variant="default">
+                  Cancel
+                </Button>
+                <Button size="sm" type="submit" variant="default">
+                  Save
+                </Button>
+              </div>
             </form>
           </Form>
         </div>
       )}
       {!isEditing && Boolean(description?.length) && (
-        <p className="mx-auto my-4 w-1/2">
-          <span className="mb-4">{description}</span>
-          <div>
+        <div className="mx-auto my-4 pb-6 relative max-w-fit w-3/4 lg:w-1/2">
+          <p className="font-medium mb-1">Description</p>
+          <p className="mb-4">{description}</p>
+          <div className="absolute bottom-0 mt-2 right-0">
             <Button onClick={() => setIsEditing(true)} size="sm" variant="default">
               Edit
             </Button>
           </div>
-        </p>
+        </div>
       )}
       {!isEditing && !description?.length && (
-        <p className="flex flex-col items-center my-4 w-full">
-          <span className="italic mb-1 text-muted">Click Edit to add a description</span>
-          <Button onClick={() => setIsEditing(true)} size="sm" variant="default">
-            Edit
-          </Button>
-        </p>
+        <div className="my-4 mx-auto pb-6 relative max-w-fit w-3/4 lg:w-1/2">
+          <p className="font-medium mb-1">Description</p>
+          <p className="italic mb-4 text-center text-muted">
+            Click Edit to add a description
+          </p>
+          <div className="absolute bottom-0 mt-2 right-0">
+            <Button onClick={() => setIsEditing(true)} size="sm" variant="default">
+              Edit
+            </Button>
+          </div>
+        </div>
       )}
     </>
   );
