@@ -19,12 +19,12 @@ body {
     --popover-foreground: 222.2 84% 4.9%;
     --primary: #e2a6a3;
     --primary-dark: #C75B7A;
+    --primary-light: #F4D9D0;
     --primary-foreground: 210 40% 98%;
     --secondary: #e9e4dd;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: #7c7c7c;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --pewter: #F4D9D0;
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;

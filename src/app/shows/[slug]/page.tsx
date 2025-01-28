@@ -62,7 +62,7 @@ export default async function ShowView({
           </div>
         </div>
       </div>
-      <div className="bg-pewter min-h-[50svh] mt-10 sm:p-4 lg:p-8">
+      <div className="bg-primary-light min-h-[50svh] mt-10 sm:p-4 lg:p-8">
         <div className="flex justify-between mb-2">
           <h2 className="font-bold sm:text-lg lg:text-2xl">All Reviews</h2>
           <ReviewModal

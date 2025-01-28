@@ -20,7 +20,7 @@ export default function ReviewCollection({
   reviews: ReviewCollection[];
 }) {
   return (
-    <div className="bg-pewter items-center justify-items-center min-h-screen pb-20 gap-16 sm:p-4 lg:p-8 text-black">
+    <div className="bg-primary-light items-center justify-items-center min-h-screen pb-20 gap-16 sm:p-4 lg:p-8 text-black">
       <h2 className="font-bold mb-4 sm:text-lg lg:text-2xl text-center">Reviews</h2>
       {!reviews.length && <div className="text-center">Nothing for now!</div>}
       {reviews.length && (

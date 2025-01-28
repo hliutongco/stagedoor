@@ -30,9 +30,13 @@ export default {
           DEFAULT: 'var(--primary)',
           foreground: 'hsl(var(--primary-foreground))',
         },
-        "primary-dark": {
+        'primary-dark': {
           DEFAULT: 'var(--primary-dark)',
           foreground: 'hsl(var(--primary-foreground))',
+        },
+        'primary-light': {
+          DEFAULT: 'var(--primary-light)',
+          foreground: 'hsl(var(--muted-foreground))',
         },
         secondary: {
           DEFAULT: 'var(--secondary)',
@@ -40,10 +44,6 @@ export default {
         },
         muted: {
           DEFAULT: 'var(--muted)',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
-        pewter: {
-          DEFAULT: 'var(--pewter)',
           foreground: 'hsl(var(--muted-foreground))',
         },
         accent: {
