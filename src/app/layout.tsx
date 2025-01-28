@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <TopNav />
             {children}
             <Toaster />
-            <footer className="bg-black flex gap-6 items-center justify-between p-3 row-start-3 text-primary">
+            <footer className="bg-primary border-t border-black flex gap-6 items-center justify-between p-3 row-start-3">
               <span className="text-sm">made by helen ♡</span>
               <div className="flex gap-4">
                 <p>About</p>

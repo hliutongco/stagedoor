@@ -1,19 +1,23 @@
 import Link from 'next/link';
-import StarRating from '@/components/core/star-rating';
+import StarRatingStatic from '@/components/core/star-rating';
 import CloudinaryImage from '@/app/components/CloudinaryImage';
 import { transformCharacters } from '@/lib/utils/index';
+import StarRating from '@/app/shows/components/star-rating/dynamic';
 
 interface ShowsListProps {
+  isPrivate?: boolean;
   shows: {
     id: string;
+    hasRatingOrReview?: boolean;
     playbillImage: string;
     rating: string;
     slug: string;
     title: string;
+    userId?: string;
   }[];
 }
 
-export default async function PlaybillCollection({ shows }: ShowsListProps) {
+export default async function PlaybillCollection({ isPrivate, shows }: ShowsListProps) {
   return (
     <>
       <h2 className="font-bold sm:text-lg lg:text-2xl text-center">
@@ -35,10 +39,19 @@ export default async function PlaybillCollection({ shows }: ShowsListProps) {
                   src={transformCharacters(show.slug)}
                   width={175}
                 />
-                {show.rating !== '0' && (
-                  <StarRating name={show.title} value={show.rating} />
-                )}
               </Link>
+              {show.rating !== '0' && !isPrivate && (
+                <StarRatingStatic name={show.title} value={show.rating} />
+              )}
+              {isPrivate && (
+                <StarRating
+                  hasRatingOrReview={show.hasRatingOrReview ?? false}
+                  id={show.id}
+                  rating={show.rating}
+                  showId={show.id}
+                  userId={show.userId ?? ''}
+                />
+              )}
             </div>
           ))}
         </div>

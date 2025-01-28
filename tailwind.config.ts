@@ -38,6 +38,10 @@ export default {
           DEFAULT: 'var(--muted)',
           foreground: 'hsl(var(--muted-foreground))',
         },
+        pewter: {
+          DEFAULT: 'var(--pewter)',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
         accent: {
           DEFAULT: 'var(--danger)',
           foreground: 'hsl(var(--accent-foreground))',

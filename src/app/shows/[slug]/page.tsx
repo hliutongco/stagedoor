@@ -7,7 +7,7 @@ import ReviewModal from './components/ReviewModal';
 import StarRating from '../components/star-rating/dynamic';
 import { default as StarRatingStatic } from '@/components/core/star-rating';
 import WatchedButton from '../components/WatchedButton';
-import ReviewCard from './components/ReviewCard';
+import ReviewCard from '@/app/components/ReviewCard';
 import Link from 'next/link';
 import CloudinaryImage from '@/app/components/CloudinaryImage';
 import { transformCharacters } from '@/lib/utils/index';
@@ -62,7 +62,7 @@ export default async function ShowView({
           </div>
         </div>
       </div>
-      <div className="bg-primary min-h-[50svh] mt-10 sm:p-4 lg:p-8">
+      <div className="bg-pewter min-h-[50svh] mt-10 sm:p-4 lg:p-8">
         <div className="flex justify-between mb-2">
           <h2 className="font-bold sm:text-lg lg:text-2xl">All Reviews</h2>
           <ReviewModal

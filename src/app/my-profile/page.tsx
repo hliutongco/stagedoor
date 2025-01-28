@@ -14,10 +14,12 @@ export default async function MyProfilePage() {
     const show = userShow.show;
     return {
       id: show?.id ?? '',
+      hasRatingOrReview: userShow.hasRating || user.reviews.length > 0,
       playbillImage: show?.playbillImage ?? '',
       rating: `${userShow.rating}`,
       slug: show?.slug ?? '',
       title: show?.title ?? '',
+      userId: user?.id ?? '',
     };
   });
   return (
@@ -32,8 +34,8 @@ export default async function MyProfilePage() {
       </p>
       <h1 className="font-bold sm:text-xl lg:text-3xl text-center">Your Profile</h1>
       <Description description={user?.description ?? ''} userId={user?.id} />
-      {watchedShows && <PlaybillCollection shows={watchedShows} />}
-      <ReviewCollection reviews={user?.reviews ?? []} />
+      {watchedShows && <PlaybillCollection isPrivate shows={watchedShows} />}
+      <ReviewCollection isPrivate reviews={user?.reviews ?? []} />
     </>
   );
 }
