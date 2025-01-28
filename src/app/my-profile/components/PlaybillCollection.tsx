@@ -3,7 +3,6 @@ import StarRatingStatic from '@/components/core/star-rating';
 import CloudinaryImage from '@/app/components/CloudinaryImage';
 import { transformCharacters } from '@/lib/utils/index';
 import StarRating from '@/app/shows/components/star-rating/dynamic';
-import WatchedButton from '@/app/shows/components/WatchedButton';
 
 interface ShowsListProps {
   isPrivate?: boolean;

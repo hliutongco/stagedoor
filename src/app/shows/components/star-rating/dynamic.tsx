@@ -18,7 +18,14 @@ interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
   userId: string;
 }
 
-const StarRating = ({ hasRatingOrReview, id, name = 'show', rating, showId, userId }: RatingsProps) => {
+const StarRating = ({
+  hasRatingOrReview,
+  id,
+  name = 'show',
+  rating,
+  showId,
+  userId,
+}: RatingsProps) => {
   const router = useRouter();
   const { redirectToSignIn } = useClerk();
   const { isWatched, setIsWatched } = useContext(IsWatchedContext);
@@ -106,7 +113,11 @@ const StarRating = ({ hasRatingOrReview, id, name = 'show', rating, showId, user
           type="radio"
           value="5"
         />
-        <label className="full" htmlFor={`${name}-star5`} title="Masterpiece - 5 stars"></label>
+        <label
+          className="full"
+          htmlFor={`${name}-star5`}
+          title="Masterpiece - 5 stars"
+        ></label>
         <input
           checked={value === '4.5'}
           id={`${name}-star4half`}
@@ -115,7 +126,11 @@ const StarRating = ({ hasRatingOrReview, id, name = 'show', rating, showId, user
           type="radio"
           value="4.5"
         />
-        <label className="half" htmlFor={`${name}-star4half`} title="Very good - 4.5 stars"></label>
+        <label
+          className="half"
+          htmlFor={`${name}-star4half`}
+          title="Very good - 4.5 stars"
+        ></label>
         <input
           checked={value === '4'}
           id={`${name}-star4`}
@@ -124,7 +139,11 @@ const StarRating = ({ hasRatingOrReview, id, name = 'show', rating, showId, user
           type="radio"
           value="4"
         />
-        <label className="full" htmlFor={`${name}-star4`} title="Very good - 4 stars"></label>
+        <label
+          className="full"
+          htmlFor={`${name}-star4`}
+          title="Very good - 4 stars"
+        ></label>
         <input
           checked={value === '3.5'}
           id={`${name}-star3half`}
@@ -146,7 +165,11 @@ const StarRating = ({ hasRatingOrReview, id, name = 'show', rating, showId, user
           type="radio"
           value="3"
         />
-        <label className="full" htmlFor={`${name}-star3`} title="Above Average - 3 stars"></label>
+        <label
+          className="full"
+          htmlFor={`${name}-star3`}
+          title="Above Average - 3 stars"
+        ></label>
         <input
           checked={value === '2.5'}
           id={`${name}-star2half`}
@@ -155,7 +178,11 @@ const StarRating = ({ hasRatingOrReview, id, name = 'show', rating, showId, user
           type="radio"
           value="2.5"
         />
-        <label className="half" htmlFor={`${name}-star2half`} title="Average - 2.5 stars"></label>
+        <label
+          className="half"
+          htmlFor={`${name}-star2half`}
+          title="Average - 2.5 stars"
+        ></label>
         <input
           checked={value === '2'}
           id={`${name}-star2`}
@@ -164,7 +191,11 @@ const StarRating = ({ hasRatingOrReview, id, name = 'show', rating, showId, user
           type="radio"
           value="2"
         />
-        <label className="full" htmlFor={`${name}-star2`} title="Below Average - 2 stars"></label>
+        <label
+          className="full"
+          htmlFor={`${name}-star2`}
+          title="Below Average - 2 stars"
+        ></label>
         <input
           checked={value === '1.5'}
           id={`${name}-star1half`}
@@ -173,7 +204,11 @@ const StarRating = ({ hasRatingOrReview, id, name = 'show', rating, showId, user
           type="radio"
           value="1.5"
         />
-        <label className="half" htmlFor={`${name}-star1half`} title="Bad - 1.5 stars"></label>
+        <label
+          className="half"
+          htmlFor={`${name}-star1half`}
+          title="Bad - 1.5 stars"
+        ></label>
         <input
           checked={value === '1'}
           id={`${name}-star1`}
@@ -191,8 +226,12 @@ const StarRating = ({ hasRatingOrReview, id, name = 'show', rating, showId, user
           type="radio"
           value="0.5"
         />
-        <label className="half" htmlFor={`${name}-starhalf`} title="Very Bad - 0.5 stars"></label>
-      </fieldset >
+        <label
+          className="half"
+          htmlFor={`${name}-starhalf`}
+          title="Very Bad - 0.5 stars"
+        ></label>
+      </fieldset>
       {rating && rating !== '0' && <RemoveRating id={id} setRating={setValue} />}
     </div>
   );
