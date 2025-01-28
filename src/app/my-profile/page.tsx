@@ -13,10 +13,11 @@ export default async function MyProfilePage() {
   const watchedShows = user?.userShows.map((userShow) => {
     const show = userShow.show;
     return {
-      id: show?.id ?? '',
+      id: userShow.id,
       hasRatingOrReview: userShow.hasRating || user.reviews.length > 0,
       playbillImage: show?.playbillImage ?? '',
       rating: `${userShow.rating}`,
+      showId: show?.id ?? '',
       slug: show?.slug ?? '',
       title: show?.title ?? '',
       userId: user?.id ?? '',
@@ -24,15 +25,15 @@ export default async function MyProfilePage() {
   });
   return (
     <>
-      <p className="mt-10 text-center">
+      <h1 className="font-bold mt-10 sm:text-xl lg:text-3xl text-center">Your Profile</h1>
+      <p className="text-center">
         <Link
-          className="hover:underline text-primary text-sm"
+          className="hover:underline text-primary-dark"
           href={`/users/${user?.username}`}
         >
           View Your Public Profile
         </Link>
       </p>
-      <h1 className="font-bold sm:text-xl lg:text-3xl text-center">Your Profile</h1>
       <Description description={user?.description ?? ''} userId={user?.id} />
       {watchedShows && <PlaybillCollection isPrivate shows={watchedShows} />}
       <ReviewCollection isPrivate reviews={user?.reviews ?? []} />

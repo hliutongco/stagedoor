@@ -12,12 +12,13 @@ import { IsWatchedContext } from '../../[slug]/components/isWatchedProvider';
 interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
   hasRatingOrReview: boolean;
   id: string | undefined;
+  name?: string;
   rating: string | undefined;
   showId: string;
   userId: string;
 }
 
-const StarRating = ({ hasRatingOrReview, id, rating, showId, userId }: RatingsProps) => {
+const StarRating = ({ hasRatingOrReview, id, name = 'show', rating, showId, userId }: RatingsProps) => {
   const router = useRouter();
   const { redirectToSignIn } = useClerk();
   const { isWatched, setIsWatched } = useContext(IsWatchedContext);
@@ -95,105 +96,105 @@ const StarRating = ({ hasRatingOrReview, id, rating, showId, userId }: RatingsPr
   );
 
   return (
-    <>
-      <fieldset className="rating">
+    <div className="flex flex-col items-center justify-center">
+      <fieldset className="rating" id={name} name={name}>
         <input
           checked={value === '5'}
-          id="star5"
-          name="rating"
+          id={`${name}-star5`}
+          name={`${name}-rating`}
           onChange={onValueChange}
           type="radio"
           value="5"
         />
-        <label className="full" htmlFor="star5" title="Masterpiece - 5 stars"></label>
+        <label className="full" htmlFor={`${name}-star5`} title="Masterpiece - 5 stars"></label>
         <input
           checked={value === '4.5'}
-          id="star4half"
-          name="rating"
+          id={`${name}-star4half`}
+          name={`${name}-rating`}
           onChange={onValueChange}
           type="radio"
           value="4.5"
         />
-        <label className="half" htmlFor="star4half" title="Very good - 4.5 stars"></label>
+        <label className="half" htmlFor={`${name}-star4half`} title="Very good - 4.5 stars"></label>
         <input
           checked={value === '4'}
-          id="star4"
-          name="rating"
+          id={`${name}-star4`}
+          name={`${name}-rating`}
           onChange={onValueChange}
           type="radio"
           value="4"
         />
-        <label className="full" htmlFor="star4" title="Very good - 4 stars"></label>
+        <label className="full" htmlFor={`${name}-star4`} title="Very good - 4 stars"></label>
         <input
           checked={value === '3.5'}
-          id="star3half"
-          name="rating"
+          id={`${name}-star3half`}
+          name={`${name}-rating`}
           onChange={onValueChange}
           type="radio"
           value="3.5"
         />
         <label
           className="half"
-          htmlFor="star3half"
+          htmlFor={`${name}-star3half`}
           title="Above Average - 3.5 stars"
         ></label>
         <input
           checked={value === '3'}
-          id="star3"
-          name="rating"
+          id={`${name}-star3`}
+          name={`${name}-rating`}
           onChange={onValueChange}
           type="radio"
           value="3"
         />
-        <label className="full" htmlFor="star3" title="Above Average - 3 stars"></label>
+        <label className="full" htmlFor={`${name}-star3`} title="Above Average - 3 stars"></label>
         <input
           checked={value === '2.5'}
-          id="star2half"
-          name="rating"
+          id={`${name}-star2half`}
+          name={`${name}-rating`}
           onChange={onValueChange}
           type="radio"
           value="2.5"
         />
-        <label className="half" htmlFor="star2half" title="Average - 2.5 stars"></label>
+        <label className="half" htmlFor={`${name}-star2half`} title="Average - 2.5 stars"></label>
         <input
           checked={value === '2'}
-          id="star2"
-          name="rating"
+          id={`${name}-star2`}
+          name={`${name}-rating`}
           onChange={onValueChange}
           type="radio"
           value="2"
         />
-        <label className="full" htmlFor="star2" title="Below Average - 2 stars"></label>
+        <label className="full" htmlFor={`${name}-star2`} title="Below Average - 2 stars"></label>
         <input
           checked={value === '1.5'}
-          id="star1half"
-          name="rating"
+          id={`${name}-star1half`}
+          name={`${name}-rating`}
           onChange={onValueChange}
           type="radio"
           value="1.5"
         />
-        <label className="half" htmlFor="star1half" title="Bad - 1.5 stars"></label>
+        <label className="half" htmlFor={`${name}-star1half`} title="Bad - 1.5 stars"></label>
         <input
           checked={value === '1'}
-          id="star1"
-          name="rating"
+          id={`${name}-star1`}
+          name={`${name}-rating`}
           onChange={onValueChange}
           type="radio"
           value="1"
         />
-        <label className="full" htmlFor="star1" title="Bad - 1 star"></label>
+        <label className="full" htmlFor={`${name}-star1`} title="Bad - 1 star"></label>
         <input
           checked={value === '0.5'}
-          id="starhalf"
-          name="rating"
+          id={`${name}-starhalf`}
+          name={`${name}-rating`}
           onChange={onValueChange}
           type="radio"
           value="0.5"
         />
-        <label className="half" htmlFor="starhalf" title="Very Bad - 0.5 stars"></label>
-      </fieldset>
+        <label className="half" htmlFor={`${name}-starhalf`} title="Very Bad - 0.5 stars"></label>
+      </fieldset >
       {rating && rating !== '0' && <RemoveRating id={id} setRating={setValue} />}
-    </>
+    </div>
   );
 };
 

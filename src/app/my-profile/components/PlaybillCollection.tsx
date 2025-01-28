@@ -3,6 +3,7 @@ import StarRatingStatic from '@/components/core/star-rating';
 import CloudinaryImage from '@/app/components/CloudinaryImage';
 import { transformCharacters } from '@/lib/utils/index';
 import StarRating from '@/app/shows/components/star-rating/dynamic';
+import WatchedButton from '@/app/shows/components/WatchedButton';
 
 interface ShowsListProps {
   isPrivate?: boolean;
@@ -11,6 +12,7 @@ interface ShowsListProps {
     hasRatingOrReview?: boolean;
     playbillImage: string;
     rating: string;
+    showId?: string;
     slug: string;
     title: string;
     userId?: string;
@@ -40,6 +42,7 @@ export default async function PlaybillCollection({ isPrivate, shows }: ShowsList
                   width={175}
                 />
               </Link>
+
               {show.rating !== '0' && !isPrivate && (
                 <StarRatingStatic name={show.title} value={show.rating} />
               )}
@@ -47,8 +50,9 @@ export default async function PlaybillCollection({ isPrivate, shows }: ShowsList
                 <StarRating
                   hasRatingOrReview={show.hasRatingOrReview ?? false}
                   id={show.id}
+                  name={show.title}
                   rating={show.rating}
-                  showId={show.id}
+                  showId={show.showId ?? ''}
                   userId={show.userId ?? ''}
                 />
               )}
