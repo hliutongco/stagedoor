@@ -35,7 +35,7 @@ export default async function Home() {
           <div className="mx-auto w-3/4">{plays && <ShowsList shows={plays} />}</div>
         </div>
       </div>
-      <div className="bg-primary min-h-screen sm:p-10">
+      <div className="bg-primary-light min-h-screen sm:p-10">
         <h3 className="font-medium sm:text-xl lg:text-3xl">Reviews</h3>
         <div className="gap-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 items-center mt-8">
           {reviews.map((review) => (

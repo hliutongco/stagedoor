@@ -18,6 +18,8 @@ body {
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
     --primary: #e2a6a3;
+    --primary-dark: #C75B7A;
+    --primary-light: #F4D9D0;
     --primary-foreground: 210 40% 98%;
     --secondary: #e9e4dd;
     --secondary-foreground: 222.2 47.4% 11.2%;

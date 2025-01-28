@@ -1,5 +1,5 @@
 import CloudinaryImage from '@/app/components/CloudinaryImage';
-import ReviewCard from '@/app/shows/[slug]/components/ReviewCard';
+import ReviewCard from '@/app/components/ReviewCard';
 import StarRating from '@/components/core/star-rating';
 import { transformCharacters } from '@/lib/utils/index';
 import { trpc } from '@/server/clients/server-api';
