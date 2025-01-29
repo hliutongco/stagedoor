@@ -20,30 +20,30 @@ export default async function Home() {
 
   return (
     <main>
-      <div className="min-h-screen mb-10 sm:p-10">
-        <h2 className="font-bold sm:text-3xl lg:text-5xl text-center">Now Showing</h2>
+      <div className="min-h-screen mb-10 p-10">
+        <h2 className="font-bold text-3xl lg:text-5xl text-center">Now Showing</h2>
         <div className="mt-5">
-          <h3 className="font-medium sm:text-xl lg:text-3xl">Musicals</h3>
+          <h3 className="font-medium text-xl lg:text-3xl">Musicals</h3>
           <Separator className="mb-3 bg-secondary" />
           <div className="mx-auto w-3/4">
             {musicals && <ShowsList shows={musicals} />}
           </div>
         </div>
         <div className="mt-5">
-          <h3 className="font-medium sm:text-xl lg:text-3xl">Straight Plays</h3>
+          <h3 className="font-medium text-xl lg:text-3xl">Straight Plays</h3>
           <Separator className="mb-3 bg-secondary" />
           <div className="mx-auto w-3/4">{plays && <ShowsList shows={plays} />}</div>
         </div>
       </div>
-      <div className="bg-primary-light min-h-screen sm:p-10">
-        <h3 className="font-medium sm:text-xl lg:text-3xl">Reviews</h3>
+      <div className="bg-primary-light min-h-screen p-10">
+        <h3 className="font-medium text-xl lg:text-3xl">Reviews</h3>
         <div className="gap-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 items-center mt-8">
           {reviews.map((review) => (
             <div
               className="bg-background flex flex-col h-full mb-10 p-4 relative rounded-md w-full"
               key={review.id}
             >
-              <h4 className="font-bold text-center sm:text-lg lg:text-xl">
+              <h4 className="font-bold text-center text-lg lg:text-xl">
                 {review.title}
               </h4>
               <div className="mx-auto">

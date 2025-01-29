@@ -25,7 +25,7 @@ export default async function MyProfilePage() {
   });
   return (
     <>
-      <h1 className="font-bold mt-10 sm:text-xl lg:text-3xl text-center">Your Profile</h1>
+      <h1 className="font-bold mt-10 text-xl lg:text-3xl text-center">Your Profile</h1>
       <p className="text-center">
         <Link
           className="hover:underline text-primary-dark"

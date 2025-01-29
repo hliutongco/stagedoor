@@ -24,15 +24,15 @@ export default async function ShowView({
   const userShow = await trpc.userShows.getUserShow({ showId: show?.id ?? '', userId });
   return (
     <IsWatchedProvider isWatched={Boolean(userShow?.isWatched)}>
-      <div className="my-10 sm:p-4 lg:p-8">
-        <h2 className="font-bold sm:text-2xl lg:text-4xl text-center">
+      <div className="my-10 p-4 lg:p-8">
+        <h2 className="font-bold text-2xl lg:text-4xl text-center">
           {show?.title ?? ''} ({show?.year ?? ''})
         </h2>
         <div className="py-4 text-center text-sm">
           {show?.userShows.length ?? 0} people have watched this show
         </div>
-        <div className="grid sm:grid-cols-1 md:grid-cols-2">
-          <div className="flex flex-col gap-4 items-center sm:mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="flex flex-col gap-4 items-center mb-4">
             <CloudinaryImage
               alt={show?.title ?? ''}
               height={394}
@@ -62,9 +62,9 @@ export default async function ShowView({
           </div>
         </div>
       </div>
-      <div className="bg-primary-light min-h-[50svh] mt-10 sm:p-4 lg:p-8">
+      <div className="bg-primary-light min-h-[50svh] mt-10 p-4 lg:p-8">
         <div className="flex justify-between mb-2">
-          <h2 className="font-bold sm:text-lg lg:text-2xl">All Reviews</h2>
+          <h2 className="font-bold text-lg lg:text-2xl">All Reviews</h2>
           <ReviewModal
             showId={show?.id ?? ''}
             userId={userId ?? ''}

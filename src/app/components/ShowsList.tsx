@@ -22,7 +22,7 @@ export default async function ShowsList({
     >
       <CarouselContent className="ml-1">
         {shows.map((show) => (
-          <CarouselItem className="sm:basis-1/3 lg:basis-1/5" key={show.id}>
+          <CarouselItem className="basis-1/3 lg:basis-1/5" key={show.id}>
             <Link className="contents" href={`/shows/${show.slug}`}>
               <CloudinaryImage
                 alt={show.title}
