@@ -43,9 +43,7 @@ export default async function Home() {
               className="bg-background flex flex-col h-full mb-10 p-4 relative rounded-md w-full"
               key={review.id}
             >
-              <h4 className="font-bold text-center text-lg lg:text-xl">
-                {review.title}
-              </h4>
+              <h4 className="font-bold text-center text-lg lg:text-xl">{review.title}</h4>
               <div className="mx-auto">
                 <StarRating name={review.id} value={`${review.userShow.rating}`} />
               </div>
