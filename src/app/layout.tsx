@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <ClerkProvider>
         <html lang="en">
           <body
-            className={`font-normal pt-10 text-black sm:text-sm md:text-base ${readExPro.className}`}
+            className={`font-normal pt-10 text-black text-sm md:text-base ${readExPro.className}`}
           >
             <TopNav />
             {children}

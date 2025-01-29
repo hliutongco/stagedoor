@@ -23,7 +23,7 @@ export default async function UserPage({
   });
   return (
     <>
-      <h1 className="font-bold sm:text-xl lg:text-3xl mt-10 text-center">
+      <h1 className="font-bold text-xl lg:text-3xl mt-10 text-center">
         {user?.username ?? 'User'}
       </h1>
       <div className="flex gap-4 items-center justify-center my-3">

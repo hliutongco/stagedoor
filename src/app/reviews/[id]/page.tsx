@@ -17,8 +17,8 @@ export default async function ReviewPage({
   const review = await trpc.reviews.getReview({ id });
   if (review === undefined) throw new Error('Review not found');
   return (
-    <div className="min-h-[95vh] mt-10 sm:p-4 lg:p-8">
-      <h2 className="font-bold sm:text-xl lg:text-3xl text-center">{review.title}</h2>
+    <div className="min-h-[95vh] mt-10 p-4 lg:p-8">
+      <h2 className="font-bold text-xl lg:text-3xl text-center">{review.title}</h2>
       <Link href={`/users/${review.user?.username}`}>
         <span className="flex items-center gap-2 justify-center">
           <Image
