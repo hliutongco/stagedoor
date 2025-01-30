@@ -1,6 +1,7 @@
 import {
   boolean,
   decimal,
+  integer,
   numeric,
   pgEnum,
   pgTable,
@@ -14,13 +15,17 @@ const showTypeEnum = pgEnum('type', ['musical', 'play']);
 
 export const shows = pgTable('shows', {
   id: uuid().primaryKey().defaultRandom(),
-  averageRating: numeric({ precision: 2 }),
+  // averageRating: numeric({ precision: 2 }).generatedAlwaysAs(
+  //   sql`CASE WHEN "totalRatings" = 0 THEN 0 ELSE "sumRatings" / "totalRatings" END`,
+  // ),
   playbillImage: text().notNull().default(''),
   slug: text()
     .notNull()
     .unique()
     .generatedAlwaysAs(sql`lower(regexp_replace(title, ' ', '-', 'g')) || '-' || year`),
   title: text().notNull(),
+  sumRatings: integer().notNull().default(0),
+  totalRatings: integer().notNull().default(0),
   type: showTypeEnum().default('musical'),
   year: text().notNull().default(`${new Date().getFullYear()}`),
 });

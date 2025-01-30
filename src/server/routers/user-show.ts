@@ -2,7 +2,7 @@ import { protectedProcedure, publicProcedure, router } from '../init-trpc';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
 import { z } from 'zod';
-import { and, avg, eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 import * as schema from '@/db/schema';
 
 const sql = neon(process.env.DATABASE_URL!);
@@ -111,17 +111,5 @@ export const userShowRouter = router({
     )
     .mutation(({ input: { id } }) => {
       return db.delete(userShows).where(eq(userShows.id, id));
-    }),
-  getAverageRating: publicProcedure
-    .input(
-      z.object({
-        showId: z.string().uuid(),
-      }),
-    )
-    .query(({ input: { showId } }) => {
-      return db
-        .select({ value: avg(schema.userShows.rating) })
-        .from(schema.userShows)
-        .where(eq(schema.userShows.showId, showId));
     }),
 });

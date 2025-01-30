@@ -34,10 +34,12 @@ export default async function ShowsList({
               <span className="hover:underline">
                 {show.title} ({show.year})
               </span>
-              <div className="text-sm">
-                Average Rating:
-                {show.averageRating} / 5
-              </div>
+              {show.averageRating !== '0' && (
+                <div className="text-sm">
+                  Average Rating:
+                  {show.averageRating} / 5
+                </div>
+              )}
             </Link>
           </CarouselItem>
         ))}

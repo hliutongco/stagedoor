@@ -120,6 +120,13 @@
       "when": 1737815484230,
       "tag": "0016_flimsy_energizer",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1738245702416,
+      "tag": "0017_silly_corsair",
+      "breakpoints": true
     }
   ]
 }
