@@ -1,6 +1,7 @@
 import {
   boolean,
   decimal,
+  numeric,
   pgEnum,
   pgTable,
   text,
@@ -13,6 +14,7 @@ const showTypeEnum = pgEnum('type', ['musical', 'play']);
 
 export const shows = pgTable('shows', {
   id: uuid().primaryKey().defaultRandom(),
+  averageRating: numeric({ precision: 2 }),
   playbillImage: text().notNull().default(''),
   slug: text()
     .notNull()

@@ -14,10 +14,20 @@ export const showsRouter = router({
     return db.select().from(shows);
   }),
   getMusicals: publicProcedure.query(() => {
-    return db.select().from(shows).where(eq(shows.type, 'musical'));
+    return db.query.shows.findMany({
+      where: eq(shows.type, 'musical'),
+      with: {
+        userShows: true,
+      },
+    });
   }),
   getPlays: publicProcedure.query(() => {
-    return db.select().from(shows).where(eq(shows.type, 'play'));
+    return db.query.shows.findMany({
+      where: eq(shows.type, 'play'),
+      with: {
+        userShows: true,
+      },
+    });
   }),
   getShowsById: publicProcedure
     .input(
