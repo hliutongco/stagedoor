@@ -2,7 +2,6 @@ import {
   boolean,
   decimal,
   integer,
-  numeric,
   pgEnum,
   pgTable,
   text,
