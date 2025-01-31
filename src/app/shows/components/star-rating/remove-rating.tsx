@@ -15,7 +15,7 @@ export default function RemoveRating({
   rating: string;
   setRating: (value: string) => void;
   showId: string;
-  sumRatings: number;
+  sumRatings: string | number;
   totalRatings: number;
 }) {
   const router = useRouter();
@@ -55,7 +55,7 @@ export default function RemoveRating({
       removeRatingMutation.mutate({ id });
       editShowMutation.mutate({
         id: showId,
-        sumRatings: sumRatings - Number(rating),
+        sumRatings: Number(sumRatings) - Number(rating),
         totalRatings: totalRatings - 1,
       });
       setRating('0');

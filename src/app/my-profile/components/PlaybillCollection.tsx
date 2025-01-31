@@ -13,7 +13,7 @@ interface ShowsListProps {
     rating: string;
     showId?: string;
     slug: string;
-    sumRatings: number;
+    sumRatings: string | number;
     title: string;
     totalRatings: number;
     userId?: string;
