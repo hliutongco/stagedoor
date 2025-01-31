@@ -19,7 +19,9 @@ export default async function MyProfilePage() {
       rating: `${userShow.rating}`,
       showId: show?.id ?? '',
       slug: show?.slug ?? '',
+      sumRatings: show?.sumRatings ?? 0,
       title: show?.title ?? '',
+      totalRatings: show?.totalRatings ?? 0,
       userId: user?.id ?? '',
     };
   });

@@ -13,7 +13,9 @@ interface ShowsListProps {
     rating: string;
     showId?: string;
     slug: string;
+    sumRatings: string | number;
     title: string;
+    totalRatings: number;
     userId?: string;
   }[];
 }
@@ -50,6 +52,8 @@ export default async function PlaybillCollection({ isPrivate, shows }: ShowsList
                   name={show.title}
                   rating={show.rating}
                   showId={show.showId ?? ''}
+                  sumRatings={show.sumRatings}
+                  totalRatings={show.totalRatings}
                   userId={show.userId ?? ''}
                 />
               )}

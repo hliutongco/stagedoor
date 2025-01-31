@@ -18,6 +18,8 @@ export default async function UserPage({
       playbillImage: show?.playbillImage ?? '',
       rating: `${userShow.rating}`,
       slug: show?.slug ?? '',
+      sumRatings: show?.sumRatings ?? 0,
+      totalRatings: show?.totalRatings ?? 0,
       title: show?.title ?? '',
     };
   });
