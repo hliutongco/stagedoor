@@ -1,6 +1,6 @@
 {
-  "id": "debe08a1-d3f1-471b-89ca-229703dd0cf7",
-  "prevId": "2760698c-0f0b-4761-8777-161abecc104e",
+  "id": "2fade228-beb9-4bd9-88b6-1dac37a4cb03",
+  "prevId": "debe08a1-d3f1-471b-89ca-229703dd0cf7",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -78,6 +78,16 @@
           "primaryKey": true,
           "notNull": true,
           "default": "gen_random_uuid()"
+        },
+        "averageRating": {
+          "name": "averageRating",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "CASE WHEN \"totalRatings\" = 0 THEN 0 ELSE \"sumRatings\"::float / \"totalRatings\" END",
+            "type": "stored"
+          }
         },
         "playbillImage": {
           "name": "playbillImage",

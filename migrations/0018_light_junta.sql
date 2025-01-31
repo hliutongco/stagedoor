@@ -1,1 +1,0 @@
-ALTER TABLE "shows" ADD COLUMN "averageRating" numeric(2) GENERATED ALWAYS AS (CASE WHEN "totalRatings" = 0 THEN 0 ELSE "sumRatings" / "totalRatings" END) STORED;

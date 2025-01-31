@@ -1,0 +1,1 @@
+ALTER TABLE "shows" ADD COLUMN "averageRating" numeric GENERATED ALWAYS AS (CASE WHEN "totalRatings" = 0 THEN 0 ELSE "sumRatings"::float / "totalRatings" END) STORED;
