@@ -55,7 +55,7 @@ export default function RemoveRating({
       removeRatingMutation.mutate({ id });
       editShowMutation.mutate({
         id: showId,
-        sumRatings: Number(sumRatings) - Number(rating),
+        sumRatings: `${Number(sumRatings) - Number(rating)}`,
         totalRatings: totalRatings - 1,
       });
       setRating('0');

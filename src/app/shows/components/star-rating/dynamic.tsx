@@ -96,14 +96,14 @@ const StarRating = ({
         createRatingMutation.mutate({ rating: newValue, showId, userId });
         editShowMutation.mutate({
           id: showId,
-          sumRatings: Number(sumRatings) + Number(newValue),
+          sumRatings: `${Number(sumRatings) + Number(newValue)}`,
           totalRatings: totalRatings + 1,
         });
       } else if (id) {
         updateRatingMutation.mutate({ id, rating: newValue });
         editShowMutation.mutate({
           id: showId,
-          sumRatings: Number(sumRatings) + (Number(newValue) - Number(value)),
+          sumRatings: `${Number(sumRatings) + (Number(newValue) - Number(value))}`,
           totalRatings,
         });
       } else {

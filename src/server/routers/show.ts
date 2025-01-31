@@ -62,7 +62,7 @@ export const showsRouter = router({
     .input(
       z.object({
         id: z.string().uuid(),
-        sumRatings: z.number(),
+        sumRatings: z.string(),
         totalRatings: z.number(),
       }),
     )
