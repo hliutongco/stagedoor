@@ -5,10 +5,18 @@ import { useRouter } from 'next/navigation';
 
 export default function RemoveRating({
   id,
+  rating,
   setRating,
+  showId,
+  sumRatings,
+  totalRatings,
 }: {
   id: string | undefined;
+  rating: string;
   setRating: (value: string) => void;
+  showId: string;
+  sumRatings: number;
+  totalRatings: number;
 }) {
   const router = useRouter();
   const utils = trpc.useUtils();
@@ -29,9 +37,27 @@ export default function RemoveRating({
       });
     },
   });
+  const editShowMutation = trpc.shows.editShow.useMutation({
+    onError: (error) => {
+      toast({
+        description: error.message,
+        title: 'Uh oh! Something went wrong.',
+        variant: 'destructive',
+      });
+    },
+    onSuccess: async () => {
+      await utils.shows.invalidate();
+      router.refresh();
+    },
+  });
   const handleClick = useCallback(() => {
     if (id) {
       removeRatingMutation.mutate({ id });
+      editShowMutation.mutate({
+        id: showId,
+        sumRatings: sumRatings - Number(rating),
+        totalRatings: totalRatings - 1,
+      });
       setRating('0');
     } else {
       toast({
@@ -41,7 +67,16 @@ export default function RemoveRating({
       });
       return;
     }
-  }, [id, removeRatingMutation, setRating]);
+  }, [
+    id,
+    editShowMutation,
+    rating,
+    removeRatingMutation,
+    setRating,
+    showId,
+    sumRatings,
+    totalRatings,
+  ]);
 
   return (
     <span className="text-sm" onClick={handleClick} role="button">

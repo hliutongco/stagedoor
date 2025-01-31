@@ -45,7 +45,7 @@ export default async function Home() {
             >
               <h4 className="font-bold text-center text-lg lg:text-xl">{review.title}</h4>
               <div className="mx-auto">
-                <StarRating name={review.id} value={`${review.userShow.rating}`} />
+                <StarRating name={review.id} value={`${review.userShow?.rating}`} />
               </div>
               <div className="mt-2">
                 <CloudinaryImage

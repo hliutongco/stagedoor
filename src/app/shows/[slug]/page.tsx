@@ -56,6 +56,8 @@ export default async function ShowView({
                 id={userShow?.id}
                 rating={userShow?.rating}
                 showId={show?.id ?? ''}
+                sumRatings={show?.sumRatings ?? 0}
+                totalRatings={show?.totalRatings ?? 0}
                 userId={userId}
               />
             </div>

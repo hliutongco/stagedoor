@@ -15,6 +15,8 @@ interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
   name?: string;
   rating: string | undefined;
   showId: string;
+  sumRatings: number;
+  totalRatings: number;
   userId: string;
 }
 
@@ -23,6 +25,8 @@ const StarRating = ({
   id,
   name = 'show',
   rating,
+  sumRatings,
+  totalRatings,
   showId,
   userId,
 }: RatingsProps) => {
@@ -67,6 +71,19 @@ const StarRating = ({
       });
     },
   });
+  const editShowMutation = trpc.shows.editShow.useMutation({
+    onError: (error) => {
+      toast({
+        description: error.message,
+        title: 'Uh oh! Something went wrong.',
+        variant: 'destructive',
+      });
+    },
+    onSuccess: async () => {
+      await utils.shows.invalidate();
+      router.refresh();
+    },
+  });
   const onValueChange = useCallback(
     (e: ChangeEvent) => {
       if (!userId) {
@@ -77,8 +94,18 @@ const StarRating = ({
       setValue(newValue);
       if (!isWatched && !hasRatingOrReview) {
         createRatingMutation.mutate({ rating: newValue, showId, userId });
+        editShowMutation.mutate({
+          id: showId,
+          sumRatings: sumRatings + Number(newValue),
+          totalRatings: totalRatings + 1,
+        });
       } else if (id) {
         updateRatingMutation.mutate({ id, rating: newValue });
+        editShowMutation.mutate({
+          id: showId,
+          sumRatings: sumRatings + (Number(newValue) - Number(value)),
+          totalRatings,
+        });
       } else {
         toast({
           description: 'Please refresh the page and try again',
@@ -91,14 +118,18 @@ const StarRating = ({
     },
     [
       createRatingMutation,
+      editShowMutation,
       hasRatingOrReview,
       id,
       isWatched,
       redirectToSignIn,
       setIsWatched,
       showId,
+      sumRatings,
+      totalRatings,
       updateRatingMutation,
       userId,
+      value,
     ],
   );
 
@@ -232,7 +263,16 @@ const StarRating = ({
           title="Very Bad - 0.5 stars"
         ></label>
       </fieldset>
-      {rating && rating !== '0' && <RemoveRating id={id} setRating={setValue} />}
+      {rating && rating !== '0' && (
+        <RemoveRating
+          id={id}
+          rating={rating}
+          setRating={setValue}
+          showId={showId}
+          sumRatings={sumRatings}
+          totalRatings={totalRatings}
+        />
+      )}
     </div>
   );
 };

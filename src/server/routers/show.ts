@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { publicProcedure, router } from '../init-trpc';
+import { protectedProcedure, publicProcedure, router } from '../init-trpc';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { eq, inArray } from 'drizzle-orm';
 import { neon } from '@neondatabase/serverless';
@@ -57,6 +57,23 @@ export const showsRouter = router({
           userShows: true,
         },
       });
+    }),
+  editShow: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().uuid(),
+        sumRatings: z.number(),
+        totalRatings: z.number(),
+      }),
+    )
+    .mutation(({ input: { id, sumRatings, totalRatings } }) => {
+      return db
+        .update(shows)
+        .set({
+          sumRatings,
+          totalRatings,
+        })
+        .where(eq(shows.id, id));
     }),
 });
 // export type definition of router
