@@ -1,5 +1,41 @@
 # CHANGELOG
 
+## [v0.7.0](https://github.com/hliutongco/stagedoor/releases/tag/v0.7.0) - 2025-01-28 13:16:21
+
+This release sees the completion of the My Profile/public profile MVP
+
+### Minor Release
+
+- PlaybillCollection:
+  - finish my-profile (#59) ([86a740a](https://github.com/hliutongco/stagedoor/commit/86a740a3ab0c2e5384d9cf76aa80752e81fbfa8d)) ([#59](https://github.com/hliutongco/stagedoor/pull/59))
+
+### Patch Release
+
+- general:
+  - fix/add description input (#58) ([a62d77c](https://github.com/hliutongco/stagedoor/commit/a62d77ce5e84ea3c56a810bd0ca0a231c8d3abd8)) ([#58](https://github.com/hliutongco/stagedoor/pull/58))
+  - fix/add cloudinary (#55) ([3b11167](https://github.com/hliutongco/stagedoor/commit/3b11167e0eb2280e86bf762fea31f8b0b78642f6)) ([#55](https://github.com/hliutongco/stagedoor/pull/55))
+
+- CloudinaryImage:
+  - switch to CloudinaryImage component (#57) ([88794cc](https://github.com/hliutongco/stagedoor/commit/88794cc5cdd915501ea17ec9a0654f18c7c26008)) ([#57](https://github.com/hliutongco/stagedoor/pull/57))
+
+- schema:
+  - add description (#56) ([7c51829](https://github.com/hliutongco/stagedoor/commit/7c518295ac60601be7a4cf14c19a0f378df0be54)) ([#56](https://github.com/hliutongco/stagedoor/pull/56))
+
+- users/[username]:
+  - add user view route (#54) ([f635bb2](https://github.com/hliutongco/stagedoor/commit/f635bb2dba438e5d3a47d6bc63ee33c5e608fcf0)) ([#54](https://github.com/hliutongco/stagedoor/pull/54))
+
+- CHANGELOG:
+  - update release notes ([f1f0e2e](https://github.com/hliutongco/stagedoor/commit/f1f0e2e825ac191a86c9468114d5ea7a69b166ed))
+
+- home:
+  - add reviews to the home page (#53) ([2be4fa6](https://github.com/hliutongco/stagedoor/commit/2be4fa6c0e8c6ddfa88a22b644c37c1bc410d906)) ([#53](https://github.com/hliutongco/stagedoor/pull/53))
+
+- loading:
+  - adjust loading screens and fix star ratings (#52) ([fe19ed6](https://github.com/hliutongco/stagedoor/commit/fe19ed6fd8bfec05838df9e7a05828c91cf52c72)) ([#52](https://github.com/hliutongco/stagedoor/pull/52))
+
+- reviews/[id]: add reviews page (#51:
+  - fix(reviews/[id]: add reviews page (#51) ([4cf53af](https://github.com/hliutongco/stagedoor/commit/4cf53af548f08e9a94d7650a60281e21fd9f4e1a)) ([#51](https://github.com/hliutongco/stagedoor/pull/51))
+
 ## [v0.6.0](https://github.com/hliutongco/stagedoor/releases/tag/v0.6.0) - 2025-01-21 05:36:25
 
 - Users can edit and delete reviews
