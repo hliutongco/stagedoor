@@ -36,7 +36,7 @@ export default async function ShowsList({
               </span>
               {show.averageRating !== '0' && (
                 <div className="text-sm">
-                  Average Rating:
+                  <span className="hidden md:inline mr-1">Avg Rating:</span>
                   {show.averageRating} / 5
                 </div>
               )}

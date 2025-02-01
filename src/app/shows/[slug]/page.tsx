@@ -28,8 +28,13 @@ export default async function ShowView({
         <h2 className="font-bold text-2xl lg:text-4xl text-center">
           {show?.title ?? ''} ({show?.year ?? ''})
         </h2>
-        <div className="py-4 text-center text-sm">
+        <div className="py-4 text-center">
           {show?.userShows.length ?? 0} people have watched this show
+          {show?.averageRating !== '0' && (
+            <div className="pt-2 text-center">
+              Average Rating: {show?.averageRating} / 5
+            </div>
+          )}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="flex flex-col gap-4 items-center mb-4">
