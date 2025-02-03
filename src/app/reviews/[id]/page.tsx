@@ -41,8 +41,10 @@ export default async function ReviewPage({
             <CloudinaryImage
               alt={review.show?.title ?? ''}
               className="rounded-sm"
-              height={400}
+              height={315}
+              priority
               src={transformCharacters(review.show?.slug ?? '')}
+              style={{ width: '200px', height: '315px' }}
               width={200}
             />
             {review.show?.title}

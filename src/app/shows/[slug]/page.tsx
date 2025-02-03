@@ -35,7 +35,9 @@ export default async function ShowView({
             <CloudinaryImage
               alt={show?.title ?? ''}
               height={394}
+              priority
               src={transformCharacters(show?.slug ?? '')}
+              style={{ width: '250px', height: '394px' }}
               width={250}
             />
           </div>

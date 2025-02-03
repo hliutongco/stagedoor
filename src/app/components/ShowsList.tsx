@@ -23,7 +23,6 @@ export default function ShowsList({ shows }: { shows: (typeof Show.$inferSelect)
               <CloudinaryImage
                 alt={show.title}
                 height={276}
-                priority
                 src={transformCharacters(show.slug)}
                 width={175}
               />
