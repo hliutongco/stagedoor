@@ -50,13 +50,15 @@ export default async function Home() {
                 <StarRating name={review.id} value={`${review.userShow?.rating}`} />
               </div>
               <div className="mt-2">
-                <CloudinaryImage
-                  alt={review.show?.title ?? ''}
-                  className="float-left px-2"
-                  height={150}
-                  src={transformCharacters(review.show?.slug ?? '')}
-                  width={100}
-                />
+                <Link href={`/shows/${review.show?.slug}`}>
+                  <CloudinaryImage
+                    alt={review.show?.title ?? ''}
+                    className="float-left mx-2"
+                    height={150}
+                    src={transformCharacters(review.show?.slug ?? '')}
+                    width={100}
+                  />
+                </Link>
                 {review.body.length > 1000 ? (
                   <>
                     <span>{review.body.slice(0, 300) + '...'}</span>

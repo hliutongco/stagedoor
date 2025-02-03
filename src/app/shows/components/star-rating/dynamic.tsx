@@ -135,7 +135,7 @@ const StarRating = ({
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <fieldset className="rating" id={name} name={name}>
+      <fieldset className="dynamic rating" id={name} name={name}>
         <input
           checked={value === '5'}
           id={`${name}-star5`}

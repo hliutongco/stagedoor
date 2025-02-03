@@ -30,7 +30,9 @@ export default function PlaybillCollection({ isPrivate, shows }: ShowsListProps)
             Rate or Review a show to add it to your collection!
           </div>
         )}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mx-4 lg:mx-0">
+        <div
+          className={`grid ${isPrivate ? 'grid-cols-1' : 'grid-cols-2'} md:grid-cols-3 lg:grid-cols-6 gap-4`}
+        >
           {shows.map((show) => (
             <div key={show.id}>
               <Link href={`/shows/${show.slug}`}>
@@ -44,7 +46,9 @@ export default function PlaybillCollection({ isPrivate, shows }: ShowsListProps)
               </Link>
 
               {show.rating !== '0' && !isPrivate && (
-                <StarRatingStatic name={show.title} value={show.rating} />
+                <div className="flex justify-center">
+                  <StarRatingStatic name={show.title} value={show.rating} />
+                </div>
               )}
               {isPrivate && (
                 <StarRating
