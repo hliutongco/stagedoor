@@ -10,11 +10,7 @@ import {
 import CloudinaryImage from './CloudinaryImage';
 import { transformCharacters } from '@/lib/utils/index';
 
-export default async function ShowsList({
-  shows,
-}: {
-  shows: (typeof Show.$inferSelect)[];
-}) {
+export default function ShowsList({ shows }: { shows: (typeof Show.$inferSelect)[] }) {
   return (
     <Carousel
       className="w-full"

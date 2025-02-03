@@ -20,7 +20,7 @@ interface ShowsListProps {
   }[];
 }
 
-export default async function PlaybillCollection({ isPrivate, shows }: ShowsListProps) {
+export default function PlaybillCollection({ isPrivate, shows }: ShowsListProps) {
   return (
     <>
       <h2 className="font-bold text-lg lg:text-2xl text-center">Playbill Collection</h2>

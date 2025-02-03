@@ -14,9 +14,11 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const musicals = await trpc.shows.getMusicals();
-  const plays = await trpc.shows.getPlays();
-  const reviews = await trpc.reviews.getReviews();
+  const [musicals, plays, reviews] = await Promise.all([
+    trpc.shows.getMusicals(),
+    trpc.shows.getPlays(),
+    trpc.reviews.getReviews(),
+  ]);
 
   return (
     <main>
