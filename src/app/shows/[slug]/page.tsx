@@ -17,8 +17,7 @@ export default async function ShowView({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
-  const user = await currentUser();
+  const [{ slug }, user] = await Promise.all([params, currentUser()]);
   const userId = user?.id ?? '';
   const show = await trpc.shows.getShow({ slug: decodeURIComponent(slug) });
   const userShow = await trpc.userShows.getUserShow({ showId: show?.id ?? '', userId });
@@ -41,7 +40,9 @@ export default async function ShowView({
             <CloudinaryImage
               alt={show?.title ?? ''}
               height={394}
+              priority
               src={transformCharacters(show?.slug ?? '')}
+              style={{ width: '250px', height: '394px' }}
               width={250}
             />
           </div>

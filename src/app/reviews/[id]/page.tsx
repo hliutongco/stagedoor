@@ -12,8 +12,7 @@ export default async function ReviewPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = await params;
-  const user = await currentUser();
+  const [{ id }, user] = await Promise.all([params, currentUser()]);
   const review = await trpc.reviews.getReview({ id });
   if (review === undefined) throw new Error('Review not found');
   return (
@@ -42,8 +41,10 @@ export default async function ReviewPage({
             <CloudinaryImage
               alt={review.show?.title ?? ''}
               className="rounded-sm"
-              height={400}
+              height={315}
+              priority
               src={transformCharacters(review.show?.slug ?? '')}
+              style={{ width: '200px', height: '315px' }}
               width={200}
             />
             {review.show?.title}

@@ -14,13 +14,15 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const musicals = await trpc.shows.getMusicals();
-  const plays = await trpc.shows.getPlays();
-  const reviews = await trpc.reviews.getReviews();
+  const [musicals, plays, reviews] = await Promise.all([
+    trpc.shows.getMusicals(),
+    trpc.shows.getPlays(),
+    trpc.reviews.getReviews(),
+  ]);
 
   return (
     <main>
-      <div className="min-h-screen mb-10 p-10">
+      <div className="min-h-[95vh] mb-10 p-10">
         <h2 className="font-bold text-3xl lg:text-5xl text-center">Now Showing</h2>
         <div className="mt-5">
           <h3 className="font-medium text-xl lg:text-3xl">Musicals</h3>
@@ -35,7 +37,7 @@ export default async function Home() {
           <div className="mx-auto w-3/4">{plays && <ShowsList shows={plays} />}</div>
         </div>
       </div>
-      <div className="bg-primary-light min-h-screen p-10">
+      <div className="bg-primary-light min-h-[95vh] p-10">
         <h3 className="font-medium text-xl lg:text-3xl">Reviews</h3>
         <div className="gap-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 items-center mt-8">
           {reviews.map((review) => (
@@ -48,13 +50,15 @@ export default async function Home() {
                 <StarRating name={review.id} value={`${review.userShow?.rating}`} />
               </div>
               <div className="mt-2">
-                <CloudinaryImage
-                  alt={review.show?.title ?? ''}
-                  className="float-left px-2"
-                  height={150}
-                  src={transformCharacters(review.show?.slug ?? '')}
-                  width={100}
-                />
+                <Link href={`/shows/${review.show?.slug}`}>
+                  <CloudinaryImage
+                    alt={review.show?.title ?? ''}
+                    className="float-left mx-2"
+                    height={150}
+                    src={transformCharacters(review.show?.slug ?? '')}
+                    width={100}
+                  />
+                </Link>
                 {review.body.length > 1000 ? (
                   <>
                     <span>{review.body.slice(0, 300) + '...'}</span>
