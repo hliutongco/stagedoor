@@ -22,7 +22,7 @@ export default async function Home() {
 
   return (
     <main>
-      <div className="min-h-screen mb-10 p-10">
+      <div className="min-h-[95vh] mb-10 p-10">
         <h2 className="font-bold text-3xl lg:text-5xl text-center">Now Showing</h2>
         <div className="mt-5">
           <h3 className="font-medium text-xl lg:text-3xl">Musicals</h3>
@@ -37,7 +37,7 @@ export default async function Home() {
           <div className="mx-auto w-3/4">{plays && <ShowsList shows={plays} />}</div>
         </div>
       </div>
-      <div className="bg-primary-light min-h-screen p-10">
+      <div className="bg-primary-light min-h-[95vh] p-10">
         <h3 className="font-medium text-xl lg:text-3xl">Reviews</h3>
         <div className="gap-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 items-center mt-8">
           {reviews.map((review) => (
