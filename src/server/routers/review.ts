@@ -10,16 +10,23 @@ const db = drizzle(sql, { schema });
 const reviews = schema.reviews;
 
 export const reviewRouter = router({
-  getReviews: publicProcedure.query(() => {
-    return db.query.reviews.findMany({
-      orderBy: desc(reviews.createdAt),
-      with: {
-        show: true,
-        user: true,
-        userShow: true,
-      },
-    });
-  }),
+  getReviews: publicProcedure
+    .input(
+      z.object({
+        limit: z.number().optional(),
+      }),
+    )
+    .query(({ input: { limit } }) => {
+      return db.query.reviews.findMany({
+        limit: limit ?? -1,
+        orderBy: desc(reviews.createdAt),
+        with: {
+          show: true,
+          user: true,
+          userShow: true,
+        },
+      });
+    }),
   getReview: publicProcedure
     .input(
       z.object({
