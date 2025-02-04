@@ -17,7 +17,7 @@ export default async function Home() {
   const [musicals, plays, reviews] = await Promise.all([
     trpc.shows.getMusicals(),
     trpc.shows.getPlays(),
-    trpc.reviews.getReviews(),
+    trpc.reviews.getReviews({ limit: 10 }),
   ]);
 
   return (

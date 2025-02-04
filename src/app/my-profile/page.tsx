@@ -8,6 +8,7 @@ import Description from './components/Description';
 export default async function MyProfilePage() {
   const _user = await currentUser();
   const user = await trpc.users.getUser({
+    limit: 6,
     username: _user?.username ?? '',
   });
   const watchedShows = user?.userShows.map((userShow) => {
@@ -27,17 +28,22 @@ export default async function MyProfilePage() {
   });
   return (
     <>
-      <h1 className="font-bold mt-10 text-xl lg:text-3xl text-center">Your Profile</h1>
-      <p className="text-center">
+      <div className="min-h-[95vh] pb-10">
+        <h1 className="font-bold mt-10 text-xl lg:text-3xl text-center">Your Profile</h1>
+        <p className="text-center">
+          <Link className="text-primary-dark underline" href={`/users/${user?.username}`}>
+            View Your Public Profile
+          </Link>
+        </p>
+        <Description description={user?.description ?? ''} userId={user?.id} />
+        {watchedShows && <PlaybillCollection isPrivate shows={watchedShows} />}
         <Link
-          className="hover:underline text-primary-dark"
-          href={`/users/${user?.username}`}
+          className="float-end mr-8 text-primary-dark underline"
+          href="/my-profile/playbill-collection"
         >
-          View Your Public Profile
+          &gt; View The Whole Collection
         </Link>
-      </p>
-      <Description description={user?.description ?? ''} userId={user?.id} />
-      {watchedShows && <PlaybillCollection isPrivate shows={watchedShows} />}
+      </div>
       <ReviewCollection isPrivate reviews={user?.reviews ?? []} />
     </>
   );

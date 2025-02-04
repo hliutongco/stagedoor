@@ -24,7 +24,7 @@ export default function PlaybillCollection({ isPrivate, shows }: ShowsListProps)
   return (
     <>
       <h2 className="font-bold text-lg lg:text-2xl text-center">Playbill Collection</h2>
-      <div className="items-center justify-items-center min-h-[95vh] pb-20 gap-16 p-4 lg:p-8">
+      <div className="items-center justify-items-center pb-10 gap-16 p-4 lg:p-8">
         {!shows.length && (
           <div className="text-center text-sm">
             Rate or Review a show to add it to your collection!
@@ -34,7 +34,7 @@ export default function PlaybillCollection({ isPrivate, shows }: ShowsListProps)
           className={`grid ${isPrivate ? 'grid-cols-1' : 'grid-cols-2'} md:grid-cols-3 lg:grid-cols-6 gap-4 ${!isPrivate && 'mx-8 lg:mx-0'}`}
         >
           {shows.map((show) => (
-            <div key={show.id}>
+            <div className="flex flex-col items-center" key={show.id}>
               <Link href={`/shows/${show.slug}`}>
                 <CloudinaryImage
                   alt={show.title}
@@ -46,9 +46,7 @@ export default function PlaybillCollection({ isPrivate, shows }: ShowsListProps)
               </Link>
 
               {show.rating !== '0' && !isPrivate && (
-                <div className="flex justify-center">
-                  <StarRatingStatic name={show.title} value={show.rating} />
-                </div>
+                <StarRatingStatic name={show.title} value={show.rating} />
               )}
               {isPrivate && (
                 <StarRating
