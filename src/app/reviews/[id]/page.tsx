@@ -1,4 +1,6 @@
 import CloudinaryImage from '@/app/components/CloudinaryImage';
+import IsLoadingProvider from '@/app/components/IsLoadingProvider';
+import ReviewBody from '@/app/components/ReviewBody';
 import ReviewCard from '@/app/components/ReviewCard';
 import StarRating from '@/components/core/star-rating';
 import { transformCharacters } from '@/lib/utils/index';
@@ -18,7 +20,7 @@ export default async function ReviewPage({
   return (
     <div className="min-h-[95vh] mt-10 p-4 lg:p-8">
       <h2 className="font-bold text-xl lg:text-3xl text-center">{review.title}</h2>
-      <Link href={`/users/${review.user?.username}`}>
+      <Link className="block mx-auto w-fit" href={`/users/${review.user?.username}`}>
         <span className="flex items-center gap-2 justify-center">
           <Image
             alt={review.user?.username ?? 'review-user'}
@@ -30,12 +32,12 @@ export default async function ReviewPage({
           {review.user?.username}
         </span>
       </Link>
-      {user?.id === review.userId && (
-        <div className="flex justify-end">
-          <ReviewCard review={review} />
-        </div>
-      )}
-      <div className="">
+      <IsLoadingProvider isLoading={false}>
+        {user?.id === review.userId && (
+          <div className="flex justify-end">
+            <ReviewCard review={review} />
+          </div>
+        )}
         <div className="flex flex-col md:float-left items-center pb-8 px-10 p-2">
           <Link className="text-center" href={`/shows/${review.show?.slug}`}>
             <CloudinaryImage
@@ -53,8 +55,8 @@ export default async function ReviewPage({
             <StarRating name={review.title} value={`${review.userShow.rating}`} />
           )}
         </div>
-        <p className="p-4 whitespace-pre-wrap">{review.body}</p>
-      </div>
+        <ReviewBody body={review.body} displayFullText />
+      </IsLoadingProvider>
     </div>
   );
 }

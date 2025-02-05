@@ -25,11 +25,12 @@ import { toast } from '@/components/ui/hooks/use-toast';
 import { reviews } from '@/db/schema';
 import { trpc } from '@/server/clients/client-api';
 import { Pencil, Trash2 } from 'lucide-react';
-import { useCallback } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { IsLoadingContext } from './IsLoadingProvider';
 
 const formSchema = z.object({
   body: z
@@ -55,12 +56,14 @@ export default function ReviewCard({ review }: { review: typeof reviews.$inferSe
   const utils = trpc.useUtils();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      body: review.body,
-      title: review.title,
-    },
+    defaultValues: useMemo(() => {
+      // console.log(review);
+      return review;
+    }, [review]),
   });
   const { control, handleSubmit, reset } = form;
+  const [isPending, startTransition] = useTransition();
+
   const deleteMutation = trpc.reviews.deleteReview.useMutation({
     onError: (error) => {
       toast({
@@ -88,7 +91,9 @@ export default function ReviewCard({ review }: { review: typeof reviews.$inferSe
     },
     onSuccess: async () => {
       await utils.reviews.invalidate();
-      router.refresh();
+      startTransition(() => {
+        router.refresh();
+      });
       toast({
         description: 'Your review was successfully saved.',
         title: 'Success!',
@@ -96,16 +101,22 @@ export default function ReviewCard({ review }: { review: typeof reviews.$inferSe
       });
     },
   });
+
+  const { setIsLoading } = useContext(IsLoadingContext);
+  useEffect(() => {
+    setIsLoading(editMutation.isPending || isPending);
+  }, [editMutation.isPending, isPending, setIsLoading]);
+
   const handleDeleteClick = useCallback(() => {
     deleteMutation.mutate({ id: review.id });
   }, [deleteMutation, review]);
   const handleEditClick = useCallback(
     (data: z.infer<typeof formSchema>) => {
       editMutation.mutate({ body: data.body, id: review.id, title: data.title });
-      reset();
     },
-    [editMutation, reset, review],
+    [editMutation, review],
   );
+
   return (
     <div className="flex">
       <Dialog>
@@ -114,7 +125,7 @@ export default function ReviewCard({ review }: { review: typeof reviews.$inferSe
             <Pencil />
           </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent handleCancel={() => reset(review)}>
           <DialogHeader>
             <DialogTitle>Edit Review</DialogTitle>
           </DialogHeader>
@@ -166,7 +177,7 @@ export default function ReviewCard({ review }: { review: typeof reviews.$inferSe
                   )}
                 />
                 <DialogFooter className="flex justify-between mt-4">
-                  <DialogClose asChild>
+                  <DialogClose asChild onClick={() => reset(review)}>
                     <Button variant="secondary">Close</Button>
                   </DialogClose>
                   <DialogClose asChild>
