@@ -57,7 +57,6 @@ export default function ReviewCard({ review }: { review: typeof reviews.$inferSe
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: useMemo(() => {
-      // console.log(review);
       return review;
     }, [review]),
   });
