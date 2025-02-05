@@ -7,6 +7,7 @@ import Link from 'next/link';
 import CloudinaryImage from '@/app/components/CloudinaryImage';
 import Image from 'next/image';
 import { transformCharacters } from '@/lib/utils/index';
+import ReviewBody from '../components/ReviewBody';
 
 export const metadata: Metadata = {
   title: 'StageDoor',
@@ -45,7 +46,11 @@ export default async function Home() {
               className="bg-background flex flex-col h-full mb-10 p-4 relative rounded-md w-full"
               key={review.id}
             >
-              <h4 className="font-bold text-center text-lg lg:text-xl">{review.title}</h4>
+              <Link href={`/reviews/${review.id}`}>
+                <h4 className="font-bold text-center text-lg lg:text-xl underline">
+                  {review.title}
+                </h4>
+              </Link>
               <div className="mx-auto">
                 <StarRating name={review.id} value={`${review.userShow?.rating}`} />
               </div>
@@ -59,19 +64,7 @@ export default async function Home() {
                     width={100}
                   />
                 </Link>
-                {review.body.length > 1000 ? (
-                  <>
-                    <span>{review.body.slice(0, 300) + '...'}</span>
-                    <Link
-                      className="ml-2 text-primary text-right text-sm"
-                      href={`/reviews/${review.id}`}
-                    >
-                      Click to read more
-                    </Link>
-                  </>
-                ) : (
-                  <span>{review.body}</span>
-                )}
+                <ReviewBody body={review.body} id={review.id} length={300} />
               </div>
               <Link href={`/users/${review.user?.username}`}>
                 <div className="absolute bottom-3 flex gap-2 items-center">

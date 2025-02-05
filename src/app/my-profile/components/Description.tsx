@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState, useTransition } from 'react';
 import {
   Button,
   Form,
@@ -9,6 +9,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  Spinner,
   Textarea,
 } from '@/components/ui/';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -37,6 +38,7 @@ export default function Description({
   userId: string | undefined;
 }) {
   const [isEditing, setIsEditing] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const utils = trpc.useUtils();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -56,14 +58,19 @@ export default function Description({
     },
     onSuccess: async () => {
       await utils.users.getUser.invalidate();
-      router.refresh();
+      startTransition(() => {
+        router.refresh();
+      });
       toast({
-        description: 'Your review was successfully submitted.',
+        description: 'Your description was successfully submitted.',
         title: 'Success!',
         variant: 'default',
       });
     },
   });
+  const isLoading = useMemo(() => {
+    return mutation.isPending || isPending;
+  }, [isPending, mutation.isPending]);
   const handleCancel = useCallback(() => {
     setIsEditing(false);
     reset();
@@ -78,6 +85,13 @@ export default function Description({
   );
   return (
     <>
+      {isLoading && (
+        <div className="my-4 mx-auto pb-6 relative max-w-fit w-3/4 lg:w-1/2">
+          <p className="pt-4 text-center">
+            <Spinner size="small" />
+          </p>
+        </div>
+      )}
       {isEditing && (
         <div className="mx-auto w-3/4 md:w-1/2 xl:w-1/3">
           <Form {...form}>
@@ -113,7 +127,7 @@ export default function Description({
           </Form>
         </div>
       )}
-      {!isEditing && Boolean(description?.length) && (
+      {!isLoading && !isEditing && Boolean(description?.length) && (
         <div className="mx-auto my-4 pb-6 relative max-w-fit w-3/4 lg:w-1/2">
           <p className="font-medium mb-1">Description</p>
           <p className="mb-4">{description}</p>
@@ -124,7 +138,7 @@ export default function Description({
           </div>
         </div>
       )}
-      {!isEditing && !description?.length && (
+      {!isLoading && !isEditing && !description?.length && (
         <div className="my-4 mx-auto pb-6 relative max-w-fit w-3/4 lg:w-1/2">
           <p className="font-medium mb-1">Description</p>
           <p className="italic mb-4 text-center text-muted">

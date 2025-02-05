@@ -1,4 +1,6 @@
 import CloudinaryImage from '@/app/components/CloudinaryImage';
+import IsLoadingProvider from '@/app/components/IsLoadingProvider';
+import ReviewBody from '@/app/components/ReviewBody';
 import ReviewCard from '@/app/components/ReviewCard';
 import StarRating from '@/components/core/star-rating';
 import { reviews as Review, shows as Show, userShows as UserShow } from '@/db/schema';
@@ -30,8 +32,8 @@ export default function ReviewCollection({
               className="bg-background col-span-1 flex flex-col h-full my-4 p-4 relative rounded-md"
               key={review.id}
             >
-              <Link href={`/reviews/${review.id}`} key={review.id}>
-                <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center">
+                <Link href={`/shows/${review.show?.slug}`}>
                   <CloudinaryImage
                     alt={review.show?.title ?? ''}
                     height={200}
@@ -39,31 +41,26 @@ export default function ReviewCollection({
                     style={{ width: 'auto', height: 'auto' }}
                     width={100}
                   />
-                  <span>{review.show?.title}</span>
-                  {review.userShow?.rating !== '0' && (
-                    <StarRating
-                      name={`${review.id ?? ''}-review`}
-                      value={`${review.userShow?.rating}`}
-                    />
-                  )}
-                </div>
-                <p className="font-bold">{review.title}</p>
-                <div className="whitespace-pre-wrap">
-                  {review.body.length > 1000 ? (
-                    <>
-                      <p>{review.body.slice(0, 300)}...</p>
-                      <span className="float-right text-sm">Click to read more</span>
-                    </>
-                  ) : (
-                    <p>{review.body}</p>
-                  )}
-                </div>
+                </Link>
+                <span>{review.show?.title}</span>
+                {review.userShow?.rating !== '0' && (
+                  <StarRating
+                    name={`${review.id ?? ''}-review`}
+                    value={`${review.userShow?.rating}`}
+                  />
+                )}
+              </div>
+              <Link className="w-fit" href={`/reviews/${review.id}`}>
+                <span className="block font-bold text-lg underline">{review.title}</span>
               </Link>
-              {isPrivate && (
-                <div className="absolute bottom-4 right-4">
-                  <ReviewCard review={review} />
-                </div>
-              )}
+              <IsLoadingProvider isLoading={false}>
+                <ReviewBody body={review.body} id={review.id} length={300} />
+                {isPrivate && (
+                  <div className="absolute bottom-4 right-4">
+                    <ReviewCard review={review} />
+                  </div>
+                )}
+              </IsLoadingProvider>
             </div>
           ))}
         </div>

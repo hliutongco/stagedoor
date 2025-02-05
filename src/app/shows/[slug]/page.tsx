@@ -11,6 +11,8 @@ import ReviewCard from '@/app/components/ReviewCard';
 import Link from 'next/link';
 import CloudinaryImage from '@/app/components/CloudinaryImage';
 import { transformCharacters } from '@/lib/utils/index';
+import ReviewBody from '@/app/components/ReviewBody';
+import IsLoadingProvider from '@/app/components/IsLoadingProvider';
 
 export default async function ShowView({
   params,
@@ -98,33 +100,25 @@ export default async function ShowView({
                     {review.user?.username}
                   </div>
                 </Link>
-                <div className="col-span-3 lg:col-span-4 p-4">
-                  <div className="flex font-bold gap-2 justify-between pb-0">
-                    <div className="flex flex-col md:flex-row items-start md:items-center gap-2">
-                      <span className="text-base md:text-lg">{review.title}</span>
-                      <StarRatingStatic
-                        name={review.id}
-                        value={`${review.userShow.rating}`}
-                      />
-                    </div>
-                    {user?.id === review.userId && <ReviewCard review={review} />}
-                  </div>
-                  <p className="whitespace-pre-wrap">
-                    {review.body.length > 1000 ? (
-                      <>
-                        <span>{review.body.slice(0, 1000) + '...'}</span>
-                        <Link
-                          className="ml-2 text-primary text-sm"
-                          href={`/reviews/${review.id}`}
-                        >
-                          Click to read more
+                <IsLoadingProvider isLoading={false}>
+                  <div className="col-span-3 lg:col-span-4 p-4">
+                    <div className="flex font-bold gap-2 justify-between pb-0">
+                      <div className="flex flex-col md:flex-row items-start md:items-center gap-2">
+                        <Link href={`/reviews/${review.id}`}>
+                          <span className="text-base md:text-lg underline">
+                            {review.title}
+                          </span>
                         </Link>
-                      </>
-                    ) : (
-                      <span>{review.body}</span>
-                    )}
-                  </p>
-                </div>
+                        <StarRatingStatic
+                          name={review.id}
+                          value={`${review.userShow.rating}`}
+                        />
+                      </div>
+                      {user?.id === review.userId && <ReviewCard review={review} />}
+                    </div>
+                    <ReviewBody body={review.body} id={review.id} />
+                  </div>
+                </IsLoadingProvider>
               </div>
             );
           })}
