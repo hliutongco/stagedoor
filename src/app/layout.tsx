@@ -5,6 +5,7 @@ import { TRPCProvider } from '@/server/clients/client-api';
 import { Toaster } from '@/components/ui/';
 
 import { Readex_Pro } from 'next/font/google';
+import Link from 'next/link';
 
 const readExPro = Readex_Pro({
   display: 'swap',
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="flex gap-4">
                 <p>About</p>
                 <p>Contact Us</p>
+                <Link href="/privacy-policy">Privacy Policy</Link>
               </div>
             </footer>
           </body>
