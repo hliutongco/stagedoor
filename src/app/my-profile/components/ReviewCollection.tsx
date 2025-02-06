@@ -26,7 +26,7 @@ export default function ReviewCollection({
       <h2 className="font-bold mb-4 text-lg lg:text-2xl text-center">Reviews</h2>
       {!reviews.length && <div className="text-center">Nothing for now!</div>}
       {Boolean(reviews.length) && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full 2xl:w-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
           {reviews.map((review) => (
             <div
               className="bg-background col-span-1 flex flex-col h-full my-4 p-4 relative rounded-md"
