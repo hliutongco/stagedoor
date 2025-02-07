@@ -100,11 +100,13 @@ const StarRating = ({
           totalRatings: totalRatings + 1,
         });
       } else if (id) {
+        const newTotal =
+          rating === '0' || rating === undefined ? totalRatings + 1 : totalRatings;
         updateRatingMutation.mutate({ id, rating: newValue });
         editShowMutation.mutate({
           id: showId,
           sumRatings: `${Number(sumRatings) + (Number(newValue) - Number(value))}`,
-          totalRatings,
+          totalRatings: newTotal,
         });
       } else {
         toast({
