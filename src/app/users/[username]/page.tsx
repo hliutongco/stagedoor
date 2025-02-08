@@ -9,11 +9,12 @@ export default async function UserPage({
   params: Promise<{ username: string }>;
 }) {
   const { username } = await params;
+  // TODO: once the drizzle fix is in place, refactor this to use the limit
   const user = await trpc.users.getUser({
-    limit: 6,
+    // limit: 6,
     username,
   });
-  const watchedShows = user?.userShows.map((userShow) => {
+  const allShows = user?.userShows.map((userShow) => {
     const show = userShow.show;
     return {
       id: show?.id ?? '',
@@ -21,10 +22,11 @@ export default async function UserPage({
       rating: `${userShow.rating}`,
       slug: show?.slug ?? '',
       sumRatings: show?.sumRatings ?? 0,
-      totalRatings: show?.totalRatings ?? 0,
       title: show?.title ?? '',
+      totalRatings: show?.totalRatings ?? 0,
     };
   });
+  const watchedShows = allShows?.slice(0, 6);
   return (
     <>
       <div className="min-h-[95vh] pb-10">
@@ -33,7 +35,7 @@ export default async function UserPage({
         </h1>
         <div className="flex gap-4 items-center justify-center my-3">
           <div className="flex flex-col text-center">
-            <span className="text-xl lg:text-2xl">{watchedShows?.length ?? '0'}</span>
+            <span className="text-xl lg:text-2xl">{allShows?.length ?? '0'}</span>
             <span className="text-base lg:text-xl">Shows</span>
           </div>
 

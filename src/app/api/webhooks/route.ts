@@ -49,29 +49,36 @@ export async function POST(req: Request) {
   }
 
   // Do something with payload
-  const eventType = evt.type;
-  if (eventType === 'user.created') {
-    const {
-      first_name: firstName,
-      id,
-      image_url: imageUrl,
-      last_name: lastName,
-      username,
-    } = evt.data;
-    trpc.users.createUser({
-      firstName,
-      id,
-      imageUrl,
-      lastName,
-      username,
-    });
-  }
-  if (eventType === 'user.deleted') {
-    const { id } = evt.data;
-    if (id === undefined) {
-      throw new Error('User cannot be deleted');
+  try {
+    const eventType = evt.type;
+    if (eventType === 'user.created') {
+      const {
+        first_name: firstName,
+        id,
+        image_url: imageUrl,
+        last_name: lastName,
+        username,
+      } = evt.data;
+      await trpc.users.createUser({
+        firstName,
+        id,
+        imageUrl,
+        lastName,
+        username,
+      });
     }
-    trpc.users.deleteUser({ id });
+    if (eventType === 'user.deleted') {
+      const { id } = evt.data;
+      if (id === undefined) {
+        throw new Error('User cannot be deleted');
+      }
+      await trpc.users.deleteUser({ id });
+    }
+  } catch (err) {
+    console.error('Error: Could not save to database:', err);
+    return new Response('Error: Server error', {
+      status: 500,
+    });
   }
 
   return new Response('Webhook received', { status: 200 });
