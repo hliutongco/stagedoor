@@ -8,6 +8,7 @@ import * as schema from '@/db/schema';
 const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql, { schema });
 const users = schema.users;
+// const userShows = schema.userShows;
 
 export const userRouter = router({
   createUser: publicProcedure
@@ -73,6 +74,13 @@ export const userRouter = router({
               show: true,
             },
           },
+        },
+        extras: {
+          // TODO: check if drizzle fixed this bug: https://github.com/drizzle-team/drizzle-orm/issues/3564
+          // if so, comment this back in:
+          // reviewsCount: db
+          //   .$count(userShows, eq(userShows.userId, users.id))
+          //   .as('reviewsCount'),
         },
       });
     }),
