@@ -36,7 +36,24 @@ export default async function TopNav() {
           </SignInButton>
         </SignedOut>
         <SignedIn>
-          <UserButton />
+          <UserButton
+            userProfileProps={{
+              appearance: {
+                elements: {
+                  profileSection__username: {
+                    display: 'none',
+                  },
+                },
+              },
+            }}
+            appearance={{
+              elements: {
+                userButtonPopoverFooter: {
+                  display: 'none',
+                },
+              },
+            }}
+          />
         </SignedIn>
       </div>
     </div>
