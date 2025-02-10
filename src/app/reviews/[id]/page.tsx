@@ -33,7 +33,7 @@ export default async function ReviewPage({
         </span>
       </Link>
       <IsLoadingProvider isLoading={false}>
-        {user?.id === review.userId && (
+        {user?.username === review.user?.username && (
           <div className="flex justify-end">
             <ReviewCard review={review} />
           </div>

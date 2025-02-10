@@ -35,7 +35,7 @@ export default function Description({
   userId,
 }: {
   description: string;
-  userId: string | undefined;
+  userId: string | null | undefined;
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -48,7 +48,7 @@ export default function Description({
     },
   });
   const { control, handleSubmit, reset } = form;
-  const mutation = trpc.users.editUser.useMutation({
+  const mutation = trpc.users.editDescription.useMutation({
     onError: (error) => {
       toast({
         description: error.message,
@@ -78,7 +78,7 @@ export default function Description({
   const onSubmit: SubmitHandler<{ description: string }> = useCallback(
     ({ description }) => {
       if (!userId) throw new Error('User ID is required');
-      mutation.mutate({ description, id: userId });
+      mutation.mutate({ description, clerkId: userId });
       setIsEditing(false);
     },
     [mutation, setIsEditing, userId],

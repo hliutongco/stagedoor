@@ -15,39 +15,55 @@ export const userRouter = router({
     .input(
       z.object({
         firstName: z.string().nullable(),
-        id: z.string(),
+        clerkId: z.string(),
         imageUrl: z.string(),
         lastName: z.string().nullable(),
         username: z.string().nullable(),
       }),
     )
-    .mutation(({ input: { firstName, id, imageUrl, lastName, username } }) => {
+    .mutation(({ input: { clerkId, firstName, imageUrl, lastName, username } }) => {
       return db.insert(users).values({
+        clerkId,
         firstName,
-        id,
         imageUrl,
         lastName,
         username,
       });
     }),
+  editDescription: protectedProcedure
+    .input(
+      z.object({
+        description: z.string(),
+        username: z.string(),
+      }),
+    )
+    .mutation(({ input: { description, username } }) => {
+      return db.update(users).set({ description }).where(eq(users.username, username));
+    }),
   editUser: protectedProcedure
     .input(
       z.object({
-        id: z.string(),
-        description: z.string(),
+        clerkId: z.string(),
+        firstName: z.string().nullable(),
+        imageUrl: z.string(),
+        lastName: z.string().nullable(),
+        username: z.string().nullable(),
       }),
     )
-    .mutation(({ input: { description, id } }) => {
-      return db.update(users).set({ description }).where(eq(users.id, id));
+    .mutation(({ input: { clerkId, firstName, imageUrl, lastName, username } }) => {
+      return db
+        .update(users)
+        .set({ firstName, imageUrl, lastName, username })
+        .where(eq(users.clerkId, clerkId));
     }),
   deleteUser: publicProcedure
     .input(
       z.object({
-        id: z.string(),
+        clerkId: z.string(),
       }),
     )
-    .mutation(({ input: { id } }) => {
-      return db.delete(users).where(eq(users.id, id));
+    .mutation(({ input: { clerkId } }) => {
+      return db.delete(users).where(eq(users.clerkId, clerkId));
     }),
   getUser: publicProcedure
     .input(
