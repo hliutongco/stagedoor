@@ -16,7 +16,7 @@ interface ShowsListProps {
     sumRatings: string | number;
     title: string;
     totalRatings: number;
-    userId?: string;
+    userIdentifier?: string;
   }[];
 }
 
@@ -57,7 +57,7 @@ export default function PlaybillCollection({ isPrivate, shows }: ShowsListProps)
                   showId={show.showId ?? ''}
                   sumRatings={show.sumRatings}
                   totalRatings={show.totalRatings}
-                  userId={show.userId ?? ''}
+                  userIdentifier={show.userIdentifier ?? ''}
                 />
               )}
             </div>
