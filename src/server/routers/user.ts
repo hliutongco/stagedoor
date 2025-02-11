@@ -40,7 +40,7 @@ export const userRouter = router({
     .mutation(({ input: { description, username } }) => {
       return db.update(users).set({ description }).where(eq(users.username, username));
     }),
-  editUser: protectedProcedure
+  editUser: publicProcedure
     .input(
       z.object({
         firstName: z.string().nullable(),
