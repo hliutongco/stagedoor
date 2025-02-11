@@ -20,7 +20,7 @@ export default async function MyProfilePlaybillPage() {
       sumRatings: show?.sumRatings ?? 0,
       title: show?.title ?? '',
       totalRatings: show?.totalRatings ?? 0,
-      userId: user?.id ?? '',
+      userId: user?.clerkId ?? '',
     };
   });
   return (

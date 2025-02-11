@@ -49,16 +49,16 @@ export const reviewRouter = router({
         body: z.string(),
         showId: z.string().uuid(),
         title: z.string(),
-        userId: z.string(),
+        userIdentifier: z.string(),
         userShowId: z.string(),
       }),
     )
-    .mutation(({ input: { body, showId, title, userId, userShowId } }) => {
+    .mutation(({ input: { body, showId, title, userIdentifier, userShowId } }) => {
       return db.insert(reviews).values({
         body,
         showId,
         title,
-        userId,
+        userIdentifier,
         userShowId,
       });
     }),

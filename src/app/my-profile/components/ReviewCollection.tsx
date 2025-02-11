@@ -43,7 +43,7 @@ export default function ReviewCollection({
                   />
                 </Link>
                 <span>{review.show?.title}</span>
-                {review.userShow?.rating !== '0' && (
+                {Boolean(review.userShow?.rating) && review.userShow?.rating !== '0' && (
                   <StarRating
                     name={`${review.id ?? ''}-review`}
                     value={`${review.userShow?.rating}`}

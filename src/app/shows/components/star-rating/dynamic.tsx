@@ -17,7 +17,7 @@ interface RatingsProps extends React.HTMLAttributes<HTMLDivElement> {
   showId: string;
   sumRatings: string | number;
   totalRatings: number;
-  userId: string;
+  userIdentifier: string;
 }
 
 const StarRating = ({
@@ -28,7 +28,7 @@ const StarRating = ({
   sumRatings,
   totalRatings,
   showId,
-  userId,
+  userIdentifier,
 }: RatingsProps) => {
   const router = useRouter();
   const { redirectToSignIn } = useClerk();
@@ -86,14 +86,14 @@ const StarRating = ({
   });
   const onValueChange = useCallback(
     (e: ChangeEvent) => {
-      if (!userId) {
+      if (!userIdentifier) {
         redirectToSignIn();
         return;
       }
       const newValue = (e.target as HTMLInputElement).value;
       setValue(newValue);
       if (!isWatched && !hasRatingOrReview) {
-        createRatingMutation.mutate({ rating: newValue, showId, userId });
+        createRatingMutation.mutate({ rating: newValue, showId, userIdentifier });
         editShowMutation.mutate({
           id: showId,
           sumRatings: `${Number(sumRatings) + Number(newValue)}`,
@@ -124,13 +124,14 @@ const StarRating = ({
       hasRatingOrReview,
       id,
       isWatched,
+      rating,
       redirectToSignIn,
       setIsWatched,
       showId,
       sumRatings,
       totalRatings,
       updateRatingMutation,
-      userId,
+      userIdentifier,
       value,
     ],
   );

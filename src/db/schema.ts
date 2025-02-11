@@ -41,7 +41,7 @@ export const reviews = pgTable('reviews', {
   createdAt: timestamp().defaultNow(),
   showId: uuid('show_id'),
   title: text().notNull(),
-  userId: text('user_id'),
+  userIdentifier: text('user_identifier'),
   updatedAt: timestamp()
     .defaultNow()
     .$onUpdate(() => new Date())
@@ -55,8 +55,8 @@ export const reviewRelations = relations(reviews, ({ one }) => ({
     references: [shows.id],
   }),
   user: one(users, {
-    fields: [reviews.userId],
-    references: [users.id],
+    fields: [reviews.userIdentifier],
+    references: [users.username],
   }),
   userShow: one(userShows, {
     fields: [reviews.userShowId],
@@ -65,7 +65,8 @@ export const reviewRelations = relations(reviews, ({ one }) => ({
 }));
 
 export const users = pgTable('users', {
-  id: text().primaryKey(),
+  id: uuid().primaryKey().defaultRandom(),
+  clerkId: text(),
   description: text(),
   firstName: text(),
   imageUrl: text().notNull(),
@@ -91,7 +92,7 @@ export const userShows = pgTable('user_shows', {
     .defaultNow()
     .$onUpdate(() => new Date())
     .notNull(),
-  userId: text('user_id'),
+  userIdentifier: text('user_identifier'),
 });
 
 export const userShowsRelations = relations(userShows, ({ many, one }) => ({
@@ -101,7 +102,7 @@ export const userShowsRelations = relations(userShows, ({ many, one }) => ({
     references: [shows.id],
   }),
   user: one(users, {
-    fields: [userShows.userId],
-    references: [users.id],
+    fields: [userShows.userIdentifier],
+    references: [users.username],
   }),
 }));

@@ -50,11 +50,11 @@ const formSchema = z.object({
 
 export default function ReviewModal({
   showId,
-  userId,
+  userIdentifier,
   userShowId,
 }: {
   showId: string;
-  userId: string;
+  userIdentifier: string;
   userShowId: string | undefined;
 }) {
   const router = useRouter();
@@ -103,23 +103,26 @@ export default function ReviewModal({
   const [open, toggleOpen] = useState(false);
   const handleOpen = useCallback(
     (value: boolean) => {
-      if (!userId) {
+      if (!userIdentifier) {
         redirectToSignIn();
         return;
       }
       toggleOpen(value);
       reset();
     },
-    [redirectToSignIn, reset, toggleOpen, userId],
+    [redirectToSignIn, reset, toggleOpen, userIdentifier],
   );
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     const { body, title } = data;
     if (userShowId) {
-      createMutation.mutate({ body, showId, title, userId, userShowId });
+      createMutation.mutate({ body, showId, title, userIdentifier, userShowId });
     } else {
-      const [{ id }] = await createUserShowMutation.mutateAsync({ showId, userId });
+      const [{ id }] = await createUserShowMutation.mutateAsync({
+        showId,
+        userIdentifier,
+      });
       setIsWatched(true);
-      createMutation.mutate({ body, showId, title, userId, userShowId: id });
+      createMutation.mutate({ body, showId, title, userIdentifier, userShowId: id });
     }
     handleOpen(false);
   };

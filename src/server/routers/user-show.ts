@@ -14,16 +14,16 @@ export const userShowRouter = router({
     .input(
       z.object({
         showId: z.string().uuid(),
-        userId: z.string(),
+        userIdentifier: z.string(),
       }),
     )
-    .mutation(async ({ input: { showId, userId } }) => {
+    .mutation(async ({ input: { showId, userIdentifier } }) => {
       return db
         .insert(userShows)
         .values({
           isWatched: true,
           showId,
-          userId,
+          userIdentifier,
         })
         .returning();
     }),
@@ -31,15 +31,15 @@ export const userShowRouter = router({
     .input(
       z.object({
         showId: z.string().uuid(),
-        userId: z.string(),
+        userIdentifier: z.string(),
         rating: z.string(),
       }),
     )
-    .mutation(({ input: { showId, userId, rating } }) => {
+    .mutation(({ input: { showId, userIdentifier, rating } }) => {
       return db.insert(userShows).values({
         isWatched: true,
         showId,
-        userId,
+        userIdentifier,
         rating,
       });
     }),
@@ -47,12 +47,15 @@ export const userShowRouter = router({
     .input(
       z.object({
         showId: z.string().uuid(),
-        userId: z.string(),
+        userIdentifier: z.string(),
       }),
     )
-    .query(({ input: { showId, userId } }) => {
+    .query(({ input: { showId, userIdentifier } }) => {
       return db.query.userShows.findFirst({
-        where: and(eq(userShows.showId, showId), eq(userShows.userId, userId)),
+        where: and(
+          eq(userShows.showId, showId),
+          eq(userShows.userIdentifier, userIdentifier),
+        ),
         with: {
           reviews: true,
         },

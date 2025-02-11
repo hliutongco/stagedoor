@@ -54,25 +54,42 @@ export async function POST(req: Request) {
     if (eventType === 'user.created') {
       const {
         first_name: firstName,
-        id,
+        id: clerkId,
         image_url: imageUrl,
         last_name: lastName,
         username,
       } = evt.data;
       await trpc.users.createUser({
         firstName,
-        id,
+        clerkId,
+        imageUrl,
+        lastName,
+        username,
+      });
+    }
+    if (eventType === 'user.updated') {
+      const {
+        first_name: firstName,
+        image_url: imageUrl,
+        last_name: lastName,
+        username,
+      } = evt.data;
+      if (username === null) {
+        throw new Error('User is missing a username and cannot be updated');
+      }
+      await trpc.users.editUser({
+        firstName,
         imageUrl,
         lastName,
         username,
       });
     }
     if (eventType === 'user.deleted') {
-      const { id } = evt.data;
-      if (id === undefined) {
+      const { id: clerkId } = evt.data;
+      if (clerkId === undefined) {
         throw new Error('User cannot be deleted');
       }
-      await trpc.users.deleteUser({ id });
+      await trpc.users.deleteUser({ clerkId });
     }
   } catch (err) {
     console.error('Error: Could not save to database:', err);

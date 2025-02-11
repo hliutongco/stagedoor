@@ -51,9 +51,11 @@ export default async function Home() {
                   {review.title}
                 </h4>
               </Link>
-              <div className="mx-auto">
-                <StarRating name={review.id} value={`${review.userShow?.rating}`} />
-              </div>
+              {Boolean(review.userShow?.rating) && review.userShow?.rating !== '0' && (
+                <div className="mx-auto">
+                  <StarRating name={review.id} value={`${review.userShow?.rating}`} />
+                </div>
+              )}
               <div className="mt-2">
                 <Link href={`/shows/${review.show?.slug}`}>
                   <CloudinaryImage
