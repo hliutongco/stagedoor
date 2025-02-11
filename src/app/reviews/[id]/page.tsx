@@ -51,7 +51,7 @@ export default async function ReviewPage({
             />
             {review.show?.title}
           </Link>
-          {review.userShow?.rating !== '0' && (
+          {Boolean(review.userShow?.rating) && review.userShow?.rating !== '0' && (
             <StarRating name={review.title} value={`${review.userShow.rating}`} />
           )}
         </div>

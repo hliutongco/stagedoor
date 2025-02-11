@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { trpc } from '@/server/clients/server-api';
 import { currentUser } from '@clerk/nextjs/server';
 import { ReactNode } from 'react';
@@ -112,10 +113,13 @@ export default async function ShowView({
                             {review.title}
                           </span>
                         </Link>
-                        <StarRatingStatic
-                          name={review.id}
-                          value={`${review.userShow.rating}`}
-                        />
+                        {Boolean(review.userShow.rating) &&
+                          review.userShow.rating !== '0' && (
+                            <StarRatingStatic
+                              name={review.id}
+                              value={`${review.userShow.rating}`}
+                            />
+                          )}
                       </div>
                       {user?.username === review.userIdentifier && (
                         <ReviewCard review={review} />
