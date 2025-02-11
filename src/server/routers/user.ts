@@ -43,18 +43,17 @@ export const userRouter = router({
   editUser: protectedProcedure
     .input(
       z.object({
-        clerkId: z.string(),
         firstName: z.string().nullable(),
         imageUrl: z.string(),
         lastName: z.string().nullable(),
-        username: z.string().nullable(),
+        username: z.string(),
       }),
     )
-    .mutation(({ input: { clerkId, firstName, imageUrl, lastName, username } }) => {
+    .mutation(({ input: { firstName, imageUrl, lastName, username } }) => {
       return db
         .update(users)
         .set({ firstName, imageUrl, lastName, username })
-        .where(eq(users.clerkId, clerkId));
+        .where(eq(users.username, username));
     }),
   deleteUser: publicProcedure
     .input(

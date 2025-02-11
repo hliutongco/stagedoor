@@ -19,14 +19,14 @@ interface WatchedButtonProps {
   hasRatingOrReview: boolean;
   id: string | undefined;
   showId: string;
-  userId: string | undefined;
+  userIdentifier: string | undefined;
 }
 
 export default function WatchedButton({
   hasRatingOrReview,
   id,
   showId,
-  userId = '',
+  userIdentifier = '',
 }: WatchedButtonProps) {
   const { isWatched, setIsWatched } = useContext(IsWatchedContext);
   const router = useRouter();
@@ -61,7 +61,7 @@ export default function WatchedButton({
   });
   const handleClick = useCallback(
     (value: boolean) => {
-      if (!userId) {
+      if (!userIdentifier) {
         redirectToSignIn();
         return;
       }
@@ -74,7 +74,7 @@ export default function WatchedButton({
         return;
       }
       if (!isWatched && !hasRatingOrReview) {
-        createMutation.mutate({ showId, userId });
+        createMutation.mutate({ showId, userIdentifier });
       } else if (id) {
         deleteMutation.mutate({ id });
       } else {
@@ -97,7 +97,7 @@ export default function WatchedButton({
       setIsWatched,
       showId,
       toast,
-      userId,
+      userIdentifier,
     ],
   );
   const isLoading = useMemo(

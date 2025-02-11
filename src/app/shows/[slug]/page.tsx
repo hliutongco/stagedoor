@@ -20,9 +20,12 @@ export default async function ShowView({
   params: Promise<{ slug: string }>;
 }) {
   const [{ slug }, user] = await Promise.all([params, currentUser()]);
-  const userId = user?.id ?? '';
+  const username = user?.username ?? '';
   const show = await trpc.shows.getShow({ slug: decodeURIComponent(slug) });
-  const userShow = await trpc.userShows.getUserShow({ showId: show?.id ?? '', userId });
+  const userShow = await trpc.userShows.getUserShow({
+    showId: show?.id ?? '',
+    userIdentifier: username,
+  });
   return (
     <IsWatchedProvider isWatched={Boolean(userShow?.isWatched)}>
       <div className="my-10 p-4 lg:p-8">
@@ -53,7 +56,7 @@ export default async function ShowView({
               hasRatingOrReview={Boolean(userShow?.hasRating || userShow?.reviews.length)}
               id={userShow?.id}
               showId={show?.id ?? ''}
-              userId={userId}
+              userIdentifier={username}
             />
             <div className="flex flex-col gap-2 items-center">
               <p>Your Rating:</p>
@@ -66,7 +69,7 @@ export default async function ShowView({
                 showId={show?.id ?? ''}
                 sumRatings={show?.sumRatings ?? 0}
                 totalRatings={show?.totalRatings ?? 0}
-                userId={userId}
+                userIdentifier={username}
               />
             </div>
           </div>
@@ -77,7 +80,7 @@ export default async function ShowView({
           <h2 className="font-bold text-lg lg:text-2xl">All Reviews</h2>
           <ReviewModal
             showId={show?.id ?? ''}
-            userId={userId ?? ''}
+            userIdentifier={username ?? ''}
             userShowId={userShow?.id}
           />
         </div>
@@ -114,7 +117,9 @@ export default async function ShowView({
                           value={`${review.userShow.rating}`}
                         />
                       </div>
-                      {user?.id === review.userId && <ReviewCard review={review} />}
+                      {user?.username === review.userIdentifier && (
+                        <ReviewCard review={review} />
+                      )}
                     </div>
                     <ReviewBody body={review.body} id={review.id} />
                   </div>

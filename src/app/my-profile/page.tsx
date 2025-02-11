@@ -35,7 +35,7 @@ export default async function MyProfilePage() {
             View Your Public Profile
           </Link>
         </p>
-        <Description description={user?.description ?? ''} userId={user?.clerkId} />
+        <Description description={user?.description ?? ''} username={user?.username} />
         {watchedShows && <PlaybillCollection isPrivate shows={watchedShows} />}
         <Link
           className="float-end mr-8 text-primary-dark underline"

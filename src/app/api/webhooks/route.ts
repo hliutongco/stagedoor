@@ -70,14 +70,15 @@ export async function POST(req: Request) {
     if (eventType === 'user.updated') {
       const {
         first_name: firstName,
-        id: clerkId,
         image_url: imageUrl,
         last_name: lastName,
         username,
       } = evt.data;
+      if (username === null) {
+        throw new Error('User is missing a username and cannot be updated');
+      }
       await trpc.users.editUser({
         firstName,
-        clerkId,
         imageUrl,
         lastName,
         username,

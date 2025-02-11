@@ -32,10 +32,10 @@ const formSchema = z.object({
 
 export default function Description({
   description,
-  userId,
+  userIdentifier,
 }: {
   description: string;
-  userId: string | null | undefined;
+  userIdentifier: string | null | undefined;
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -77,11 +77,11 @@ export default function Description({
   }, [reset, setIsEditing]);
   const onSubmit: SubmitHandler<{ description: string }> = useCallback(
     ({ description }) => {
-      if (!userId) throw new Error('User ID is required');
-      mutation.mutate({ description, clerkId: userId });
+      if (!userIdentifier) throw new Error('User ID is required');
+      mutation.mutate({ description, userIdentifier });
       setIsEditing(false);
     },
-    [mutation, setIsEditing, userId],
+    [mutation, setIsEditing, userIdentifier],
   );
   return (
     <>
