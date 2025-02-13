@@ -79,8 +79,8 @@ export default function RemoveRating({
   ]);
 
   return (
-    <span className="text-sm" onClick={handleClick} role="button">
+    <button className="text-sm" onClick={handleClick}>
       Remove Rating
-    </span>
+    </button>
   );
 }

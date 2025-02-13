@@ -24,6 +24,7 @@ export default function ShowsList({ shows }: { shows: (typeof Show.$inferSelect)
                 alt={show.title}
                 height={276}
                 src={transformCharacters(show.slug)}
+                style={{ height: 'auto', width: 'auto' }}
                 width={175}
               />
               <span className="hover:underline">

@@ -63,6 +63,7 @@ export default async function Home() {
                     className="float-left mx-2"
                     height={150}
                     src={transformCharacters(review.show?.slug ?? '')}
+                    style={{ width: '100px', height: '150px' }}
                     width={100}
                   />
                 </Link>
