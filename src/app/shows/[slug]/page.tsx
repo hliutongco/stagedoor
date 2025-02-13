@@ -30,15 +30,16 @@ export default async function ShowView({
   return (
     <IsWatchedProvider isWatched={Boolean(userShow?.isWatched)}>
       <div className="my-10 p-4 lg:p-8">
-        <h2 className="font-bold text-2xl lg:text-4xl text-center">
+        <h2
+          aria-label={`${show?.title ?? 'Current Show'} ${show?.year ?? 'Unknown Year'}`}
+          className="font-bold text-2xl lg:text-4xl text-center"
+        >
           {show?.title ?? ''} ({show?.year ?? ''})
         </h2>
         <div className="py-4 text-center">
-          {show?.userShows.length ?? 0} people have watched this show
+          <p>{show?.userShows.length ?? 0} people have watched this show</p>
           {show?.averageRating !== '0' && (
-            <div className="pt-2 text-center">
-              Average Rating: {show?.averageRating} / 5
-            </div>
+            <p className="pt-2 text-center">Average Rating: {show?.averageRating} / 5</p>
           )}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2">
@@ -96,6 +97,7 @@ export default async function ShowView({
                   <div className="flex flex-col float-left items-center p-4 mx-4 text-center text-sm">
                     <Image
                       alt={review.user?.username + 'profile picture'}
+                      aria-hidden
                       className="rounded-md"
                       height={50}
                       src={review.user?.imageUrl ?? ''}

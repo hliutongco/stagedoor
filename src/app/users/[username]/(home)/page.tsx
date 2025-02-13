@@ -48,7 +48,7 @@ export default async function UserPage({
           className="float-end mr-8 text-primary-dark underline"
           href={`/users/${user?.username}/playbill-collection`}
         >
-          &gt; View The Whole Collection
+          View The Whole Collection
         </Link>
       </div>
       <ReviewCollection reviews={user?.reviews ?? []} />

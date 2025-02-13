@@ -137,8 +137,16 @@ const StarRating = ({
   );
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <fieldset className="dynamic rating" id={name} name={name}>
+    <div
+      aria-label={`Current rating: ${value} stars`}
+      className="flex flex-col items-center justify-center"
+    >
+      <fieldset
+        aria-label="Click to change your rating"
+        className="dynamic rating"
+        id={name}
+        name={name}
+      >
         <input
           checked={value === '5'}
           id={`${name}-star5`}

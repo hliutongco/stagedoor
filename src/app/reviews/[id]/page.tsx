@@ -24,6 +24,7 @@ export default async function ReviewPage({
         <span className="flex items-center gap-2 justify-center">
           <Image
             alt={review.user?.username ?? 'review-user'}
+            aria-hidden
             className="rounded-sm"
             height={20}
             src={review.user?.imageUrl ?? ''}
@@ -43,6 +44,7 @@ export default async function ReviewPage({
           <Link className="text-center" href={`/shows/${review.show?.slug}`}>
             <CloudinaryImage
               alt={review.show?.title ?? ''}
+              aria-hidden
               className="rounded-sm"
               height={315}
               priority

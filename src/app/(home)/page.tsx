@@ -73,6 +73,7 @@ export default async function Home() {
                 <div className="absolute bottom-3 flex gap-2 items-center">
                   <Image
                     alt={review.user?.username + 'profile picture'}
+                    aria-hidden
                     className="rounded-2xl"
                     height={30}
                     src={review.user?.imageUrl ?? ''}
