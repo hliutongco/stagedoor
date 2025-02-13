@@ -63,7 +63,7 @@ export default async function Home() {
                     className="float-left mx-2"
                     height={150}
                     src={transformCharacters(review.show?.slug ?? '')}
-                    style={{ width: '100px', height: '150px' }}
+                    style={{ height: '150px', width: '100px' }}
                     width={100}
                   />
                 </Link>
@@ -76,7 +76,7 @@ export default async function Home() {
                     className="rounded-2xl"
                     height={30}
                     src={review.user?.imageUrl ?? ''}
-                    style={{ width: 'auto', height: 'auto' }}
+                    style={{ height: 'auto', width: 'auto' }}
                     width={30}
                   />
                   {review.user?.username}

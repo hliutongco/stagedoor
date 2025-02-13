@@ -38,7 +38,7 @@ export default function ReviewCollection({
                     alt={review.show?.title ?? ''}
                     height={200}
                     src={transformCharacters(review.show?.slug ?? '')}
-                    style={{ width: 'auto', height: 'auto' }}
+                    style={{ height: 'auto', width: 'auto' }}
                     width={100}
                   />
                 </Link>

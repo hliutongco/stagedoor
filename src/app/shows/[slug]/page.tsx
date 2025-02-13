@@ -48,7 +48,7 @@ export default async function ShowView({
               height={394}
               priority
               src={transformCharacters(show?.slug ?? '')}
-              style={{ width: '250px', height: '394px' }}
+              style={{ height: '394px', width: '250px' }}
               width={250}
             />
           </div>
@@ -99,7 +99,7 @@ export default async function ShowView({
                       className="rounded-md"
                       height={50}
                       src={review.user?.imageUrl ?? ''}
-                      style={{ width: 'auto', height: 'auto' }}
+                      style={{ height: 'auto', width: 'auto' }}
                       width={50}
                     />
                     {review.user?.username}
