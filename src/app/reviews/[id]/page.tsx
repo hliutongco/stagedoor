@@ -27,6 +27,7 @@ export default async function ReviewPage({
             className="rounded-sm"
             height={20}
             src={review.user?.imageUrl ?? ''}
+            style={{ width: 'auto', height: 'auto' }}
             width={20}
           />
           {review.user?.username}

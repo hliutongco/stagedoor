@@ -75,6 +75,7 @@ export default async function Home() {
                     className="rounded-2xl"
                     height={30}
                     src={review.user?.imageUrl ?? ''}
+                    style={{ width: 'auto', height: 'auto' }}
                     width={30}
                   />
                   {review.user?.username}

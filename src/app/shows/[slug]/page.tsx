@@ -99,6 +99,7 @@ export default async function ShowView({
                       className="rounded-md"
                       height={50}
                       src={review.user?.imageUrl ?? ''}
+                      style={{ width: 'auto', height: 'auto' }}
                       width={50}
                     />
                     {review.user?.username}
