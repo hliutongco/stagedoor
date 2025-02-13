@@ -132,7 +132,12 @@ export default function Description({
           <p className="font-medium mb-1">Description</p>
           <p className="mb-4">{description}</p>
           <div className="absolute bottom-0 mt-2 right-0">
-            <Button onClick={() => setIsEditing(true)} size="sm" variant="default">
+            <Button
+              aria-label="Edit Description"
+              onClick={() => setIsEditing(true)}
+              size="sm"
+              variant="default"
+            >
               Edit
             </Button>
           </div>

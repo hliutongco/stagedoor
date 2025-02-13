@@ -63,6 +63,7 @@ export default async function Home() {
                     className="float-left mx-2"
                     height={150}
                     src={transformCharacters(review.show?.slug ?? '')}
+                    style={{ height: '150px', width: '100px' }}
                     width={100}
                   />
                 </Link>
@@ -72,10 +73,11 @@ export default async function Home() {
                 <div className="absolute bottom-3 flex gap-2 items-center">
                   <Image
                     alt={review.user?.username + 'profile picture'}
+                    aria-hidden
                     className="rounded-2xl"
                     height={30}
                     src={review.user?.imageUrl ?? ''}
-                    style={{ width: 'auto', height: 'auto' }}
+                    style={{ height: 'auto', width: 'auto' }}
                     width={30}
                   />
                   {review.user?.username}

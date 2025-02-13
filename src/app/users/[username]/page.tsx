@@ -35,13 +35,13 @@ export default async function UserPage({
         </h1>
         <div className="flex gap-4 items-center justify-center my-3">
           <div className="flex flex-col text-center">
-            <span className="text-xl lg:text-2xl">{allShows?.length ?? '0'}</span>
-            <span className="text-base lg:text-xl">Shows</span>
+            <p className="text-xl lg:text-2xl">{allShows?.length ?? '0'}</p>
+            <p className="text-base lg:text-xl">Shows</p>
           </div>
 
           <div className="flex flex-col text-center">
-            <span className="text-xl lg:text-2xl">{user?.reviews.length ?? '0'}</span>
-            <span className="text-base lg:text-xl">Reviews</span>
+            <p className="text-xl lg:text-2xl">{user?.reviews.length ?? '0'}</p>
+            <p className="text-base lg:text-xl">Reviews</p>
           </div>
         </div>
         <p className="mb-4 mx-auto max-w-fit w-3/4 lg:w-1/2">{user?.description}</p>
@@ -50,7 +50,7 @@ export default async function UserPage({
           className="float-end mr-8 text-primary-dark underline"
           href={`/users/${user?.username}/playbill-collection`}
         >
-          &gt; View The Whole Collection
+          View The Whole Collection
         </Link>
       </div>
       <ReviewCollection reviews={user?.reviews ?? []} />

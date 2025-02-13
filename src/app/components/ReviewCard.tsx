@@ -117,11 +117,11 @@ export default function ReviewCard({ review }: { review: typeof reviews.$inferSe
   );
 
   return (
-    <div className="flex">
+    <div aria-label="Edit or Delete Review" className="flex">
       <Dialog>
         <DialogTrigger asChild>
-          <Button size="sm" variant="ghost">
-            <Pencil />
+          <Button aria-label="Edit Review" size="sm" variant="ghost">
+            <Pencil aria-hidden />
           </Button>
         </DialogTrigger>
         <DialogContent handleCancel={() => reset(review)}>
@@ -192,8 +192,8 @@ export default function ReviewCard({ review }: { review: typeof reviews.$inferSe
       </Dialog>
       <Dialog>
         <DialogTrigger asChild>
-          <Button size="sm" variant="ghost">
-            <Trash2 />
+          <Button aria-label="Delete Review" size="sm" variant="ghost">
+            <Trash2 aria-hidden />
           </Button>
         </DialogTrigger>
         <DialogContent>

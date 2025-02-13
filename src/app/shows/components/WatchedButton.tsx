@@ -5,14 +5,7 @@ import { Check } from 'lucide-react';
 import { useToast } from '@/components/ui/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { useCallback, useContext, useMemo } from 'react';
-import {
-  Button,
-  Spinner,
-  TooltipProvider,
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from '@/components/ui/index';
+import { Button, Spinner } from '@/components/ui/index';
 import { IsWatchedContext } from '../[slug]/components/isWatchedProvider';
 
 interface WatchedButtonProps {
@@ -109,16 +102,9 @@ export default function WatchedButton({
     <>
       {isLoading && <Spinner />}
       {!isLoading && isWatched && (
-        <TooltipProvider delayDuration={100}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button onClick={() => handleClick(false)} variant="secondary">
-                <Check className="mr-1" size="30" /> I&apos;ve Seen This!
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Undo</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Button onClick={() => handleClick(false)} variant="secondary">
+          <Check className="mr-1" size="30" /> I&apos;ve Seen This!
+        </Button>
       )}
       {!isLoading && !isWatched && (
         <Button className="text-black" onClick={() => handleClick(true)}>

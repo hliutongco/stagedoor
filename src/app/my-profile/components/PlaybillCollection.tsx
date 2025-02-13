@@ -40,7 +40,7 @@ export default function PlaybillCollection({ isPrivate, shows }: ShowsListProps)
                   alt={show.title}
                   height={276}
                   src={transformCharacters(show.slug)}
-                  style={{ width: 'auto', height: 'auto' }}
+                  style={{ height: 'auto', width: 'auto' }}
                   width={175}
                 />
               </Link>

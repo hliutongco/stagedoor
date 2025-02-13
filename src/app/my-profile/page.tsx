@@ -41,7 +41,7 @@ export default async function MyProfilePage() {
           className="float-end mr-8 text-primary-dark underline"
           href="/my-profile/playbill-collection"
         >
-          &gt; View The Whole Collection
+          View The Whole Collection
         </Link>
       </div>
       <ReviewCollection isPrivate reviews={user?.reviews ?? []} />

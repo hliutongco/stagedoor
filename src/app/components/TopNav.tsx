@@ -37,19 +37,19 @@ export default async function TopNav() {
         </SignedOut>
         <SignedIn>
           <UserButton
+            appearance={{
+              elements: {
+                userButtonPopoverFooter: {
+                  display: 'none',
+                },
+              },
+            }}
             userProfileProps={{
               appearance: {
                 elements: {
                   profileSection__username: {
                     display: 'none',
                   },
-                },
-              },
-            }}
-            appearance={{
-              elements: {
-                userButtonPopoverFooter: {
-                  display: 'none',
                 },
               },
             }}
