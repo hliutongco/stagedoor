@@ -1,12 +1,21 @@
 import PlaybillCollection from '@/app/my-profile/components/PlaybillCollection';
 import { trpc } from '@/server/clients/server-api';
+import { Metadata } from 'next';
 import Link from 'next/link';
 
-export default async function UserPlaybillPage({
-  params,
-}: {
+type Props = {
   params: Promise<{ username: string }>;
-}) {
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const username = (await params).username;
+  return {
+    title: `${username ?? 'User'}'s Playbill Collection`,
+  };
+}
+
+export default async function UserPlaybillPage({ params }: Props) {
   const { username } = await params;
   const user = await trpc.users.getUser({
     username,

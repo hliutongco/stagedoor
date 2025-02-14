@@ -2,6 +2,13 @@ import { currentUser } from '@clerk/nextjs/server';
 import PlaybillCollection from '../components/PlaybillCollection';
 import { trpc } from '@/server/clients/server-api';
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Your Playbill Collection',
+  };
+}
 
 export default async function MyProfilePlaybillPage() {
   const _user = await currentUser();

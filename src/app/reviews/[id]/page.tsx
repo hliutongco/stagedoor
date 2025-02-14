@@ -6,14 +6,24 @@ import StarRating from '@/components/core/star-rating';
 import { transformCharacters } from '@/lib/utils/index';
 import { trpc } from '@/server/clients/server-api';
 import { currentUser } from '@clerk/nextjs/server';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default async function ReviewPage({
-  params,
-}: {
+type Props = {
   params: Promise<{ id: string }>;
-}) {
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const id = (await params).id;
+  const review = await trpc.reviews.getReview({ id });
+  return {
+    title: review?.title ?? 'Full Review',
+  };
+}
+
+export default async function ReviewPage({ params }: Props) {
   const [{ id }, user] = await Promise.all([params, currentUser()]);
   const review = await trpc.reviews.getReview({ id });
   if (review === undefined) throw new Error('Review not found');
