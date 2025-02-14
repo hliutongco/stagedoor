@@ -1,5 +1,62 @@
 # CHANGELOG
 
+## [v0.8.0](https://github.com/hliutongco/stagedoor/releases/tag/v0.8.0) - 2025-02-13 18:45:05
+
+This release adds accessibility features:
+
+- jsx-a11y plugin is setup in strict mode
+- all new lint errors fixed
+- addition of aria-labels and aria-hidden tags
+
+### Minor Release
+
+- app:
+  - add accessibility features (#74) ([092661d](https://github.com/hliutongco/stagedoor/commit/092661dbc972eb42755486bf6ae34728be4b8931)) ([#74](https://github.com/hliutongco/stagedoor/pull/74))
+
+### Patch Release
+
+- Image:
+  - add width and height to style ([85768d9](https://github.com/hliutongco/stagedoor/commit/85768d95b92d24701433639923ad5bceb4dc8bc7))
+
+- routers/user:
+  - change webhook route to public procedure (#73) ([afc46c7](https://github.com/hliutongco/stagedoor/commit/afc46c7842d98f414619bc1145818611ef481877)) ([#73](https://github.com/hliutongco/stagedoor/pull/73))
+
+- app:
+  - switch user id to clerkId (#72) ([957467e](https://github.com/hliutongco/stagedoor/commit/957467ed9c7104ab729a5202a2cd160fdd3fe345)) ([#72](https://github.com/hliutongco/stagedoor/pull/72))
+  - misc changes (#64) ([c869e5f](https://github.com/hliutongco/stagedoor/commit/c869e5f71198792d863949c1f55e43a0a034f916)) ([#64](https://github.com/hliutongco/stagedoor/pull/64))
+  - remove sm breakpoints (#60) ([f497dc6](https://github.com/hliutongco/stagedoor/commit/f497dc61f818b574dfbc85f2482bb0c298dd366f)) ([#60](https://github.com/hliutongco/stagedoor/pull/60))
+
+- TopNav:
+  - remove change username section (#71) ([1cec6f6](https://github.com/hliutongco/stagedoor/commit/1cec6f67bb5cb231fba839ad5b0aea8630543a12)) ([#71](https://github.com/hliutongco/stagedoor/pull/71))
+
+- PlaybillCollection:
+  - fix loading screen, temp fix for watched shows (#70) ([ef8588e](https://github.com/hliutongco/stagedoor/commit/ef8588e4d411f442449138fb3fd6227093160ac2)) ([#70](https://github.com/hliutongco/stagedoor/pull/70))
+  - add playbill collection routes (#65) ([c5292fe](https://github.com/hliutongco/stagedoor/commit/c5292fe77cd228c022255dc53a1fc7f999b17899)) ([#65](https://github.com/hliutongco/stagedoor/pull/65))
+
+- dynamic:
+  - fix average rating bug (#69) ([59056d4](https://github.com/hliutongco/stagedoor/commit/59056d4ed74d6400b31ad1cdee45e6b6cd9f0c44)) ([#69](https://github.com/hliutongco/stagedoor/pull/69))
+
+- ReviewCollection:
+  - fix grid cols on larger screen sizes (#68) ([bcc3106](https://github.com/hliutongco/stagedoor/commit/bcc31069954129d987c9ce148e28aa7b3523b194)) ([#68](https://github.com/hliutongco/stagedoor/pull/68))
+
+- privacy-policy:
+  - add a privacy policy page (#67) ([bc35b09](https://github.com/hliutongco/stagedoor/commit/bc35b09ce534f5680c63a1321c5a82d682d2bcb7)) ([#67](https://github.com/hliutongco/stagedoor/pull/67))
+
+- ReviewBody:
+  - add ReviewBody component and IsLoadingProvider (#66) ([6f5f597](https://github.com/hliutongco/stagedoor/commit/6f5f597514a9f943d999f5e5e244ca3fd2759f20)) ([#66](https://github.com/hliutongco/stagedoor/pull/66))
+
+- CHANGELOG:
+  - update release notes ([f475106](https://github.com/hliutongco/stagedoor/commit/f4751062ab174efb3f9a512b98cdde0ea4bf328d))
+
+- ShowsList:
+  - add average rating to the shows view page (#63) ([a799862](https://github.com/hliutongco/stagedoor/commit/a799862808f05bf96bbaf79ed0a002f76f8a3ea9)) ([#63](https://github.com/hliutongco/stagedoor/pull/63))
+
+- general:
+  - fix/(StarRating): finish avg rating (#62) ([3bf8ad0](https://github.com/hliutongco/stagedoor/commit/3bf8ad08456384e764fee66569f4d527a6843150)) ([#62](https://github.com/hliutongco/stagedoor/pull/62))
+
+- schema:
+  - average rating (#61) ([b8793d9](https://github.com/hliutongco/stagedoor/commit/b8793d932932cef4deec1e07bb277b2ab923b2a0)) ([#61](https://github.com/hliutongco/stagedoor/pull/61))
+
 ## [v0.7.0](https://github.com/hliutongco/stagedoor/releases/tag/v0.7.0) - 2025-01-28 13:16:21
 
 This release sees the completion of the My Profile/public profile MVP
