@@ -2,12 +2,21 @@ import PlaybillCollection from '@/app/my-profile/components/PlaybillCollection';
 import { trpc } from '@/server/clients/server-api';
 import ReviewCollection from '@/app/my-profile/components/ReviewCollection';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
-export default async function UserPage({
-  params,
-}: {
+type Props = {
   params: Promise<{ username: string }>;
-}) {
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const username = (await params).username;
+  return {
+    title: `${username ?? 'User'}'s Profile`,
+  };
+}
+
+export default async function UserPage({ params }: Props) {
   const { username } = await params;
   // TODO: once the drizzle fix is in place, refactor this to use the limit
   const user = await trpc.users.getUser({

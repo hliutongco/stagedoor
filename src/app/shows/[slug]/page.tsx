@@ -1,4 +1,5 @@
 /* eslint-disable indent */
+import { Metadata } from 'next';
 import { trpc } from '@/server/clients/server-api';
 import { currentUser } from '@clerk/nextjs/server';
 import { ReactNode } from 'react';
@@ -15,11 +16,20 @@ import { transformCharacters } from '@/lib/utils/index';
 import ReviewBody from '@/app/components/ReviewBody';
 import IsLoadingProvider from '@/app/components/IsLoadingProvider';
 
-export default async function ShowView({
-  params,
-}: {
+type Props = {
   params: Promise<{ slug: string }>;
-}) {
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const slug = (await params).slug;
+  const show = await trpc.shows.getShow({ slug: decodeURIComponent(slug) });
+  return {
+    title: show?.title ?? 'Current Show',
+  };
+}
+
+export default async function ShowView({ params }: Props) {
   const [{ slug }, user] = await Promise.all([params, currentUser()]);
   const username = user?.username ?? '';
   const show = await trpc.shows.getShow({ slug: decodeURIComponent(slug) });

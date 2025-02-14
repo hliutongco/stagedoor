@@ -4,6 +4,13 @@ import { trpc } from '@/server/clients/server-api';
 import ReviewCollection from './components/ReviewCollection';
 import Link from 'next/link';
 import Description from './components/Description';
+import { Metadata } from 'next';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Your Profile',
+  };
+}
 
 export default async function MyProfilePage() {
   const _user = await currentUser();
