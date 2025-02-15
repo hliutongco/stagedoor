@@ -3,12 +3,13 @@
   "version": "0.0.5",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
+    "dev": "next dev",
     "format": "prettier --check './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-    "format:fix": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "format:fix": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "lint": "next lint",
+    "start": "next start",
+    "test": "cypress open"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.9.2",
@@ -51,6 +52,7 @@
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^8.18.1",
     "@typescript-eslint/parser": "^8.18.1",
+    "cypress": "^14.0.3",
     "drizzle-kit": "^0.28.1",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",

@@ -39,9 +39,9 @@ export default async function UserPage({ params }: Props) {
   return (
     <>
       <div className="min-h-[95vh] pb-10">
-        <h1 className="font-bold text-xl lg:text-3xl mt-10 text-center">
+        <h2 className="font-bold text-xl lg:text-3xl mt-10 text-center">
           {user?.username ?? 'User'}
-        </h1>
+        </h2>
         <div className="flex gap-4 items-center justify-center my-3">
           <div className="flex flex-col text-center">
             <p className="text-xl lg:text-2xl">{allShows?.length ?? '0'}</p>
