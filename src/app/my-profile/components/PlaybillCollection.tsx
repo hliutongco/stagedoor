@@ -3,6 +3,7 @@ import StarRatingStatic from '@/components/core/star-rating';
 import CloudinaryImage from '@/app/components/CloudinaryImage';
 import { transformCharacters } from '@/lib/utils/index';
 import StarRating from '@/app/shows/components/star-rating/dynamic';
+import { Separator } from '@/components/ui';
 
 interface ShowsListProps {
   isPrivate?: boolean;
@@ -22,8 +23,9 @@ interface ShowsListProps {
 
 export default function PlaybillCollection({ isPrivate, shows }: ShowsListProps) {
   return (
-    <>
-      <h2 className="font-bold text-lg lg:text-2xl text-center">Playbill Collection</h2>
+    <div className="mx-10">
+      <h2 className="font-medium text-xl lg:text-3xl">Playbill Collection</h2>
+      <Separator className="bg-secondary" />
       <div className="items-center justify-items-center pb-10 gap-16 p-4 lg:p-8">
         {!shows.length && (
           <div className="text-center text-sm">
@@ -64,6 +66,6 @@ export default function PlaybillCollection({ isPrivate, shows }: ShowsListProps)
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }

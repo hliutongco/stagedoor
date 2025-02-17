@@ -39,7 +39,7 @@ export default async function UserPage({ params }: Props) {
   return (
     <>
       <div className="min-h-[95vh] pb-10">
-        <h2 className="font-bold text-xl lg:text-3xl mt-10 text-center">
+        <h2 className="font-bold text-3xl lg:text-5xl mt-10 text-center">
           {user?.username ?? 'User'}
         </h2>
         <div className="flex gap-4 items-center justify-center my-3">

@@ -39,10 +39,10 @@ export default async function ShowView({ params }: Props) {
   });
   return (
     <IsWatchedProvider isWatched={Boolean(userShow?.isWatched)}>
-      <div className="my-10 p-4 lg:p-8">
+      <div className="my-2 p-4 lg:p-8">
         <h2
           aria-label={`${show?.title ?? 'Current Show'} ${show?.year ?? 'Unknown Year'}`}
-          className="font-bold text-2xl lg:text-4xl text-center"
+          className="font-bold text-3xl lg:text-5xl text-center"
         >
           {show?.title ?? ''} ({show?.year ?? ''})
         </h2>
