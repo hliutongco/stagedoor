@@ -36,7 +36,7 @@ export default async function MyProfilePage() {
   return (
     <>
       <div className="min-h-[95vh] pb-10">
-        <h2 className="font-bold mt-10 text-xl lg:text-3xl text-center">Your Profile</h2>
+        <h2 className="font-bold mt-10 text-3xl lg:text-5xl text-center">Your Profile</h2>
         <p className="text-center">
           <Link className="text-primary-dark underline" href={`/users/${user?.username}`}>
             View Your Public Profile
