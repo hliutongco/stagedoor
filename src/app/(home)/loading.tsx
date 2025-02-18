@@ -10,23 +10,23 @@ export default function Loading() {
       <div className="items-center justify-items-center min-h-[95vh] p-4 lg:p-8">
         <div className="grid grid-cols-3 lg:grid-cols-5 gap-4">
           <div>
-            <Skeleton className="bg-secondary h-[170px] md:h-[276px] lg:h-[200px] xl:h-[276px] mt-2 rounded-md w-[120px] md:w-[175px] lg:w-[150px] xl:w-[175px]" />
+            <Skeleton className="bg-secondary h-[140px] md:h-[276px] lg:h-[200px] xl:h-[276px] mt-2 rounded-md w-[90px] md:w-[175px] lg:w-[150px] xl:w-[175px]" />
             <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[100px] lg:w-[150px]" />
           </div>
           <div>
-            <Skeleton className="bg-secondary h-[170px] md:h-[276px] lg:h-[200px] xl:h-[276px] mt-2 rounded-md w-[120px] md:w-[175px] lg:w-[150px] xl:w-[175px]" />
+            <Skeleton className="bg-secondary h-[140px] md:h-[276px] lg:h-[200px] xl:h-[276px] mt-2 rounded-md w-[90px] md:w-[175px] lg:w-[150px] xl:w-[175px]" />
             <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[100px] lg:w-[150px]" />
           </div>
           <div>
-            <Skeleton className="bg-secondary h-[170px] md:h-[276px] lg:h-[200px] xl:h-[276px] mt-2 rounded-md w-[120px] md:w-[175px] lg:w-[150px] xl:w-[175px]" />
+            <Skeleton className="bg-secondary h-[140px] md:h-[276px] lg:h-[200px] xl:h-[276px] mt-2 rounded-md w-[90px] md:w-[175px] lg:w-[150px] xl:w-[175px]" />
             <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[100px] lg:w-[150px]" />
           </div>
           <div className="hidden lg:block">
-            <Skeleton className="bg-secondary h-[170px] md:h-[276px] lg:h-[200px] xl:h-[276px] mt-2 rounded-md w-[120px] md:w-[175px] lg:w-[150px] xl:w-[175px]" />
+            <Skeleton className="bg-secondary h-[140px] md:h-[276px] lg:h-[200px] xl:h-[276px] mt-2 rounded-md w-[90px] md:w-[175px] lg:w-[150px] xl:w-[175px]" />
             <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[100px] lg:w-[150px]" />
           </div>
           <div className="hidden lg:block">
-            <Skeleton className="bg-secondary h-[170px] md:h-[276px] lg:h-[200px] xl:h-[276px] mt-2 rounded-md w-[120px] md:w-[175px] lg:w-[150px] xl:w-[175px]" />
+            <Skeleton className="bg-secondary h-[140px] md:h-[276px] lg:h-[200px] xl:h-[276px] mt-2 rounded-md w-[90px] md:w-[175px] lg:w-[150px] xl:w-[175px]" />
             <Skeleton className="bg-secondary h-[25px] mt-2 rounded-md w-[100px] lg:w-[150px]" />
           </div>
         </div>
