@@ -3,25 +3,19 @@ import { Metadata } from 'next';
 import { trpc } from '@/server/clients/server-api';
 import { currentUser } from '@clerk/nextjs/server';
 import { ReactNode } from 'react';
-import Image from 'next/image';
 import IsWatchedProvider from './components/isWatchedProvider';
 import ReviewModal from './components/ReviewModal';
 import StarRating from '../components/star-rating/dynamic';
-import { default as StarRatingStatic } from '@/components/core/star-rating';
 import WatchedButton from '../components/WatchedButton';
-import ReviewCard from '@/app/components/ReviewCard';
-import Link from 'next/link';
 import CloudinaryImage from '@/app/components/CloudinaryImage';
 import { transformCharacters } from '@/lib/utils/index';
-import ReviewBody from '@/app/components/ReviewBody';
-import IsLoadingProvider from '@/app/components/IsLoadingProvider';
+import ReviewContainer from './components/ReviewContainer';
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // read route params
   const slug = (await params).slug;
   const show = await trpc.shows.getShow({ slug: decodeURIComponent(slug) });
   return {
@@ -99,49 +93,11 @@ export default async function ShowView({ params }: Props) {
         <div className="flex flex-col mt-2">
           {show?.reviews.map<ReactNode>((review) => {
             return (
-              <div
-                className="bg-background lg:min-h-[200px] mt-4 rounded-md"
+              <ReviewContainer
                 key={review.id}
-              >
-                <Link href={`/users/${review.user?.username}`}>
-                  <div className="flex flex-col float-left items-center p-4 mx-4 text-center text-sm">
-                    <Image
-                      alt={review.user?.username + 'profile picture'}
-                      aria-hidden
-                      className="rounded-md"
-                      height={50}
-                      src={review.user?.imageUrl ?? ''}
-                      style={{ height: 'auto', width: 'auto' }}
-                      width={50}
-                    />
-                    {review.user?.username}
-                  </div>
-                </Link>
-                <IsLoadingProvider isLoading={false}>
-                  <div className="col-span-3 lg:col-span-4 p-4">
-                    <div className="flex font-bold gap-2 justify-between pb-0">
-                      <div className="flex flex-col md:flex-row items-start md:items-center gap-2">
-                        <Link href={`/reviews/${review.id}`}>
-                          <span className="text-base md:text-lg underline">
-                            {review.title}
-                          </span>
-                        </Link>
-                        {Boolean(review.userShow.rating) &&
-                          review.userShow.rating !== '0' && (
-                            <StarRatingStatic
-                              name={review.id}
-                              value={`${review.userShow.rating}`}
-                            />
-                          )}
-                      </div>
-                      {user?.username === review.userIdentifier && (
-                        <ReviewCard review={review} />
-                      )}
-                    </div>
-                    <ReviewBody body={review.body} id={review.id} />
-                  </div>
-                </IsLoadingProvider>
-              </div>
+                review={review}
+                username={user?.username}
+              />
             );
           })}
           {!show?.reviews?.length && <p className="text-center">Nothing for now!</p>}

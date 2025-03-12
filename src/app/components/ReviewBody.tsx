@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { IsLoadingContext } from './IsLoadingProvider';
 import { Spinner } from '@/components/ui';
 import Link from 'next/link';
@@ -17,13 +17,22 @@ export default function ReviewBody({
   length?: number;
 }) {
   const { isLoading } = useContext(IsLoadingContext);
+  const isFullTextDisplayed = useMemo(() => {
+    return displayFullText || body.length <= length;
+  }, [body, displayFullText, length]);
+  const displayedText = useMemo(() => {
+    if (isFullTextDisplayed) {
+      return body;
+    }
+    return body.slice(0, length) + '...';
+  }, [body, isFullTextDisplayed, length]);
   return (
     <>
       {isLoading && <Spinner className="mt-4" />}
-      {!isLoading && !displayFullText && body.length > length && (
+      {!isLoading && !isFullTextDisplayed && (
         <>
           <p className="whitespace-pre-wrap">
-            <span>{body.slice(0, length) + '...'}</span>
+            <span>{displayedText}</span>
           </p>
           <Link
             className="float-right mb-4 text-primary underline w-fit"
@@ -33,8 +42,8 @@ export default function ReviewBody({
           </Link>
         </>
       )}
-      {!isLoading && (displayFullText || body.length < length) && (
-        <p className="whitespace-pre-wrap">{body}</p>
+      {!isLoading && isFullTextDisplayed && (
+        <p className="whitespace-pre-wrap">{displayedText}</p>
       )}
     </>
   );
