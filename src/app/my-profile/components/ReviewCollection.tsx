@@ -17,7 +17,7 @@ type Review = typeof Review.$inferSelect;
 
 interface ReviewCollection extends Review {
   show: typeof Show.$inferSelect | null;
-  user: typeof User.$inferSelect | null;
+  user?: typeof User.$inferSelect | null;
   userShow: typeof UserShow.$inferSelect | null;
 }
 
@@ -69,15 +69,15 @@ export default function ReviewCollection({
                       <ReviewActions review={review} />
                     </div>
                   )}
-                  {displayUser && (
-                    <Link href={`/users/${review.user?.username}`}>
+                  {displayUser && review?.user && (
+                    <Link href={`/users/${review.user.username}`}>
                       <div className="absolute bottom-3 flex gap-2 items-center">
                         <Image
-                          alt={review.user?.username + 'profile picture'}
+                          alt={review.user.username + 'profile picture'}
                           aria-hidden
                           className="rounded-2xl"
                           height={30}
-                          src={review.user?.imageUrl ?? ''}
+                          src={review.user.imageUrl ?? ''}
                           style={{ height: 'auto', width: 'auto' }}
                           width={30}
                         />
