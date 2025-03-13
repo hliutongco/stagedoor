@@ -9,8 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui';
-import {
   Form,
   FormControl,
   FormField,
@@ -51,7 +49,11 @@ const formSchema = z.object({
     }),
 });
 
-export default function ReviewCard({ review }: { review: typeof reviews.$inferSelect }) {
+export default function ReviewActions({
+  review,
+}: {
+  review: typeof reviews.$inferSelect;
+}) {
   const router = useRouter();
   const utils = trpc.useUtils();
   const form = useForm<z.infer<typeof formSchema>>({

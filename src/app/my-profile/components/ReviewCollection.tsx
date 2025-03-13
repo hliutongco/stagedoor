@@ -1,7 +1,7 @@
 import CloudinaryImage from '@/app/components/CloudinaryImage';
 import IsLoadingProvider from '@/app/components/IsLoadingProvider';
 import ReviewBody from '@/app/components/ReviewBody';
-import ReviewCard from '@/app/components/ReviewCard';
+import ReviewActions from '@/app/components/ReviewActions';
 import StarRating from '@/components/core/star-rating';
 import { reviews as Review, shows as Show, userShows as UserShow } from '@/db/schema';
 import { transformCharacters } from '@/lib/utils/index';
@@ -57,7 +57,7 @@ export default function ReviewCollection({
                   <ReviewBody body={review.body} id={review.id} length={300} />
                   {isPrivate && (
                     <div className="absolute bottom-4 right-4">
-                      <ReviewCard review={review} />
+                      <ReviewActions review={review} />
                     </div>
                   )}
                 </IsLoadingProvider>

@@ -1,7 +1,7 @@
 import CloudinaryImage from '@/app/components/CloudinaryImage';
 import IsLoadingProvider from '@/app/components/IsLoadingProvider';
 import ReviewBody from '@/app/components/ReviewBody';
-import ReviewCard from '@/app/components/ReviewCard';
+import ReviewActions from '@/app/components/ReviewActions';
 import StarRating from '@/components/core/star-rating';
 import { transformCharacters } from '@/lib/utils/index';
 import { trpc } from '@/server/clients/server-api';
@@ -47,7 +47,7 @@ export default async function ReviewPage({ params }: Props) {
       <IsLoadingProvider isLoading={false}>
         {user?.username === review.user?.username && (
           <div className="flex justify-end">
-            <ReviewCard review={review} />
+            <ReviewActions review={review} />
           </div>
         )}
         <div className="flex flex-col md:float-left items-center pb-8 px-10 p-2">
