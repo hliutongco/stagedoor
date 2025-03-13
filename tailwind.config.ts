@@ -90,6 +90,7 @@ export default {
         md: '768px',
         lg: '1005px',
         xl: '1440px',
+        '2xl': '1720px',
       },
     },
   },

@@ -3,21 +3,30 @@ import IsLoadingProvider from '@/app/components/IsLoadingProvider';
 import ReviewBody from '@/app/components/ReviewBody';
 import ReviewActions from '@/app/components/ReviewActions';
 import StarRating from '@/components/core/star-rating';
-import { reviews as Review, shows as Show, userShows as UserShow } from '@/db/schema';
+import {
+  reviews as Review,
+  shows as Show,
+  users as User,
+  userShows as UserShow,
+} from '@/db/schema';
 import { transformCharacters } from '@/lib/utils/index';
 import Link from 'next/link';
+import Image from 'next/image';
 
 type Review = typeof Review.$inferSelect;
 
 interface ReviewCollection extends Review {
   show: typeof Show.$inferSelect | null;
+  user?: typeof User.$inferSelect | null;
   userShow: typeof UserShow.$inferSelect | null;
 }
 
 export default function ReviewCollection({
+  displayUser,
   isPrivate,
   reviews,
 }: {
+  displayUser?: boolean;
   isPrivate?: boolean;
   reviews: ReviewCollection[];
 }) {
@@ -26,7 +35,7 @@ export default function ReviewCollection({
       <h2 className="font-medium text-xl lg:text-3xl">Reviews</h2>
       {!reviews.length && <div className="text-center">Nothing for now!</div>}
       {Boolean(reviews.length) && (
-        <div className="gap-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 items-center mt-8">
+        <div className="gap-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 items-center mt-8">
           {reviews.map((review) => (
             <div
               className="bg-background flex flex-col h-full mb-10 p-4 relative rounded-md w-full"
@@ -59,6 +68,22 @@ export default function ReviewCollection({
                     <div className="absolute bottom-4 right-4">
                       <ReviewActions review={review} />
                     </div>
+                  )}
+                  {displayUser && review?.user && (
+                    <Link href={`/users/${review.user.username}`}>
+                      <div className="absolute bottom-3 flex gap-2 items-center">
+                        <Image
+                          alt={review.user.username + 'profile picture'}
+                          aria-hidden
+                          className="rounded-2xl"
+                          height={30}
+                          src={review.user.imageUrl ?? ''}
+                          style={{ height: 'auto', width: 'auto' }}
+                          width={30}
+                        />
+                        {review.user?.username}
+                      </div>
+                    </Link>
                   )}
                 </IsLoadingProvider>
               </div>
