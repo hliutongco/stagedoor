@@ -30,7 +30,7 @@ export default async function MyProfilePage() {
       sumRatings: show?.sumRatings ?? 0,
       title: show?.title ?? '',
       totalRatings: show?.totalRatings ?? 0,
-      userId: user?.clerkId ?? '',
+      userIdentifier: user?.username ?? '',
     };
   });
   return (
