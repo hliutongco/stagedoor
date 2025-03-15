@@ -61,7 +61,7 @@ export default function PlaybillCollection({ isPrivate, shows }: ShowsListProps)
                   showId={show.showId ?? ''}
                   sumRatings={show.sumRatings}
                   totalRatings={show.totalRatings}
-                  userIdentifier={show.userIdentifier ?? ''}
+                  userIdentifier={show?.userIdentifier ?? ''}
                 />
               )}
             </div>
