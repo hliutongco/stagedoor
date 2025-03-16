@@ -33,7 +33,10 @@ export default async function Home() {
           <div className="mx-auto w-3/4">{plays && <ShowsList shows={plays} />}</div>
         </div>
       </div>
-      <ReviewCollection displayUser reviews={reviews} />
+      <div className="bg-primary-light min-h-[95vh] pb-20 gap-16 p-4 lg:p-8 text-black">
+        <h2 className="font-medium text-xl lg:text-3xl">Reviews</h2>
+        <ReviewCollection displayUser reviews={reviews} />
+      </div>
     </main>
   );
 }
