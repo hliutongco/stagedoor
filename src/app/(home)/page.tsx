@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import ShowsList from '../components/ShowsList';
 import { trpc } from '@/server/clients/server-api';
 import { Separator } from '@/components/ui/';
-import ReviewCollection from '../my-profile/components/ReviewCollection';
+import ReviewCollection from '@/app/components/ReviewCollection';
 
 export const metadata: Metadata = {
   title: 'StageDoor',

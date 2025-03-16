@@ -67,15 +67,17 @@ export const userRouter = router({
   getUser: publicProcedure
     .input(
       z.object({
-        limit: z.number().optional(),
+        reviewLimit: z.number().optional(),
+        showLimit: z.number().optional(),
         username: z.string(),
       }),
     )
-    .query(({ input: { limit, username } }) => {
+    .query(({ input: { reviewLimit, showLimit, username } }) => {
       return db.query.users.findFirst({
         where: eq(users.username, username),
         with: {
           reviews: {
+            limit: reviewLimit ?? -1,
             orderBy: (reviews) => desc(reviews.updatedAt),
             with: {
               show: true,
@@ -83,7 +85,7 @@ export const userRouter = router({
             },
           },
           userShows: {
-            limit: limit ?? -1,
+            limit: showLimit ?? -1,
             orderBy: (userShows) => desc(userShows.updatedAt),
             with: {
               show: true,
