@@ -31,8 +31,7 @@ export default function ReviewCollection({
   reviews: ReviewCollection[];
 }) {
   return (
-    <div className="bg-primary-light min-h-[95vh] pb-20 gap-16 p-4 lg:p-8 text-black">
-      <h2 className="font-medium text-xl lg:text-3xl">Reviews</h2>
+    <>
       {!reviews.length && <div className="text-center">Nothing for now!</div>}
       {Boolean(reviews.length) && (
         <div className="gap-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 items-center mt-8">
@@ -91,6 +90,6 @@ export default function ReviewCollection({
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 }

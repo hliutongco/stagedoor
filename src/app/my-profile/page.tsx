@@ -1,7 +1,7 @@
 import { currentUser } from '@clerk/nextjs/server';
 import PlaybillCollection from './components/PlaybillCollection';
 import { trpc } from '@/server/clients/server-api';
-import ReviewCollection from './components/ReviewCollection';
+import ReviewCollection from '../components/ReviewCollection';
 import Link from 'next/link';
 import Description from './components/Description';
 import { Metadata } from 'next';
@@ -15,7 +15,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function MyProfilePage() {
   const _user = await currentUser();
   const user = await trpc.users.getUser({
-    limit: 6,
+    reviewLimit: 4,
+    showLimit: 6,
     username: _user?.username ?? '',
   });
   const watchedShows = user?.userShows.map((userShow) => {
@@ -44,14 +45,27 @@ export default async function MyProfilePage() {
         </p>
         <Description description={user?.description ?? ''} username={user?.username} />
         {watchedShows && <PlaybillCollection isPrivate shows={watchedShows} />}
-        <Link
-          className="float-end mr-8 text-primary-dark underline"
-          href="/my-profile/playbill-collection"
-        >
-          View The Whole Collection
-        </Link>
+        {watchedShows && watchedShows.length >= 6 && (
+          <Link
+            className="float-end mr-8 text-primary-dark underline"
+            href="/my-profile/playbill-collection"
+          >
+            View The Whole Collection
+          </Link>
+        )}
       </div>
-      <ReviewCollection isPrivate reviews={user?.reviews ?? []} />
+      <div className="bg-primary-light min-h-[95vh] pb-20 gap-16 p-4 lg:p-8 text-black">
+        <h2 className="font-medium text-xl lg:text-3xl">{`${user?.username ?? 'User'}'s Reviews`}</h2>
+        <ReviewCollection isPrivate reviews={user?.reviews ?? []} />
+        {user?.reviews && user.reviews.length >= 4 && (
+          <Link
+            className="float-end text-black underline"
+            href={`/users/${user?.username}/reviews`}
+          >
+            View All Reviews
+          </Link>
+        )}
+      </div>
     </>
   );
 }
