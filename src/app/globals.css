@@ -1,3 +1,4 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,7 +19,7 @@ body {
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
     --primary: #e2a6a3;
-    --primary-dark: #C75B7A;
+    --primary-dark: #b44e6c;
     --primary-light: #F4D9D0;
     --primary-foreground: 210 40% 98%;
     --secondary: #e9e4dd;

@@ -35,7 +35,7 @@ export default function ReviewBody({
             <span>{displayedText}</span>
           </p>
           <Link
-            className="float-right mb-4 text-primary underline w-fit"
+            className="float-right mb-4 text-primary-dark underline w-fit"
             href={`/reviews/${id}`}
           >
             Click to read more
