@@ -41,9 +41,9 @@ export default function ReviewCollection({
               key={review.id}
             >
               <Link href={`/reviews/${review.id}`}>
-                <h4 className="font-bold text-center text-lg lg:text-xl underline">
+                <h3 className="font-bold text-center text-lg lg:text-xl underline">
                   {review.title}
-                </h4>
+                </h3>
               </Link>
               {Boolean(review.userShow?.rating) && review.userShow?.rating !== '0' && (
                 <div className="mx-auto">
@@ -55,9 +55,9 @@ export default function ReviewCollection({
                   <CloudinaryImage
                     alt={review.show?.title ?? ''}
                     className="float-left mx-2"
-                    height={150}
+                    height={158}
                     src={transformCharacters(review.show?.slug ?? '')}
-                    style={{ height: '150px', width: '100px' }}
+                    style={{ height: '158px', width: '100px' }}
                     width={100}
                   />
                 </Link>

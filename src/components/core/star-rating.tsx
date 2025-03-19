@@ -5,7 +5,7 @@ export default function StarRating({ name, value }: { name: string; value: strin
     <fieldset aria-label={`Rating: ${value} stars`} className="rating hover-disabled">
       <input
         checked={value === '5'}
-        id="star5"
+        id={`${name}-star5`}
         name={`${name}-rating`}
         readOnly
         type="radio"
@@ -21,7 +21,7 @@ export default function StarRating({ name, value }: { name: string; value: strin
       </label>
       <input
         checked={value === '4.5'}
-        id="star4half"
+        id={`${name}-star4half`}
         name={`${name}-rating`}
         readOnly
         type="radio"
@@ -37,7 +37,7 @@ export default function StarRating({ name, value }: { name: string; value: strin
       </label>
       <input
         checked={value === '4'}
-        id="star4"
+        id={`${name}-star4`}
         name={`${name}-rating`}
         readOnly
         type="radio"
@@ -53,7 +53,7 @@ export default function StarRating({ name, value }: { name: string; value: strin
       </label>
       <input
         checked={value === '3.5'}
-        id="star3half"
+        id={`${name}-star3half`}
         name={`${name}-rating`}
         readOnly
         type="radio"
@@ -69,7 +69,7 @@ export default function StarRating({ name, value }: { name: string; value: strin
       </label>
       <input
         checked={value === '3'}
-        id="star3"
+        id={`${name}-star3`}
         name={`${name}-rating`}
         readOnly
         type="radio"
@@ -85,7 +85,7 @@ export default function StarRating({ name, value }: { name: string; value: strin
       </label>
       <input
         checked={value === '2.5'}
-        id="star2half"
+        id={`${name}-star2half`}
         name={`${name}-rating`}
         readOnly
         type="radio"
@@ -101,7 +101,7 @@ export default function StarRating({ name, value }: { name: string; value: strin
       </label>
       <input
         checked={value === '2'}
-        id="star2"
+        id={`${name}-star2`}
         name={`${name}-rating`}
         readOnly
         type="radio"
@@ -117,7 +117,7 @@ export default function StarRating({ name, value }: { name: string; value: strin
       </label>
       <input
         checked={value === '1.5'}
-        id="star1half"
+        id={`${name}-star1half`}
         name={`${name}-rating`}
         readOnly
         type="radio"
@@ -133,7 +133,7 @@ export default function StarRating({ name, value }: { name: string; value: strin
       </label>
       <input
         checked={value === '1'}
-        id="star1"
+        id={`${name}-star1`}
         name={`${name}-rating`}
         readOnly
         type="radio"
@@ -149,7 +149,7 @@ export default function StarRating({ name, value }: { name: string; value: strin
       </label>
       <input
         checked={value === '0.5'}
-        id="starhalf"
+        id={`${name}-starhalf`}
         name={`${name}-rating`}
         readOnly
         type="radio"

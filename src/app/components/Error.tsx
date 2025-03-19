@@ -8,7 +8,7 @@ export default function ErrorComponent({ error }: { error: Error }) {
         <p>{error.message}</p>
         <p>
           Go Back to the{' '}
-          <Link className="hover:underline text-primary" href="/">
+          <Link className="hover:underline text-primary-dark" href="/">
             Home Page
           </Link>{' '}
           or try refreshing
