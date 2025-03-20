@@ -1,10 +1,21 @@
-@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+:root, :host {
+  --fa-style-family-classic: 'Font Awesome 6 Free';
+  --fa-font-solid: normal 900 1em/1 'Font Awesome 6 Free';
+}
+
+.icon::before {
+  /* Set the font and weight for this icon style */
+  font: var(--fa-font-solid);
+  /* Make sure icons render pixel-perfect */
+  -webkit-font-smoothing: antialiased;
 }
 
 @layer base {
