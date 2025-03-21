@@ -50,11 +50,12 @@ export default async function ShowView({ params }: Props) {
           <div className="flex flex-col gap-4 items-center mb-4">
             <CloudinaryImage
               alt={show?.title ?? ''}
-              height={394}
+              crop="fit"
+              height={317}
               priority
               src={transformCharacters(show?.slug ?? '')}
-              style={{ height: '394px', width: '250px' }}
-              width={250}
+              style={{ height: '317px', width: '200px' }}
+              width={200}
             />
           </div>
           <div className="flex flex-col gap-8 items-center">
