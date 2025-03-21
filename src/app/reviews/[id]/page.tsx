@@ -56,10 +56,11 @@ export default async function ReviewPage({ params }: Props) {
               alt={review.show?.title ?? ''}
               aria-hidden
               className="rounded-sm"
-              height={315}
+              crop="fit"
+              height={317}
               priority
               src={transformCharacters(review.show?.slug ?? '')}
-              style={{ height: '315px', width: '200px' }}
+              style={{ height: '317px', width: '200px' }}
               width={200}
             />
             {review.show?.title}
